@@ -129,41 +129,115 @@
              RESERVAS
         ================================================== -->
 
-        <section
-            id="panelReservas"
-            class="admin-panel"
+       <section
+    id="panelReservas"
+    class="admin-panel"
+>
+
+    <div class="seccion-titulo">
+
+        <div>
+
+            <span class="numero-seccion">
+                01
+            </span>
+
+            <h2>
+                Reservas
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="semana-controles">
+
+        <button
+            type="button"
+            id="btnSemanaAnteriorAdmin"
+            class="btn-semana"
         >
-
-            <div class="seccion-titulo">
-
-                <div>
-                    <span class="numero-seccion">
-                        01
-                    </span>
-
-                    <h2>
-                        Reservas
-                    </h2>
-                </div>
-
-            </div>
+            ← Semana anterior
+        </button>
 
 
-            <div class="panel-proximamente">
+        <div>
+            <strong id="textoSemanaAdmin">
+                Cargando semana...
+            </strong>
+        </div>
 
-                <h3>
-                    Módulo de reservas
-                </h3>
 
-                <p>
-                    Esta sección se habilitará cuando terminemos
-                    el catálogo y la reserva docente.
-                </p>
+        <button
+            type="button"
+            id="btnSemanaSiguienteAdmin"
+            class="btn-semana"
+        >
+            Semana siguiente →
+        </button>
 
-            </div>
+    </div>
 
-        </section>
 
+    <div
+        id="mensajeReservasAdmin"
+        class="mensaje-admin"
+    ></div>
+
+
+    <div class="tabla-semanal-wrapper">
+
+        <table class="tabla-semanal-material">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Horario
+                    </th>
+
+                    <th id="adminCabLunes">
+                        Lunes
+                    </th>
+
+                    <th id="adminCabMartes">
+                        Martes
+                    </th>
+
+                    <th id="adminCabMiercoles">
+                        Miércoles
+                    </th>
+
+                    <th id="adminCabJueves">
+                        Jueves
+                    </th>
+
+                    <th id="adminCabViernes">
+                        Viernes
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="cuerpoTablaReservasAdmin">
+
+                <tr>
+                    <td colspan="6">
+                        Cargando reservas...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
 
         <!-- =================================================
              MATERIALES
@@ -477,45 +551,107 @@
              ENTREGAS
         ================================================== -->
 
-        <section
-            id="panelEntregas"
-            class="admin-panel"
+       <section
+    id="panelEntregas"
+    class="admin-panel"
+>
+
+    <div class="seccion-titulo">
+
+        <div>
+
+            <span class="numero-seccion">
+                03
+            </span>
+
+            <h2>
+                Entregas y devoluciones
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-card">
+
+        <div class="card-header">
+
+            <h3>
+                Reservas pendientes
+            </h3>
+
+            <p>
+                Selecciona una reserva para registrar
+                devoluciones parciales o completas.
+            </p>
+
+        </div>
+
+
+        <div
+            id="listaEntregasPendientes"
+            class="lista-entregas"
         >
+            Cargando reservas...
+        </div>
 
-            <div class="seccion-titulo">
-
-                <div>
-
-                    <span class="numero-seccion">
-                        03
-                    </span>
-
-                    <h2>
-                        Entregas y devoluciones
-                    </h2>
-
-                </div>
-
-            </div>
+    </div>
 
 
-            <div class="panel-proximamente">
+    <div
+        id="panelGestionEntrega"
+        class="admin-card oculto"
+    >
 
-                <h3>
-                    Control de devoluciones
-                </h3>
+        <div class="card-header">
 
-                <p>
-                    Aquí se controlará posteriormente lo entregado,
-                    lo pendiente y las observaciones.
-                </p>
+            <h3 id="tituloGestionEntrega">
+                Registrar devolución
+            </h3>
 
-            </div>
+            <p id="datosGestionEntrega">
+            </p>
 
-        </section>
+        </div>
 
 
-    </main>
+        <div
+            id="detalleGestionEntrega"
+            class="detalle-entrega"
+        ></div>
+
+
+        <div class="acciones-formulario">
+
+            <button
+                type="button"
+                id="btnGuardarDevolucion"
+                class="btn-principal btn-auto"
+            >
+                Guardar devolución
+            </button>
+
+
+            <button
+                type="button"
+                id="btnCerrarGestionEntrega"
+                class="btn-secundario btn-auto"
+            >
+                Cerrar
+            </button>
+
+        </div>
+
+
+        <p
+            id="mensajeEntrega"
+            class="mensaje-admin"
+        ></p>
+
+    </div>
+
+</section>
 
 
     <!-- =====================================================

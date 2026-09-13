@@ -1,5 +1,5 @@
 /* =========================================================
-   CONFIGURACIÓN GENERAL
+   GENERAL
 ========================================================= */
 
 * {
@@ -8,17 +8,30 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     font-family:
         Arial,
         Helvetica,
         sans-serif;
+
+    color: #1f2937;
+
+    background: #f4f6f8;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
 }
 
 
@@ -53,13 +66,11 @@ body {
     background-attachment: fixed;
 }
 
-
 .login-container {
     width: 100%;
 
     max-width: 430px;
 }
-
 
 .login-card {
     width: 100%;
@@ -74,24 +85,13 @@ body {
 
     box-shadow:
         0 12px 35px
-        rgba(
-            0,
-            0,
-            0,
-            0.25
-        );
+        rgba(0, 0, 0, 0.25);
 
     text-align: center;
 }
 
-
-/* =========================================================
-   LOGO
-========================================================= */
-
 .login-logo {
     width: 105px;
-
     height: 105px;
 
     object-fit: contain;
@@ -106,18 +106,8 @@ body {
 
     box-shadow:
         0 6px 18px
-        rgba(
-            0,
-            0,
-            0,
-            0.30
-        );
+        rgba(0, 0, 0, 0.30);
 }
-
-
-/* =========================================================
-   TEXTOS
-========================================================= */
 
 .login-instituto {
     margin-bottom: 7px;
@@ -131,7 +121,6 @@ body {
     letter-spacing: 3px;
 }
 
-
 .login-card h1 {
     margin-bottom: 10px;
 
@@ -139,7 +128,6 @@ body {
 
     font-size: 29px;
 }
-
 
 .login-descripcion {
     margin-bottom: 28px;
@@ -151,17 +139,11 @@ body {
     line-height: 1.6;
 }
 
-
-/* =========================================================
-   CAMPOS
-========================================================= */
-
 .campo {
     margin-bottom: 18px;
 
     text-align: left;
 }
-
 
 .campo label {
     display: block;
@@ -174,7 +156,6 @@ body {
 
     font-weight: bold;
 }
-
 
 .campo input {
     width: 100%;
@@ -192,35 +173,25 @@ body {
     font-size: 15px;
 
     outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
 }
-
 
 .campo input:focus {
     border-color: #3b82f6;
 
     box-shadow:
         0 0 0 3px
-        rgba(
-            59,
-            130,
-            246,
-            0.15
-        );
+        rgba(59, 130, 246, 0.15);
 }
 
 
 /* =========================================================
-   BOTÓN
+   BOTONES GENERALES
 ========================================================= */
 
 .btn-principal {
     width: 100%;
 
-    padding: 13px 20px;
+    padding: 12px 20px;
 
     border: none;
 
@@ -234,13 +205,10 @@ body {
 
     font-weight: bold;
 
-    cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
 }
-
 
 .btn-principal:hover {
     background: #1d4ed8;
@@ -248,16 +216,37 @@ body {
     transform: translateY(-1px);
 }
 
-
 .btn-principal:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
 
     cursor: wait;
 }
 
+.btn-auto {
+    width: auto;
+}
+
+.btn-secundario {
+    padding: 12px 20px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-weight: bold;
+}
+
+.oculto {
+    display: none !important;
+}
+
 
 /* =========================================================
-   MENSAJE
+   MENSAJE LOGIN
 ========================================================= */
 
 .mensaje-login {
@@ -272,31 +261,1106 @@ body {
 
 
 /* =========================================================
+   ADMIN BODY
+========================================================= */
+
+.admin-page {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            rgba(244, 246, 248, 0.95),
+            rgba(244, 246, 248, 0.95)
+        ),
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: 520px;
+
+    background-attachment: fixed;
+}
+
+
+/* =========================================================
+   ADMIN HEADER
+========================================================= */
+
+.admin-header {
+    background: #111c2a;
+
+    color: #ffffff;
+
+    border-bottom: 1px solid #263548;
+}
+
+.admin-header-contenido {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.admin-identidad {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+.admin-identidad img {
+    width: 80px;
+    height: 80px;
+
+    object-fit: contain;
+
+    background: #ffffff;
+
+    padding: 8px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.15);
+}
+
+.admin-identidad h1 {
+    font-size: 24px;
+
+    margin-bottom: 5px;
+}
+
+.admin-identidad > div > p:last-child {
+    color: #cbd5e1;
+
+    font-size: 14px;
+}
+
+.admin-etiqueta {
+    margin-bottom: 4px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.btn-salir {
+    padding: 10px 15px;
+
+    border: 1px solid #475569;
+
+    border-radius: 8px;
+
+    background: #1e293b;
+
+    color: white;
+}
+
+.btn-salir:hover {
+    background: #334155;
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.admin-tabs {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 30;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    padding: 10px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #dbe2ea;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn {
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #e9eef4;
+
+    color: #334155;
+
+    font-weight: bold;
+}
+
+.tab-btn:hover {
+    background: #dce5ef;
+}
+
+.tab-btn.activo {
+    background: #2563eb;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   CONTENIDO ADMIN
+========================================================= */
+
+.admin-main {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 25px 20px 60px;
+}
+
+.admin-panel {
+    display: none;
+}
+
+.admin-panel.activo {
+    display: block;
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.seccion-titulo {
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.seccion-titulo > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.numero-seccion {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #111c2a;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.seccion-titulo h2 {
+    color: #111827;
+
+    font-size: 23px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.admin-card {
+    margin-bottom: 24px;
+
+    padding: 24px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 16px
+        rgba(15, 23, 42, 0.06);
+}
+
+.card-header {
+    margin-bottom: 22px;
+}
+
+.card-header h3 {
+    margin-bottom: 5px;
+
+    font-size: 20px;
+}
+
+.card-header p {
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.card-header-listado {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   FORMULARIO MATERIAL
+========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.campo-admin {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.campo-admin label {
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.campo-admin input,
+.campo-admin textarea,
+.buscador-materiales input {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    outline: none;
+}
+
+.campo-admin textarea {
+    resize: vertical;
+}
+
+.campo-admin input:focus,
+.campo-admin textarea:focus,
+.buscador-materiales input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+}
+
+.campo-ancho {
+    grid-column: 1 / -1;
+}
+
+.bloque-formulario {
+    margin-top: 26px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #e2e8f0;
+}
+
+.bloque-formulario h4 {
+    margin-bottom: 4px;
+
+    color: #1e293b;
+
+    font-size: 16px;
+}
+
+.texto-ayuda {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CATEGORÍAS
+========================================================= */
+
+.categorias-checks {
+    margin-top: 15px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.categoria-check {
+    min-height: 48px;
+
+    padding: 10px 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 9px;
+
+    background: #f8fafc;
+
+    cursor: pointer;
+}
+
+.categoria-check:hover {
+    border-color: #93c5fd;
+
+    background: #eff6ff;
+}
+
+.categoria-check input {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =========================================================
+   IMAGEN FORMULARIO
+========================================================= */
+
+.imagen-formulario {
+    margin-top: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.imagen-preview-contenedor {
+    width: 160px;
+    height: 130px;
+
+    flex: 0 0 160px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+}
+
+.imagen-preview {
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    object-fit: contain;
+}
+
+.sin-imagen {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 48px;
+}
+
+.imagen-controles {
+    flex: 1;
+}
+
+.imagen-controles input {
+    width: 100%;
+
+    margin-bottom: 8px;
+}
+
+.acciones-formulario {
+    margin-top: 25px;
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+.mensaje-admin {
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.mensaje-ok {
+    color: #15803d;
+}
+
+.mensaje-error {
+    color: #dc2626;
+}
+
+.mensaje-info {
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+.buscador-materiales {
+    width: min(100%, 320px);
+}
+
+
+/* =========================================================
+   GRID MATERIALES
+========================================================= */
+
+.materiales-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.material-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 14px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.material-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 24px
+        rgba(15, 23, 42, 0.10);
+}
+
+.material-imagen-wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 210px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f1f5f9;
+
+    overflow: hidden;
+}
+
+.material-card-imagen {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 10px;
+}
+
+.material-card-sin-imagen {
+    font-size: 62px;
+}
+
+.estado-material {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    padding: 6px 9px;
+
+    border-radius: 20px;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.estado-disponible {
+    background: #16a34a;
+}
+
+.estado-no-disponible {
+    background: #f59e0b;
+}
+
+.estado-retirado {
+    background: #dc2626;
+}
+
+.material-card-contenido {
+    padding: 17px;
+}
+
+.material-card-cabecera {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+.material-codigo {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+.material-card h3 {
+    color: #111827;
+
+    font-size: 18px;
+
+    line-height: 1.25;
+}
+
+.material-cantidad {
+    min-width: 65px;
+
+    text-align: right;
+}
+
+.material-cantidad strong {
+    display: block;
+
+    color: #2563eb;
+
+    font-size: 24px;
+}
+
+.material-cantidad span {
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+.material-descripcion {
+    margin-top: 12px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.material-categorias {
+    margin-top: 14px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.material-categorias span {
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    background: #e8eef6;
+
+    color: #334155;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.material-acciones {
+    margin-top: 17px;
+
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.material-acciones button {
+    padding: 8px 10px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.btn-editar {
+    background: #2563eb;
+}
+
+.btn-estado {
+    background: #f59e0b;
+}
+
+.btn-quitar {
+    background: #dc2626;
+}
+
+.btn-restaurar {
+    background: #16a34a;
+}
+
+
+/* =========================================================
+   VACÍO
+========================================================= */
+
+.lista-vacia {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #64748b;
+}
+
+.lista-vacia span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 55px;
+}
+
+
+/* =========================================================
+   PRÓXIMAMENTE
+========================================================= */
+
+.panel-proximamente {
+    padding: 45px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+.panel-proximamente h3 {
+    margin-bottom: 8px;
+}
+
+.panel-proximamente p {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   MODO OSCURO
+========================================================= */
+
+body.modo-oscuro {
+    color: #e2e8f0;
+
+    background: #09111c;
+}
+
+body.modo-oscuro.admin-page {
+    background:
+        linear-gradient(
+            rgba(9, 17, 28, 0.96),
+            rgba(9, 17, 28, 0.96)
+        ),
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: 520px;
+
+    background-attachment: fixed;
+}
+
+body.modo-oscuro .admin-tabs {
+    background: #111c2a;
+
+    border-color: #263548;
+}
+
+body.modo-oscuro .tab-btn {
+    background: #1e293b;
+
+    color: #e2e8f0;
+}
+
+body.modo-oscuro .tab-btn.activo {
+    background: #2563eb;
+
+    color: white;
+}
+
+body.modo-oscuro .seccion-titulo h2 {
+    color: #ffffff;
+}
+
+body.modo-oscuro .admin-card,
+body.modo-oscuro .material-card,
+body.modo-oscuro .panel-proximamente {
+    background: #111c2a;
+
+    border-color: #263548;
+}
+
+body.modo-oscuro .card-header p,
+body.modo-oscuro .texto-ayuda,
+body.modo-oscuro .material-descripcion,
+body.modo-oscuro .material-codigo,
+body.modo-oscuro .panel-proximamente p {
+    color: #94a3b8;
+}
+
+body.modo-oscuro .card-header h3,
+body.modo-oscuro .bloque-formulario h4,
+body.modo-oscuro .material-card h3 {
+    color: #ffffff;
+}
+
+body.modo-oscuro .campo-admin label {
+    color: #e2e8f0;
+}
+
+body.modo-oscuro .campo-admin input,
+body.modo-oscuro .campo-admin textarea,
+body.modo-oscuro .buscador-materiales input {
+    background: #1e293b;
+
+    border-color: #475569;
+
+    color: #ffffff;
+}
+
+body.modo-oscuro .bloque-formulario {
+    border-color: #263548;
+}
+
+body.modo-oscuro .categoria-check {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+body.modo-oscuro .categoria-check:hover {
+    background: #243247;
+}
+
+body.modo-oscuro .imagen-preview-contenedor,
+body.modo-oscuro .material-imagen-wrapper {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+body.modo-oscuro .material-categorias span {
+    background: #263548;
+
+    color: #e2e8f0;
+}
+
+body.modo-oscuro .btn-secundario {
+    background: #1e293b;
+
+    border-color: #475569;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .materiales-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .categorias-checks {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
+
+
+/* =========================================================
    CELULAR
 ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .login-page {
         background-size: 300px;
     }
 
-
     .login-card {
-        padding:
-            28px 20px;
+        padding: 28px 20px;
     }
-
 
     .login-logo {
         width: 88px;
-
         height: 88px;
     }
-
 
     .login-card h1 {
         font-size: 25px;
     }
 
+
+    .admin-header-contenido {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .admin-identidad img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .admin-identidad h1 {
+        font-size: 20px;
+    }
+
+    .btn-salir {
+        width: 100%;
+    }
+
+    .admin-tabs {
+        justify-content: flex-start;
+
+        overflow-x: auto;
+
+        flex-wrap: nowrap;
+    }
+
+    .tab-btn {
+        flex: 0 0 auto;
+
+        white-space: nowrap;
+    }
+
+    .admin-main {
+        padding:
+            20px 12px
+            50px;
+    }
+
+    .seccion-titulo {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .seccion-titulo .btn-principal {
+        width: 100%;
+    }
+
+    .admin-card {
+        padding: 17px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-ancho {
+        grid-column: auto;
+    }
+
+    .categorias-checks {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .imagen-formulario {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .imagen-preview-contenedor {
+        width: 100%;
+        height: 180px;
+
+        flex: none;
+    }
+
+    .acciones-formulario {
+        flex-direction: column;
+    }
+
+    .acciones-formulario button {
+        width: 100%;
+    }
+
+    .card-header-listado {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .buscador-materiales {
+        width: 100%;
+    }
+
+    .materiales-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .material-imagen-wrapper {
+        height: 230px;
+    }
+
+}
+
+
+/* =========================================================
+   TELÉFONOS PEQUEÑOS
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .categorias-checks {
+        grid-template-columns: 1fr;
+    }
+
+    .material-card-cabecera {
+        flex-direction: column;
+    }
+
+    .material-cantidad {
+        text-align: left;
+    }
 }

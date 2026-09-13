@@ -14,22 +14,512 @@
         CETA | Material de Gabinete
     </title>
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="img/logo-ceta-transparente.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/estilos.css?v=3"
+    >
+
 </head>
 
 
-<body>
+<body class="docente-page">
 
-    <h1>
-        Panel Docente
-    </h1>
 
-    <p>
-        Material de Gabinete CETA
-    </p>
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
 
-    <p>
-        Login docente funcionando correctamente.
-    </p>
+    <header class="docente-header">
+
+        <div class="docente-header-contenido">
+
+            <div class="docente-identidad">
+
+                <img
+                    src="img/logo-ceta-transparente.png"
+                    alt="Logo CETA"
+                >
+
+                <div>
+
+                    <p class="docente-etiqueta">
+                        INSTITUTO CETA
+                    </p>
+
+                    <h1>
+                        Material de Gabinete
+                    </h1>
+
+                    <p id="nombreDocente">
+                        Cargando docente...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="btnCerrarSesionDocente"
+                class="btn-salir"
+            >
+                Cerrar sesión
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         TABS
+    ====================================================== -->
+
+    <nav class="docente-tabs">
+
+        <button
+            type="button"
+            class="docente-tab activo"
+            data-panel="panelReservasDocente"
+        >
+            📅 Reservas
+        </button>
+
+
+        <button
+            type="button"
+            class="docente-tab"
+            data-panel="panelNuevaReserva"
+        >
+            ➕ Reservar material
+        </button>
+
+
+        <button
+            type="button"
+            id="btnModoOscuroDocente"
+            class="docente-tab"
+        >
+            🌙 Modo oscuro
+        </button>
+
+    </nav>
+
+
+    <main class="docente-main">
+
+
+        <!-- =================================================
+             TABLA SEMANAL
+        ================================================== -->
+
+        <section
+            id="panelReservasDocente"
+            class="docente-panel activo"
+        >
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        01
+                    </span>
+
+                    <h2>
+                        Reservas semanales
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="semana-controles">
+
+                <button
+                    type="button"
+                    id="btnSemanaAnterior"
+                    class="btn-semana"
+                >
+                    ← Semana anterior
+                </button>
+
+
+                <div>
+
+                    <strong id="textoSemana">
+                        Cargando semana...
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="btnSemanaSiguiente"
+                    class="btn-semana"
+                >
+                    Semana siguiente →
+                </button>
+
+            </div>
+
+
+            <div
+                id="mensajeReservasDocente"
+                class="mensaje-docente"
+            ></div>
+
+
+            <div class="tabla-semanal-wrapper">
+
+                <table class="tabla-semanal-material">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Horario
+                            </th>
+
+                            <th id="cabLunes">
+                                Lunes
+                            </th>
+
+                            <th id="cabMartes">
+                                Martes
+                            </th>
+
+                            <th id="cabMiercoles">
+                                Miércoles
+                            </th>
+
+                            <th id="cabJueves">
+                                Jueves
+                            </th>
+
+                            <th id="cabViernes">
+                                Viernes
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="cuerpoTablaReservas">
+
+                        <tr>
+
+                            <td colspan="6">
+                                Cargando reservas...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NUEVA RESERVA
+        ================================================== -->
+
+        <section
+            id="panelNuevaReserva"
+            class="docente-panel"
+        >
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        02
+                    </span>
+
+                    <h2>
+                        Nueva reserva
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 DATOS DE LA CLASE
+            ============================================== -->
+
+            <div class="docente-card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Datos de la clase
+                    </h3>
+
+                    <p>
+                        Selecciona fecha, horario, grupo y tema.
+                    </p>
+
+                </div>
+
+
+                <div class="reserva-datos-grid">
+
+
+                    <div class="campo-admin">
+
+                        <label for="reservaFecha">
+                            Fecha *
+                        </label>
+
+                        <input
+                            type="date"
+                            id="reservaFecha"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo-admin">
+
+                        <label for="reservaHorario">
+                            Horario *
+                        </label>
+
+                        <select id="reservaHorario">
+
+                            <option value="">
+                                Seleccionar horario
+                            </option>
+
+                            <option value="09:00-12:00">
+                                09:00 - 12:00
+                            </option>
+
+                            <option value="14:00-17:00">
+                                14:00 - 17:00
+                            </option>
+
+                            <option value="19:00-21:30">
+                                19:00 - 21:30
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo-admin">
+
+                        <label for="reservaGrupo">
+                            Grupo *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="reservaGrupo"
+                            placeholder="Ej. EEA-4A"
+                        >
+
+                    </div>
+
+
+                    <div class="campo-admin campo-ancho">
+
+                        <label for="reservaTema">
+                            Tema / descripción de la clase *
+                        </label>
+
+                        <textarea
+                            id="reservaTema"
+                            rows="3"
+                            placeholder="Ej. Diagnóstico del sistema de encendido"
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 BUSCAR MATERIAL
+            ============================================== -->
+
+            <div class="docente-card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Buscar materiales
+                    </h3>
+
+                    <p>
+                        Primero selecciona fecha y horario
+                        para consultar las cantidades disponibles.
+                    </p>
+
+                </div>
+
+
+                <div class="filtros-material-docente">
+
+
+                    <div class="campo-admin">
+
+                        <label for="filtroCategoria">
+                            Área / categoría
+                        </label>
+
+                        <select id="filtroCategoria">
+
+                            <option value="">
+                                Todas las categorías
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo-admin">
+
+                        <label for="buscarMaterialDocente">
+                            Buscar
+                        </label>
+
+                        <input
+                            type="search"
+                            id="buscarMaterialDocente"
+                            placeholder="Ej. batería, bobina, bujía..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="mensajeDisponibilidad"
+                    class="mensaje-docente"
+                >
+                    Selecciona una fecha y un horario.
+                </div>
+
+
+                <div
+                    id="catalogoMaterialesDocente"
+                    class="catalogo-materiales-docente"
+                ></div>
+
+            </div>
+
+
+            <!-- =============================================
+                 CARRITO
+            ============================================== -->
+
+            <div class="docente-card carrito-card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Materiales seleccionados
+                    </h3>
+
+                    <p>
+                        Puedes seguir buscando y añadir más materiales
+                        antes de finalizar.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="carritoMateriales"
+                    class="carrito-materiales"
+                >
+
+                    <div class="carrito-vacio">
+
+                        <span>
+                            🛒
+                        </span>
+
+                        <p>
+                            Todavía no seleccionaste materiales.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="carrito-footer">
+
+                    <div>
+
+                        <strong id="contadorCarrito">
+                            0 materiales
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnFinalizarReserva"
+                        class="btn-principal btn-auto"
+                        disabled
+                    >
+                        Finalizar reserva
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeNuevaReserva"
+                    class="mensaje-docente"
+                ></p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="js/supabase.js?v=3"></script>
+
+    <script src="js/docente.js?v=3"></script>
+
 
 </body>
 

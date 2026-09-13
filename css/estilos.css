@@ -2417,3 +2417,253 @@ body.modo-oscuro .reserva-docente-nombre {
     }
 
 }
+/* =========================================================
+   ADMIN RESERVAS Y ENTREGAS
+========================================================= */
+
+.acciones-reserva-admin {
+    margin-top: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.btn-gestionar-entrega,
+.btn-cancelar-reserva-admin {
+    width: 100%;
+
+    padding: 7px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+.btn-gestionar-entrega {
+    background: #2563eb;
+}
+
+
+.btn-cancelar-reserva-admin {
+    background: #dc2626;
+}
+
+
+/* =========================================================
+   ESTADOS
+========================================================= */
+
+.estado-reserva-admin {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    padding: 4px 7px;
+
+    border-radius: 20px;
+
+    color: white;
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+
+.estado-reserva-reservada {
+    background: #2563eb;
+}
+
+
+.estado-reserva-parcial {
+    background: #f59e0b;
+}
+
+
+.estado-reserva-completada {
+    background: #16a34a;
+}
+
+
+.estado-reserva-cancelada {
+    background: #dc2626;
+}
+
+
+/* =========================================================
+   LISTA DE ENTREGAS
+========================================================= */
+
+.lista-entregas {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.entrega-card {
+    padding: 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 11px;
+
+    background: #f8fafc;
+}
+
+
+.entrega-card h3 {
+    margin: 4px 0 6px;
+
+    color: #111827;
+}
+
+
+.entrega-card p {
+    margin: 3px 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+.entrega-fecha {
+    color: #2563eb;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.entrega-pendientes {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #b45309;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   DETALLE DE DEVOLUCIÓN
+========================================================= */
+
+.detalle-entrega {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+.detalle-entrega-item {
+    padding: 16px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(180px, 1fr)
+        190px
+        minmax(220px, 1fr);
+
+    gap: 18px;
+
+    align-items: start;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 11px;
+
+    background: #f8fafc;
+}
+
+
+.detalle-entrega-info h4 {
+    margin-bottom: 8px;
+
+    color: #111827;
+}
+
+
+.detalle-entrega-info p {
+    margin-bottom: 4px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   OSCURO
+========================================================= */
+
+body.modo-oscuro .entrega-card,
+body.modo-oscuro .detalle-entrega-item {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+
+body.modo-oscuro .entrega-card h3,
+body.modo-oscuro .detalle-entrega-info h4 {
+    color: #ffffff;
+}
+
+
+body.modo-oscuro .entrega-card p,
+body.modo-oscuro .detalle-entrega-info p {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .entrega-card {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .entrega-card button {
+        width: 100%;
+    }
+
+
+    .detalle-entrega-item {
+        grid-template-columns: 1fr;
+    }
+
+}

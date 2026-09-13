@@ -1907,7 +1907,1361 @@ window.restaurarMaterial =
         await cargarMateriales();
     };
 
+// =========================================================
+// RESERVAS ADMINISTRADOR
+// =========================================================
 
+let lunesSemanaAdmin =
+    obtenerLunesAdmin(
+        new Date()
+    );
+
+let reservasAdmin = [];
+let detallesAdmin = [];
+let materialesAdmin = [];
+let perfilesAdmin = [];
+
+let reservaEntregaActual = null;
+
+
+// =========================================================
+// ELEMENTOS RESERVAS
+// =========================================================
+
+const btnSemanaAnteriorAdmin =
+    document.getElementById(
+        "btnSemanaAnteriorAdmin"
+    );
+
+const btnSemanaSiguienteAdmin =
+    document.getElementById(
+        "btnSemanaSiguienteAdmin"
+    );
+
+const textoSemanaAdmin =
+    document.getElementById(
+        "textoSemanaAdmin"
+    );
+
+const cuerpoTablaReservasAdmin =
+    document.getElementById(
+        "cuerpoTablaReservasAdmin"
+    );
+
+const mensajeReservasAdmin =
+    document.getElementById(
+        "mensajeReservasAdmin"
+    );
+
+
+const listaEntregasPendientes =
+    document.getElementById(
+        "listaEntregasPendientes"
+    );
+
+const panelGestionEntrega =
+    document.getElementById(
+        "panelGestionEntrega"
+    );
+
+const tituloGestionEntrega =
+    document.getElementById(
+        "tituloGestionEntrega"
+    );
+
+const datosGestionEntrega =
+    document.getElementById(
+        "datosGestionEntrega"
+    );
+
+const detalleGestionEntrega =
+    document.getElementById(
+        "detalleGestionEntrega"
+    );
+
+const btnGuardarDevolucion =
+    document.getElementById(
+        "btnGuardarDevolucion"
+    );
+
+const btnCerrarGestionEntrega =
+    document.getElementById(
+        "btnCerrarGestionEntrega"
+    );
+
+const mensajeEntrega =
+    document.getElementById(
+        "mensajeEntrega"
+    );
+
+
+// =========================================================
+// FECHAS ADMIN
+// =========================================================
+
+function obtenerLunesAdmin(fecha) {
+
+    const resultado =
+        new Date(
+            fecha.getFullYear(),
+            fecha.getMonth(),
+            fecha.getDate()
+        );
+
+    const dia =
+        resultado.getDay();
+
+    const diferencia =
+        dia === 0
+            ? -6
+            : 1 - dia;
+
+    resultado.setDate(
+        resultado.getDate() +
+        diferencia
+    );
+
+    resultado.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+    return resultado;
+}
+
+
+function sumarDiasAdmin(
+    fecha,
+    dias
+) {
+
+    const nueva =
+        new Date(fecha);
+
+    nueva.setDate(
+        nueva.getDate() +
+        dias
+    );
+
+    return nueva;
+}
+
+
+function fechaISOAdmin(fecha) {
+
+    const y =
+        fecha.getFullYear();
+
+    const m =
+        String(
+            fecha.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+    const d =
+        String(
+            fecha.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+    return `${y}-${m}-${d}`;
+}
+
+
+function fechaCortaAdmin(fecha) {
+
+    return fecha.toLocaleDateString(
+        "es-BO",
+        {
+            day: "2-digit",
+            month: "2-digit"
+        }
+    );
+}
+
+
+function fechaCompletaAdmin(fecha) {
+
+    return fecha.toLocaleDateString(
+        "es-BO",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }
+    );
+}
+
+
+// =========================================================
+// HORARIOS
+// =========================================================
+
+const HORARIOS_ADMIN = [
+    "09:00-12:00",
+    "14:00-17:00",
+    "19:00-21:30"
+];
+
+
+// =========================================================
+// CARGAR RESERVAS SEMANA
+// =========================================================
+
+async function cargarReservasAdmin() {
+
+    if (!cuerpoTablaReservasAdmin) {
+        return;
+    }
+
+
+    const viernes =
+        sumarDiasAdmin(
+            lunesSemanaAdmin,
+            4
+        );
+
+
+    textoSemanaAdmin.textContent =
+        `${fechaCompletaAdmin(
+            lunesSemanaAdmin
+        )} al ${fechaCompletaAdmin(
+            viernes
+        )}`;
+
+
+    actualizarCabecerasAdmin();
+
+
+    const inicio =
+        fechaISOAdmin(
+            lunesSemanaAdmin
+        );
+
+    const fin =
+        fechaISOAdmin(
+            viernes
+        );
+
+
+    const {
+        data: reservas,
+        error
+    } =
+        await supabaseClient
+            .from("reservas_material")
+            .select(`
+                id,
+                usuario_id,
+                grupo,
+                fecha,
+                horario,
+                tema,
+                estado,
+                observacion_general
+            `)
+            .gte(
+                "fecha",
+                inicio
+            )
+            .lte(
+                "fecha",
+                fin
+            )
+            .order(
+                "fecha",
+                {
+                    ascending: true
+                }
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+        cuerpoTablaReservasAdmin.innerHTML =
+            `
+            <tr>
+                <td colspan="6">
+                    Error cargando reservas.
+                </td>
+            </tr>
+            `;
+
+        return;
+    }
+
+
+    reservasAdmin =
+        reservas || [];
+
+
+    const idsReservas =
+        reservasAdmin
+            .map(
+                r => r.id
+            );
+
+
+    detallesAdmin = [];
+
+
+    if (idsReservas.length) {
+
+        const {
+            data,
+            error: errorDetalles
+        } =
+            await supabaseClient
+                .from("reserva_material_detalle")
+                .select(`
+                    id,
+                    reserva_id,
+                    material_id,
+                    cantidad,
+                    cantidad_devuelta,
+                    observacion
+                `)
+                .in(
+                    "reserva_id",
+                    idsReservas
+                );
+
+
+        if (!errorDetalles) {
+
+            detallesAdmin =
+                data || [];
+        }
+    }
+
+
+    const idsMateriales =
+        [
+            ...new Set(
+                detallesAdmin
+                    .map(
+                        d => d.material_id
+                    )
+            )
+        ];
+
+
+    materialesAdmin = [];
+
+
+    if (idsMateriales.length) {
+
+        const {
+            data
+        } =
+            await supabaseClient
+                .from("materiales_gabinete")
+                .select(`
+                    id,
+                    nombre,
+                    codigo
+                `)
+                .in(
+                    "id",
+                    idsMateriales
+                );
+
+
+        materialesAdmin =
+            data || [];
+    }
+
+
+    const idsUsuarios =
+        [
+            ...new Set(
+                reservasAdmin
+                    .map(
+                        r => r.usuario_id
+                    )
+            )
+        ];
+
+
+    perfilesAdmin = [];
+
+
+    if (idsUsuarios.length) {
+
+        const {
+            data
+        } =
+            await supabaseClient
+                .from("perfiles")
+                .select(`
+                    id,
+                    nombre,
+                    usuario
+                `)
+                .in(
+                    "id",
+                    idsUsuarios
+                );
+
+
+        perfilesAdmin =
+            data || [];
+    }
+
+
+    renderizarReservasAdmin();
+
+    renderizarEntregasPendientes();
+}
+
+
+// =========================================================
+// CABECERAS
+// =========================================================
+
+function actualizarCabecerasAdmin() {
+
+    const dias = [
+
+        [
+            "adminCabLunes",
+            "Lunes",
+            0
+        ],
+
+        [
+            "adminCabMartes",
+            "Martes",
+            1
+        ],
+
+        [
+            "adminCabMiercoles",
+            "Miércoles",
+            2
+        ],
+
+        [
+            "adminCabJueves",
+            "Jueves",
+            3
+        ],
+
+        [
+            "adminCabViernes",
+            "Viernes",
+            4
+        ]
+    ];
+
+
+    dias.forEach(
+        item => {
+
+            const fecha =
+                sumarDiasAdmin(
+                    lunesSemanaAdmin,
+                    item[2]
+                );
+
+
+            const elemento =
+                document.getElementById(
+                    item[0]
+                );
+
+
+            if (elemento) {
+
+                elemento.innerHTML =
+                    `
+                    ${item[1]}
+                    <small>
+                        ${fechaCortaAdmin(fecha)}
+                    </small>
+                    `;
+            }
+        }
+    );
+}
+
+
+// =========================================================
+// HELPERS
+// =========================================================
+
+function nombreMaterialAdmin(id) {
+
+    const material =
+        materialesAdmin.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+    return material
+        ? material.nombre
+        : "Material";
+}
+
+
+function nombreDocenteAdmin(id) {
+
+    const perfil =
+        perfilesAdmin.find(
+            item =>
+                item.id === id
+        );
+
+    return perfil
+        ? (
+            perfil.nombre ||
+            perfil.usuario
+        )
+        : "Docente";
+}
+
+
+// =========================================================
+// ESTADO
+// =========================================================
+
+function etiquetaEstadoAdmin(estado) {
+
+    const mapa = {
+
+        reservada:
+            [
+                "RESERVADA",
+                "estado-reserva-reservada"
+            ],
+
+        parcial:
+            [
+                "PARCIAL",
+                "estado-reserva-parcial"
+            ],
+
+        completada:
+            [
+                "COMPLETADA",
+                "estado-reserva-completada"
+            ],
+
+        cancelada:
+            [
+                "CANCELADA",
+                "estado-reserva-cancelada"
+            ]
+    };
+
+
+    return mapa[estado] ||
+        [
+            estado,
+            ""
+        ];
+}
+
+
+// =========================================================
+// RENDER TABLA RESERVAS
+// =========================================================
+
+function renderizarReservasAdmin() {
+
+    const dias =
+        Array.from(
+            {
+                length: 5
+            },
+            (
+                _,
+                i
+            ) =>
+                fechaISOAdmin(
+                    sumarDiasAdmin(
+                        lunesSemanaAdmin,
+                        i
+                    )
+                )
+        );
+
+
+    cuerpoTablaReservasAdmin.innerHTML =
+        HORARIOS_ADMIN
+            .map(
+                horario => {
+
+                    const celdas =
+                        dias
+                            .map(
+                                fecha => {
+
+                                    const reservas =
+                                        reservasAdmin.filter(
+                                            r =>
+                                                r.fecha === fecha
+                                                &&
+                                                r.horario === horario
+                                        );
+
+
+                                    if (!reservas.length) {
+
+                                        return `
+                                            <td class="celda-vacia">
+                                                —
+                                            </td>
+                                        `;
+                                    }
+
+
+                                    const contenido =
+                                        reservas
+                                            .map(
+                                                reserva => {
+
+                                                    const detalles =
+                                                        detallesAdmin
+                                                            .filter(
+                                                                d =>
+                                                                    Number(
+                                                                        d.reserva_id
+                                                                    ) ===
+                                                                    Number(
+                                                                        reserva.id
+                                                                    )
+                                                            );
+
+
+                                                    const materiales =
+                                                        detalles
+                                                            .map(
+                                                                d =>
+                                                                    `
+                                                                    <li>
+                                                                        ${d.cantidad} ×
+                                                                        ${escaparHTML(
+                                                                            nombreMaterialAdmin(
+                                                                                d.material_id
+                                                                            )
+                                                                        )}
+                                                                    </li>
+                                                                    `
+                                                            )
+                                                            .join("");
+
+
+                                                    const estado =
+                                                        etiquetaEstadoAdmin(
+                                                            reserva.estado
+                                                        );
+
+
+                                                    const botones =
+                                                        reserva.estado !== "cancelada"
+                                                        &&
+                                                        reserva.estado !== "completada"
+
+                                                            ? `
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn-gestionar-entrega"
+                                                                    onclick="abrirEntrega(${reserva.id})"
+                                                                >
+                                                                    Gestionar entrega
+                                                                </button>
+
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn-cancelar-reserva-admin"
+                                                                    onclick="cancelarReservaAdmin(${reserva.id})"
+                                                                >
+                                                                    Cancelar
+                                                                </button>
+                                                            `
+
+                                                            : "";
+
+
+                                                    return `
+                                                        <div class="reserva-semanal-card">
+
+                                                            <span
+                                                                class="estado-reserva-admin ${estado[1]}"
+                                                            >
+                                                                ${estado[0]}
+                                                            </span>
+
+                                                            <span class="reserva-docente-nombre">
+                                                                ${escaparHTML(
+                                                                    nombreDocenteAdmin(
+                                                                        reserva.usuario_id
+                                                                    )
+                                                                )}
+                                                            </span>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Grupo:
+                                                                </strong>
+
+                                                                ${escaparHTML(
+                                                                    reserva.grupo
+                                                                )}
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Tema:
+                                                                </strong>
+
+                                                                ${escaparHTML(
+                                                                    reserva.tema
+                                                                )}
+                                                            </p>
+
+                                                            <ul>
+                                                                ${materiales}
+                                                            </ul>
+
+                                                            <div class="acciones-reserva-admin">
+                                                                ${botones}
+                                                            </div>
+
+                                                        </div>
+                                                    `;
+                                                }
+                                            )
+                                            .join("");
+
+
+                                    return `
+                                        <td>
+                                            ${contenido}
+                                        </td>
+                                    `;
+                                }
+                            )
+                            .join("");
+
+
+                    return `
+                        <tr>
+
+                            <th class="horario-columna">
+                                ${horario.replace(
+                                    "-",
+                                    " - "
+                                )}
+                            </th>
+
+                            ${celdas}
+
+                        </tr>
+                    `;
+                }
+            )
+            .join("");
+}
+
+
+// =========================================================
+// CAMBIO DE SEMANA
+// =========================================================
+
+btnSemanaAnteriorAdmin
+    ?.addEventListener(
+        "click",
+        async () => {
+
+            lunesSemanaAdmin =
+                sumarDiasAdmin(
+                    lunesSemanaAdmin,
+                    -7
+                );
+
+            await cargarReservasAdmin();
+        }
+    );
+
+
+btnSemanaSiguienteAdmin
+    ?.addEventListener(
+        "click",
+        async () => {
+
+            lunesSemanaAdmin =
+                sumarDiasAdmin(
+                    lunesSemanaAdmin,
+                    7
+                );
+
+            await cargarReservasAdmin();
+        }
+    );
+
+
+// =========================================================
+// CANCELAR RESERVA ADMIN
+// =========================================================
+
+window.cancelarReservaAdmin =
+    async function (
+        reservaId
+    ) {
+
+        if (
+            !confirm(
+                "¿Cancelar esta reserva?\n\nLos materiales volverán a estar disponibles para ese horario."
+            )
+        ) {
+            return;
+        }
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient.rpc(
+                    "cancelar_reserva_material",
+                    {
+                        p_reserva_id:
+                            reservaId
+                    }
+                );
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            mensajeReservasAdmin.className =
+                "mensaje-admin mensaje-ok";
+
+
+            mensajeReservasAdmin.textContent =
+                "Reserva cancelada correctamente.";
+
+
+            await cargarReservasAdmin();
+
+
+        } catch (error) {
+
+            console.error(error);
+
+
+            mensajeReservasAdmin.className =
+                "mensaje-admin mensaje-error";
+
+
+            mensajeReservasAdmin.textContent =
+                error.message ||
+                "No se pudo cancelar la reserva.";
+        }
+    };
+
+
+// =========================================================
+// ENTREGAS PENDIENTES
+// =========================================================
+
+function renderizarEntregasPendientes() {
+
+    if (!listaEntregasPendientes) {
+        return;
+    }
+
+
+    const pendientes =
+        reservasAdmin.filter(
+            r =>
+                r.estado === "reservada"
+                ||
+                r.estado === "parcial"
+        );
+
+
+    if (!pendientes.length) {
+
+        listaEntregasPendientes.innerHTML =
+            `
+            <div class="lista-vacia">
+
+                <span>
+                    ✅
+                </span>
+
+                <p>
+                    No hay devoluciones pendientes esta semana.
+                </p>
+
+            </div>
+            `;
+
+        return;
+    }
+
+
+    listaEntregasPendientes.innerHTML =
+        pendientes
+            .map(
+                reserva => {
+
+                    const detalles =
+                        detallesAdmin
+                            .filter(
+                                d =>
+                                    Number(
+                                        d.reserva_id
+                                    ) ===
+                                    Number(
+                                        reserva.id
+                                    )
+                            );
+
+
+                    const pendientesCantidad =
+                        detalles
+                            .reduce(
+                                (
+                                    total,
+                                    d
+                                ) =>
+                                    total
+                                    +
+                                    (
+                                        Number(d.cantidad)
+                                        -
+                                        Number(d.cantidad_devuelta)
+                                    ),
+                                0
+                            );
+
+
+                    return `
+                        <div class="entrega-card">
+
+                            <div>
+
+                                <span class="entrega-fecha">
+                                    ${escaparHTML(
+                                        reserva.fecha
+                                    )}
+                                    ·
+                                    ${escaparHTML(
+                                        reserva.horario
+                                    )}
+                                </span>
+
+                                <h3>
+                                    ${escaparHTML(
+                                        nombreDocenteAdmin(
+                                            reserva.usuario_id
+                                        )
+                                    )}
+                                </h3>
+
+                                <p>
+                                    Grupo:
+                                    ${escaparHTML(
+                                        reserva.grupo
+                                    )}
+                                </p>
+
+                                <p>
+                                    Tema:
+                                    ${escaparHTML(
+                                        reserva.tema
+                                    )}
+                                </p>
+
+                                <strong class="entrega-pendientes">
+                                    ${pendientesCantidad}
+                                    unidad(es) pendientes
+                                </strong>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn-principal btn-auto"
+                                onclick="abrirEntrega(${reserva.id})"
+                            >
+                                Registrar devolución
+                            </button>
+
+                        </div>
+                    `;
+                }
+            )
+            .join("");
+}
+
+
+// =========================================================
+// ABRIR ENTREGA
+// =========================================================
+
+window.abrirEntrega =
+    function (
+        reservaId
+    ) {
+
+        const reserva =
+            reservasAdmin.find(
+                r =>
+                    Number(r.id) ===
+                    Number(reservaId)
+            );
+
+
+        if (!reserva) {
+            return;
+        }
+
+
+        reservaEntregaActual =
+            reserva;
+
+
+        const detalles =
+            detallesAdmin
+                .filter(
+                    d =>
+                        Number(d.reserva_id) ===
+                        Number(reservaId)
+                );
+
+
+        tituloGestionEntrega.textContent =
+            `Reserva #${reserva.id}`;
+
+
+        datosGestionEntrega.innerHTML =
+            `
+            <strong>
+                ${escaparHTML(
+                    nombreDocenteAdmin(
+                        reserva.usuario_id
+                    )
+                )}
+            </strong>
+            · Grupo
+            ${escaparHTML(
+                reserva.grupo
+            )}
+            ·
+            ${escaparHTML(
+                reserva.fecha
+            )}
+            ·
+            ${escaparHTML(
+                reserva.horario
+            )}
+            `;
+
+
+        detalleGestionEntrega.innerHTML =
+            detalles
+                .map(
+                    detalle => {
+
+                        const pendiente =
+                            Number(
+                                detalle.cantidad
+                            )
+                            -
+                            Number(
+                                detalle.cantidad_devuelta
+                            );
+
+
+                        return `
+                            <div class="detalle-entrega-item">
+
+                                <div class="detalle-entrega-info">
+
+                                    <h4>
+                                        ${escaparHTML(
+                                            nombreMaterialAdmin(
+                                                detalle.material_id
+                                            )
+                                        )}
+                                    </h4>
+
+                                    <p>
+                                        Reservado:
+                                        <strong>
+                                            ${detalle.cantidad}
+                                        </strong>
+                                    </p>
+
+                                    <p>
+                                        Ya devuelto:
+                                        <strong>
+                                            ${detalle.cantidad_devuelta}
+                                        </strong>
+                                    </p>
+
+                                    <p>
+                                        Pendiente:
+                                        <strong>
+                                            ${pendiente}
+                                        </strong>
+                                    </p>
+
+                                </div>
+
+
+                                <div class="campo-admin">
+
+                                    <label>
+                                        Cantidad devuelta total
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        min="${detalle.cantidad_devuelta}"
+                                        max="${detalle.cantidad}"
+                                        value="${detalle.cantidad_devuelta}"
+                                        class="input-devuelto"
+                                        data-detalle-id="${detalle.id}"
+                                    >
+
+                                </div>
+
+
+                                <div class="campo-admin">
+
+                                    <label>
+                                        Observación
+                                    </label>
+
+                                    <textarea
+                                        rows="3"
+                                        class="input-observacion-entrega"
+                                        data-detalle-id="${detalle.id}"
+                                        placeholder="Ej. Fuente 1 revisar cables"
+                                    >${escaparHTML(
+                                        detalle.observacion ||
+                                        ""
+                                    )}</textarea>
+
+                                </div>
+
+                            </div>
+                        `;
+                    }
+                )
+                .join("");
+
+
+        panelGestionEntrega.classList.remove(
+            "oculto"
+        );
+
+
+        mensajeEntrega.textContent =
+            "";
+
+
+        panelGestionEntrega.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    };
+
+
+// =========================================================
+// CERRAR ENTREGA
+// =========================================================
+
+btnCerrarGestionEntrega
+    ?.addEventListener(
+        "click",
+        () => {
+
+            reservaEntregaActual =
+                null;
+
+
+            panelGestionEntrega.classList.add(
+                "oculto"
+            );
+
+
+            mensajeEntrega.textContent =
+                "";
+        }
+    );
+
+
+// =========================================================
+// GUARDAR DEVOLUCIÓN
+// =========================================================
+
+btnGuardarDevolucion
+    ?.addEventListener(
+        "click",
+        async () => {
+
+            if (!reservaEntregaActual) {
+                return;
+            }
+
+
+            const inputsCantidad =
+                Array.from(
+                    document.querySelectorAll(
+                        ".input-devuelto"
+                    )
+                );
+
+
+            const detalles =
+                inputsCantidad
+                    .map(
+                        input => {
+
+                            const detalleId =
+                                Number(
+                                    input.dataset.detalleId
+                                );
+
+
+                            const observacionInput =
+                                document.querySelector(
+                                    `.input-observacion-entrega[data-detalle-id="${detalleId}"]`
+                                );
+
+
+                            return {
+
+                                detalle_id:
+                                    detalleId,
+
+                                cantidad_devuelta:
+                                    Number(
+                                        input.value
+                                    ),
+
+                                observacion:
+                                    observacionInput
+                                        ?.value
+                                        ?.trim()
+                                        || ""
+                            };
+                        }
+                    );
+
+
+            if (
+                !confirm(
+                    "¿Guardar esta devolución?"
+                )
+            ) {
+                return;
+            }
+
+
+            btnGuardarDevolucion.disabled =
+                true;
+
+
+            btnGuardarDevolucion.textContent =
+                "Guardando...";
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient.rpc(
+                        "registrar_devolucion_material",
+                        {
+
+                            p_reserva_id:
+                                reservaEntregaActual.id,
+
+                            p_detalles:
+                                detalles
+                        }
+                    );
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                mensajeEntrega.className =
+                    "mensaje-admin mensaje-ok";
+
+
+                mensajeEntrega.textContent =
+                    "Devolución registrada correctamente.";
+
+
+                await cargarReservasAdmin();
+
+
+                setTimeout(
+                    () => {
+
+                        panelGestionEntrega.classList.add(
+                            "oculto"
+                        );
+
+                        reservaEntregaActual =
+                            null;
+
+                    },
+                    700
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                mensajeEntrega.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEntrega.textContent =
+                    error.message ||
+                    "No se pudo registrar la devolución.";
+
+            } finally {
+
+                btnGuardarDevolucion.disabled =
+                    false;
+
+
+                btnGuardarDevolucion.textContent =
+                    "Guardar devolución";
+            }
+        }
+    );
 // =========================================================
 // INICIALIZACIÓN
 // =========================================================
@@ -1929,6 +3283,8 @@ async function iniciarAdmin() {
     await cargarCategorias();
 
     await cargarMateriales();
+
+    await cargarReservasAdmin();
 
 
     limpiarFormulario();

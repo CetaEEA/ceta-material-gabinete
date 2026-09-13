@@ -1,1 +1,302 @@
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.88),
+            rgba(255, 255, 255, 0.88)
+        ),
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: 520px;
+
+    background-attachment: fixed;
+}
+
+
+.login-container {
+    width: 100%;
+
+    max-width: 430px;
+}
+
+
+.login-card {
+    width: 100%;
+
+    padding: 35px;
+
+    border-radius: 18px;
+
+    background: #111c2a;
+
+    border: 1px solid #263548;
+
+    box-shadow:
+        0 12px 35px
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.login-logo {
+    width: 105px;
+
+    height: 105px;
+
+    object-fit: contain;
+
+    padding: 9px;
+
+    margin-bottom: 16px;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 18px
+        rgba(
+            0,
+            0,
+            0,
+            0.30
+        );
+}
+
+
+/* =========================================================
+   TEXTOS
+========================================================= */
+
+.login-instituto {
+    margin-bottom: 7px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+.login-card h1 {
+    margin-bottom: 10px;
+
+    color: #ffffff;
+
+    font-size: 29px;
+}
+
+
+.login-descripcion {
+    margin-bottom: 28px;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.campo {
+    margin-bottom: 18px;
+
+    text-align: left;
+}
+
+
+.campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #e2e8f0;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+.campo input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #475569;
+
+    border-radius: 9px;
+
+    background: #1e293b;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.campo input:focus {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            59,
+            130,
+            246,
+            0.15
+        );
+}
+
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.btn-principal {
+    width: 100%;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-principal:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+.btn-principal:disabled {
+    opacity: 0.65;
+
+    cursor: wait;
+}
+
+
+/* =========================================================
+   MENSAJE
+========================================================= */
+
+.mensaje-login {
+    min-height: 20px;
+
+    margin-top: 17px;
+
+    color: #fca5a5;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .login-page {
+        background-size: 300px;
+    }
+
+
+    .login-card {
+        padding:
+            28px 20px;
+    }
+
+
+    .login-logo {
+        width: 88px;
+
+        height: 88px;
+    }
+
+
+    .login-card h1 {
+        font-size: 25px;
+    }
+
+}

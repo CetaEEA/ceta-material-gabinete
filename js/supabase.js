@@ -9,11 +9,11 @@
 // =========================================================
 
 const SUPABASE_URL =
-    "AQUI_TU_SUPABASE_URL";
+    "https://cystgztmeyinsvmkkbji.supabase.co";
 
 
 const SUPABASE_ANON_KEY =
-    "AQUI_TU_SUPABASE_ANON_KEY";
+    "sb_publishable_4n5HfbFA8otKAg_X3ic8ig_VZzCqgH1";
 
 
 // =========================================================

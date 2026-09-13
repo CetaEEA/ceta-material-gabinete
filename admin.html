@@ -14,22 +14,522 @@
         CETA | Administración Material de Gabinete
     </title>
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="img/logo-ceta-transparente.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/estilos.css"
+    >
+
 </head>
 
 
-<body>
+<body class="admin-page">
 
-    <h1>
-        Panel Administrativo
-    </h1>
 
-    <p>
-        Material de Gabinete CETA
-    </p>
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
 
-    <p>
-        Login administrador funcionando correctamente.
-    </p>
+    <header class="admin-header">
+
+        <div class="admin-header-contenido">
+
+            <div class="admin-identidad">
+
+                <img
+                    src="img/logo-ceta-transparente.png"
+                    alt="Logo CETA"
+                >
+
+                <div>
+
+                    <p class="admin-etiqueta">
+                        INSTITUTO CETA
+                    </p>
+
+                    <h1>
+                        Material de Gabinete
+                    </h1>
+
+                    <p id="nombreAdministrador">
+                        Cargando usuario...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="btnCerrarSesion"
+                class="btn-salir"
+            >
+                Cerrar sesión
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         NAVEGACIÓN
+    ====================================================== -->
+
+    <nav class="admin-tabs">
+
+        <button
+            type="button"
+            class="tab-btn"
+            data-panel="panelReservas"
+        >
+            📅 Reservas
+        </button>
+
+
+        <button
+            type="button"
+            class="tab-btn activo"
+            data-panel="panelMateriales"
+        >
+            📦 Materiales
+        </button>
+
+
+        <button
+            type="button"
+            class="tab-btn"
+            data-panel="panelEntregas"
+        >
+            ↩️ Entregas
+        </button>
+
+
+        <button
+            type="button"
+            id="btnModoOscuro"
+            class="tab-btn"
+        >
+            🌙 Modo oscuro
+        </button>
+
+    </nav>
+
+
+    <main class="admin-main">
+
+
+        <!-- =================================================
+             RESERVAS
+        ================================================== -->
+
+        <section
+            id="panelReservas"
+            class="admin-panel"
+        >
+
+            <div class="seccion-titulo">
+
+                <div>
+                    <span class="numero-seccion">
+                        01
+                    </span>
+
+                    <h2>
+                        Reservas
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="panel-proximamente">
+
+                <h3>
+                    Módulo de reservas
+                </h3>
+
+                <p>
+                    Esta sección se habilitará cuando terminemos
+                    el catálogo y la reserva docente.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MATERIALES
+        ================================================== -->
+
+        <section
+            id="panelMateriales"
+            class="admin-panel activo"
+        >
+
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        02
+                    </span>
+
+                    <h2>
+                        Gestión de materiales
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="btnNuevoMaterial"
+                    class="btn-principal btn-auto"
+                >
+                    + Nuevo material
+                </button>
+
+            </div>
+
+
+            <!-- =============================================
+                 FORMULARIO
+            ============================================== -->
+
+            <div
+                id="contenedorFormularioMaterial"
+                class="admin-card formulario-material"
+            >
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3 id="tituloFormularioMaterial">
+                            Registrar nuevo material
+                        </h3>
+
+                        <p>
+                            Ingresa los datos generales,
+                            cantidad, categorías e imagen.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form id="formMaterial">
+
+
+                    <input
+                        type="hidden"
+                        id="materialId"
+                    >
+
+
+                    <div class="form-grid">
+
+
+                        <div class="campo-admin">
+
+                            <label for="materialCodigo">
+                                Código
+                            </label>
+
+                            <input
+                                type="text"
+                                id="materialCodigo"
+                                placeholder="Ej. BAT-001"
+                            >
+
+                        </div>
+
+
+                        <div class="campo-admin">
+
+                            <label for="materialNombre">
+                                Nombre *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="materialNombre"
+                                placeholder="Ej. Batería automotriz"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo-admin">
+
+                            <label for="materialCantidad">
+                                Cantidad total *
+                            </label>
+
+                            <input
+                                type="number"
+                                id="materialCantidad"
+                                min="0"
+                                step="1"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo-admin campo-ancho">
+
+                            <label for="materialDescripcion">
+                                Descripción
+                            </label>
+
+                            <textarea
+                                id="materialDescripcion"
+                                rows="4"
+                                placeholder="Descripción del material..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         CATEGORÍAS
+                    ====================================== -->
+
+                    <div class="bloque-formulario">
+
+                        <h4>
+                            Áreas / categorías
+                        </h4>
+
+                        <p class="texto-ayuda">
+                            Puedes seleccionar varias.
+                        </p>
+
+
+                        <div
+                            id="categoriasMaterial"
+                            class="categorias-checks"
+                        >
+
+                            Cargando categorías...
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         IMAGEN
+                    ====================================== -->
+
+                    <div class="bloque-formulario">
+
+                        <h4>
+                            Imagen del material
+                        </h4>
+
+
+                        <div class="imagen-formulario">
+
+
+                            <div class="imagen-preview-contenedor">
+
+                                <img
+                                    id="previewImagenMaterial"
+                                    class="imagen-preview"
+                                    alt="Vista previa"
+                                >
+
+                                <div
+                                    id="sinImagenMaterial"
+                                    class="sin-imagen"
+                                >
+                                    📦
+                                </div>
+
+                            </div>
+
+
+                            <div class="imagen-controles">
+
+                                <input
+                                    type="file"
+                                    id="materialImagen"
+                                    accept="image/png,image/jpeg,image/webp"
+                                >
+
+                                <p class="texto-ayuda">
+                                    JPG, PNG o WEBP.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         BOTONES
+                    ====================================== -->
+
+                    <div class="acciones-formulario">
+
+                        <button
+                            type="submit"
+                            id="btnGuardarMaterial"
+                            class="btn-principal btn-auto"
+                        >
+                            Guardar material
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="btnCancelarEdicion"
+                            class="btn-secundario btn-auto oculto"
+                        >
+                            Cancelar edición
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        id="mensajeMaterial"
+                        class="mensaje-admin"
+                    ></p>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- =============================================
+                 LISTADO
+            ============================================== -->
+
+            <div class="admin-card">
+
+
+                <div class="card-header card-header-listado">
+
+                    <div>
+
+                        <h3>
+                            Materiales registrados
+                        </h3>
+
+                        <p id="contadorMateriales">
+                            Cargando...
+                        </p>
+
+                    </div>
+
+
+                    <div class="buscador-materiales">
+
+                        <input
+                            type="search"
+                            id="buscarMaterial"
+                            placeholder="Buscar material..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="listaMateriales"
+                    class="materiales-grid"
+                >
+
+                    <p>
+                        Cargando materiales...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ENTREGAS
+        ================================================== -->
+
+        <section
+            id="panelEntregas"
+            class="admin-panel"
+        >
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        03
+                    </span>
+
+                    <h2>
+                        Entregas y devoluciones
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-proximamente">
+
+                <h3>
+                    Control de devoluciones
+                </h3>
+
+                <p>
+                    Aquí se controlará posteriormente lo entregado,
+                    lo pendiente y las observaciones.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/admin.js"></script>
+
 
 </body>
 

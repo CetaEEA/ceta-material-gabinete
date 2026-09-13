@@ -2152,36 +2152,43 @@ async function cargarReservasAdmin() {
         );
 
 
-    const {
-        data: reservas,
-        error
-    } =
-        await supabaseClient
-            .from("reservas_material")
-            .select(`
-                id,
-                usuario_id,
-                grupo,
-                fecha,
-                horario,
-                tema,
-                estado,
-                observacion_general
-            `)
-            .gte(
-                "fecha",
-                inicio
-            )
-            .lte(
-                "fecha",
-                fin
-            )
-            .order(
-                "fecha",
-                {
-                    ascending: true
-                }
-            );
+   const {
+    data: reservas,
+    error
+} =
+    await supabaseClient
+        .from("reservas_material")
+        .select(`
+            id,
+            usuario_id,
+            grupo,
+            fecha,
+            horario,
+            tema,
+            estado,
+            observacion_general
+        `)
+        .gte(
+            "fecha",
+            inicio
+        )
+        .lte(
+            "fecha",
+            fin
+        )
+
+        // NO mostrar reservas canceladas
+        .neq(
+            "estado",
+            "cancelada"
+        )
+
+        .order(
+            "fecha",
+            {
+                ascending: true
+            }
+        );
 
 
     if (error) {
@@ -2918,7 +2925,6 @@ function renderizarEntregasPendientes() {
 // =========================================================
 // ABRIR ENTREGA
 // =========================================================
-
 window.abrirEntrega =
     function (
         reservaId
@@ -2933,6 +2939,11 @@ window.abrirEntrega =
 
 
         if (!reserva) {
+
+            alert(
+                "No se encontró la reserva."
+            );
+
             return;
         }
 
@@ -2945,14 +2956,42 @@ window.abrirEntrega =
             detallesAdmin
                 .filter(
                     d =>
-                        Number(d.reserva_id) ===
-                        Number(reservaId)
+                        Number(
+                            d.reserva_id
+                        ) ===
+                        Number(
+                            reservaId
+                        )
                 );
 
+
+        // =================================================
+        // CAMBIAR AUTOMÁTICAMENTE A LA PESTAÑA ENTREGAS
+        // =================================================
+
+        const botonEntregas =
+            document.querySelector(
+                '.tab-btn[data-panel="panelEntregas"]'
+            );
+
+
+        if (botonEntregas) {
+
+            botonEntregas.click();
+        }
+
+
+        // =================================================
+        // TÍTULO
+        // =================================================
 
         tituloGestionEntrega.textContent =
             `Reserva #${reserva.id}`;
 
+
+        // =================================================
+        // DATOS DE LA RESERVA
+        // =================================================
 
         datosGestionEntrega.innerHTML =
             `
@@ -2963,20 +3002,37 @@ window.abrirEntrega =
                     )
                 )}
             </strong>
-            · Grupo
+
+            · Grupo:
             ${escaparHTML(
                 reserva.grupo
             )}
-            ·
+
+            · Fecha:
             ${escaparHTML(
                 reserva.fecha
             )}
-            ·
+
+            · Horario:
             ${escaparHTML(
                 reserva.horario
             )}
+
+            <br>
+
+            <strong>
+                Tema:
+            </strong>
+
+            ${escaparHTML(
+                reserva.tema
+            )}
             `;
 
+
+        // =================================================
+        // DETALLES
+        // =================================================
 
         detalleGestionEntrega.innerHTML =
             detalles
@@ -2996,6 +3052,7 @@ window.abrirEntrega =
                         return `
                             <div class="detalle-entrega-item">
 
+
                                 <div class="detalle-entrega-info">
 
                                     <h4>
@@ -3006,22 +3063,28 @@ window.abrirEntrega =
                                         )}
                                     </h4>
 
+
                                     <p>
                                         Reservado:
+
                                         <strong>
                                             ${detalle.cantidad}
                                         </strong>
                                     </p>
 
+
                                     <p>
                                         Ya devuelto:
+
                                         <strong>
                                             ${detalle.cantidad_devuelta}
                                         </strong>
                                     </p>
 
+
                                     <p>
                                         Pendiente:
+
                                         <strong>
                                             ${pendiente}
                                         </strong>
@@ -3038,10 +3101,15 @@ window.abrirEntrega =
 
                                     <input
                                         type="number"
+
                                         min="${detalle.cantidad_devuelta}"
+
                                         max="${detalle.cantidad}"
+
                                         value="${detalle.cantidad_devuelta}"
+
                                         class="input-devuelto"
+
                                         data-detalle-id="${detalle.id}"
                                     >
 
@@ -3056,8 +3124,11 @@ window.abrirEntrega =
 
                                     <textarea
                                         rows="3"
+
                                         class="input-observacion-entrega"
+
                                         data-detalle-id="${detalle.id}"
+
                                         placeholder="Ej. Fuente 1 revisar cables"
                                     >${escaparHTML(
                                         detalle.observacion ||
@@ -3066,12 +3137,17 @@ window.abrirEntrega =
 
                                 </div>
 
+
                             </div>
                         `;
                     }
                 )
                 .join("");
 
+
+        // =================================================
+        // MOSTRAR PANEL DE GESTIÓN
+        // =================================================
 
         panelGestionEntrega.classList.remove(
             "oculto"
@@ -3082,12 +3158,26 @@ window.abrirEntrega =
             "";
 
 
-        panelGestionEntrega.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    };
+        // =================================================
+        // BAJAR HASTA LA RESERVA
+        // =================================================
 
+        setTimeout(
+            () => {
+
+                panelGestionEntrega
+                    .scrollIntoView({
+                        behavior:
+                            "smooth",
+
+                        block:
+                            "start"
+                    });
+
+            },
+            150
+        );
+    };
 
 // =========================================================
 // CERRAR ENTREGA

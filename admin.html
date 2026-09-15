@@ -14,15 +14,23 @@
         CETA | Administración Material de Gabinete
     </title>
 
+    <!-- ================================================
+         ICONO
+    ================================================= -->
+
     <link
         rel="icon"
         type="image/png"
         href="img/logo-ceta-transparente.png"
     >
 
+    <!-- ================================================
+         ESTILOS
+    ================================================= -->
+
     <link
         rel="stylesheet"
-        href="css/estilos.css"
+        href="css/estilos.css?v=4"
     >
 
 </head>
@@ -122,125 +130,157 @@
     </nav>
 
 
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
     <main class="admin-main">
 
 
         <!-- =================================================
-             RESERVAS
+             01 - RESERVAS
         ================================================== -->
 
-       <section
-    id="panelReservas"
-    class="admin-panel"
->
-
-    <div class="seccion-titulo">
-
-        <div>
-
-            <span class="numero-seccion">
-                01
-            </span>
-
-            <h2>
-                Reservas
-            </h2>
-
-        </div>
-
-    </div>
-
-
-    <div class="semana-controles">
-
-        <button
-            type="button"
-            id="btnSemanaAnteriorAdmin"
-            class="btn-semana"
+        <section
+            id="panelReservas"
+            class="admin-panel"
         >
-            ← Semana anterior
-        </button>
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        01
+                    </span>
+
+                    <h2>
+                        Reservas
+                    </h2>
+
+                </div>
+
+            </div>
 
 
-        <div>
-            <strong id="textoSemanaAdmin">
-                Cargando semana...
-            </strong>
-        </div>
+            <!-- =============================================
+                 CONTROLES SEMANA
+            ============================================== -->
+
+            <div class="semana-controles">
 
 
-        <button
-            type="button"
-            id="btnSemanaSiguienteAdmin"
-            class="btn-semana"
-        >
-            Semana siguiente →
-        </button>
-
-    </div>
+                <button
+                    type="button"
+                    id="btnSemanaAnteriorAdmin"
+                    class="btn-semana"
+                >
+                    ← Semana anterior
+                </button>
 
 
-    <div
-        id="mensajeReservasAdmin"
-        class="mensaje-admin"
-    ></div>
+                <div>
+
+                    <strong id="textoSemanaAdmin">
+                        Cargando semana...
+                    </strong>
+
+                </div>
 
 
-    <div class="tabla-semanal-wrapper">
-
-        <table class="tabla-semanal-material">
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Horario
-                    </th>
-
-                    <th id="adminCabLunes">
-                        Lunes
-                    </th>
-
-                    <th id="adminCabMartes">
-                        Martes
-                    </th>
-
-                    <th id="adminCabMiercoles">
-                        Miércoles
-                    </th>
-
-                    <th id="adminCabJueves">
-                        Jueves
-                    </th>
-
-                    <th id="adminCabViernes">
-                        Viernes
-                    </th>
-
-                </tr>
-
-            </thead>
+                <button
+                    type="button"
+                    id="btnSemanaSiguienteAdmin"
+                    class="btn-semana"
+                >
+                    Semana siguiente →
+                </button>
 
 
-            <tbody id="cuerpoTablaReservasAdmin">
+                <!-- =========================================
+                     NUEVO BOTÓN PDF
+                ========================================== -->
 
-                <tr>
-                    <td colspan="6">
-                        Cargando reservas...
-                    </td>
-                </tr>
+                <button
+                    type="button"
+                    id="btnPDFReservasMaterial"
+                    class="btn-principal btn-auto"
+                >
+                    🖨️ Imprimir PDF
+                </button>
 
-            </tbody>
 
-        </table>
+            </div>
 
-    </div>
 
-</section>
+            <div
+                id="mensajeReservasAdmin"
+                class="mensaje-admin"
+            ></div>
+
+
+            <!-- =============================================
+                 TABLA SEMANAL
+            ============================================== -->
+
+            <div class="tabla-semanal-wrapper">
+
+                <table class="tabla-semanal-material">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Horario
+                            </th>
+
+                            <th id="adminCabLunes">
+                                Lunes
+                            </th>
+
+                            <th id="adminCabMartes">
+                                Martes
+                            </th>
+
+                            <th id="adminCabMiercoles">
+                                Miércoles
+                            </th>
+
+                            <th id="adminCabJueves">
+                                Jueves
+                            </th>
+
+                            <th id="adminCabViernes">
+                                Viernes
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="cuerpoTablaReservasAdmin">
+
+                        <tr>
+
+                            <td colspan="6">
+                                Cargando reservas...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
 
         <!-- =================================================
-             MATERIALES
+             02 - MATERIALES
         ================================================== -->
 
         <section
@@ -263,6 +303,7 @@
 
                 </div>
 
+
                 <button
                     type="button"
                     id="btnNuevoMaterial"
@@ -275,7 +316,7 @@
 
 
             <!-- =============================================
-                 FORMULARIO
+                 FORMULARIO MATERIAL
             ============================================== -->
 
             <div
@@ -313,6 +354,8 @@
                     <div class="form-grid">
 
 
+                        <!-- CÓDIGO -->
+
                         <div class="campo-admin">
 
                             <label for="materialCodigo">
@@ -327,6 +370,8 @@
 
                         </div>
 
+
+                        <!-- NOMBRE -->
 
                         <div class="campo-admin">
 
@@ -343,6 +388,8 @@
 
                         </div>
 
+
+                        <!-- CANTIDAD -->
 
                         <div class="campo-admin">
 
@@ -362,6 +409,8 @@
                         </div>
 
 
+                        <!-- DESCRIPCIÓN -->
+
                         <div class="campo-admin campo-ancho">
 
                             <label for="materialDescripcion">
@@ -375,6 +424,7 @@
                             ></textarea>
 
                         </div>
+
 
                     </div>
 
@@ -398,16 +448,14 @@
                             id="categoriasMaterial"
                             class="categorias-checks"
                         >
-
                             Cargando categorías...
-
                         </div>
 
                     </div>
 
 
                     <!-- =====================================
-                         IMAGEN
+                         IMAGEN DEL MATERIAL
                     ====================================== -->
 
                     <div class="bloque-formulario">
@@ -420,13 +468,16 @@
                         <div class="imagen-formulario">
 
 
+                            <!-- VISTA PREVIA -->
+
                             <div class="imagen-preview-contenedor">
 
                                 <img
                                     id="previewImagenMaterial"
                                     class="imagen-preview"
-                                    alt="Vista previa"
+                                    alt="Vista previa del material"
                                 >
+
 
                                 <div
                                     id="sinImagenMaterial"
@@ -437,6 +488,8 @@
 
                             </div>
 
+
+                            <!-- SELECCIONAR ARCHIVO -->
 
                             <div class="imagen-controles">
 
@@ -459,10 +512,11 @@
 
 
                     <!-- =====================================
-                         BOTONES
+                         BOTONES FORMULARIO
                     ====================================== -->
 
                     <div class="acciones-formulario">
+
 
                         <button
                             type="submit"
@@ -481,6 +535,7 @@
                             Cancelar edición
                         </button>
 
+
                     </div>
 
 
@@ -496,7 +551,7 @@
 
 
             <!-- =============================================
-                 LISTADO
+                 LISTADO DE MATERIALES
             ============================================== -->
 
             <div class="admin-card">
@@ -548,123 +603,164 @@
 
 
         <!-- =================================================
-             ENTREGAS
+             03 - ENTREGAS
         ================================================== -->
 
-       <section
-    id="panelEntregas"
-    class="admin-panel"
->
-
-    <div class="seccion-titulo">
-
-        <div>
-
-            <span class="numero-seccion">
-                03
-            </span>
-
-            <h2>
-                Entregas y devoluciones
-            </h2>
-
-        </div>
-
-    </div>
-
-
-    <div class="admin-card">
-
-        <div class="card-header">
-
-            <h3>
-                Reservas pendientes
-            </h3>
-
-            <p>
-                Selecciona una reserva para registrar
-                devoluciones parciales o completas.
-            </p>
-
-        </div>
-
-
-        <div
-            id="listaEntregasPendientes"
-            class="lista-entregas"
+        <section
+            id="panelEntregas"
+            class="admin-panel"
         >
-            Cargando reservas...
-        </div>
-
-    </div>
 
 
-    <div
-        id="panelGestionEntrega"
-        class="admin-card oculto"
-    >
+            <div class="seccion-titulo">
 
-        <div class="card-header">
+                <div>
 
-            <h3 id="tituloGestionEntrega">
-                Registrar devolución
-            </h3>
+                    <span class="numero-seccion">
+                        03
+                    </span>
 
-            <p id="datosGestionEntrega">
-            </p>
+                    <h2>
+                        Entregas y devoluciones
+                    </h2>
 
-        </div>
+                </div>
 
-
-        <div
-            id="detalleGestionEntrega"
-            class="detalle-entrega"
-        ></div>
+            </div>
 
 
-        <div class="acciones-formulario">
+            <!-- =============================================
+                 RESERVAS PENDIENTES
+            ============================================== -->
 
-            <button
-                type="button"
-                id="btnGuardarDevolucion"
-                class="btn-principal btn-auto"
+            <div class="admin-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Reservas pendientes
+                        </h3>
+
+                        <p>
+                            Selecciona una reserva para registrar
+                            devoluciones parciales o completas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="listaEntregasPendientes"
+                    class="lista-entregas"
+                >
+                    Cargando reservas...
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 GESTIÓN DE DEVOLUCIÓN
+            ============================================== -->
+
+            <div
+                id="panelGestionEntrega"
+                class="admin-card oculto"
             >
-                Guardar devolución
-            </button>
 
 
-            <button
-                type="button"
-                id="btnCerrarGestionEntrega"
-                class="btn-secundario btn-auto"
-            >
-                Cerrar
-            </button>
+                <div class="card-header">
 
-        </div>
+                    <div>
+
+                        <h3 id="tituloGestionEntrega">
+                            Registrar devolución
+                        </h3>
+
+                        <p id="datosGestionEntrega">
+                        </p>
+
+                    </div>
+
+                </div>
 
 
-        <p
-            id="mensajeEntrega"
-            class="mensaje-admin"
-        ></p>
+                <div
+                    id="detalleGestionEntrega"
+                    class="detalle-entrega"
+                ></div>
 
-    </div>
 
-</section>
+                <div class="acciones-formulario">
+
+
+                    <button
+                        type="button"
+                        id="btnGuardarDevolucion"
+                        class="btn-principal btn-auto"
+                    >
+                        Guardar devolución
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="btnCerrarGestionEntrega"
+                        class="btn-secundario btn-auto"
+                    >
+                        Cerrar
+                    </button>
+
+
+                </div>
+
+
+                <p
+                    id="mensajeEntrega"
+                    class="mensaje-admin"
+                ></p>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
 
 
     <!-- =====================================================
-         SUPABASE
+         LIBRERÍAS
     ====================================================== -->
+
+    <!-- Supabase -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
     ></script>
 
-    <script src="js/supabase.js"></script>
 
-    <script src="js/admin.js"></script>
+    <!-- jsPDF
+         Necesario para generar el PDF semanal
+    -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+    ></script>
+
+
+    <!-- =====================================================
+         ARCHIVOS DEL SISTEMA
+    ====================================================== -->
+
+    <script src="js/supabase.js?v=4"></script>
+
+    <script src="js/admin.js?v=4"></script>
 
 
 </body>

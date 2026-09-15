@@ -3380,5 +3380,1089 @@ async function iniciarAdmin() {
     limpiarFormulario();
 }
 
+// =========================================================
+// PDF SEMANAL - MATERIAL DE GABINETE
+// =========================================================
 
+const btnPDFReservasMaterial =
+    document.getElementById(
+        "btnPDFReservasMaterial"
+    );
+
+
+btnPDFReservasMaterial
+    ?.addEventListener(
+        "click",
+        generarPDFReservasMaterial
+    );
+
+
+// =========================================================
+// GENERAR PDF
+// =========================================================
+
+async function generarPDFReservasMaterial() {
+
+    if (
+        !reservasAdmin ||
+        reservasAdmin.length === 0
+    ) {
+
+        alert(
+            "No hay reservas para imprimir en esta semana."
+        );
+
+        return;
+    }
+
+
+    const {
+        jsPDF
+    } = window.jspdf;
+
+
+    const pdf =
+        new jsPDF({
+            orientation: "landscape",
+            unit: "mm",
+            format: "a4"
+        });
+
+
+    const anchoPagina =
+        pdf.internal.pageSize.getWidth();
+
+    const altoPagina =
+        pdf.internal.pageSize.getHeight();
+
+
+    const margenIzquierdo = 8;
+    const margenDerecho = 8;
+    const limiteInferior = altoPagina - 14;
+
+
+    let numeroPagina = 1;
+
+
+    // =====================================================
+    // FECHAS
+    // =====================================================
+
+    const lunes =
+        lunesSemanaAdmin;
+
+
+    const viernes =
+        sumarDiasAdmin(
+            lunesSemanaAdmin,
+            4
+        );
+
+
+    const fechasSemana =
+        Array.from(
+            {
+                length: 5
+            },
+            (
+                _,
+                i
+            ) =>
+                sumarDiasAdmin(
+                    lunesSemanaAdmin,
+                    i
+                )
+        );
+
+
+    // =====================================================
+    // PIE DE PÁGINA
+    // =====================================================
+
+    function dibujarPiePagina() {
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        pdf.setFontSize(
+            8
+        );
+
+        pdf.setTextColor(
+            90,
+            90,
+            90
+        );
+
+
+        pdf.text(
+            "Sistema de Material de Gabinete · CETA",
+            margenIzquierdo,
+            altoPagina - 6
+        );
+
+
+        pdf.text(
+            `Página ${numeroPagina}`,
+            anchoPagina - margenDerecho,
+            altoPagina - 6,
+            {
+                align: "right"
+            }
+        );
+
+
+        pdf.setTextColor(
+            0,
+            0,
+            0
+        );
+    }
+
+
+    // =====================================================
+    // CABECERA PRIMERA PÁGINA
+    // =====================================================
+
+    function dibujarCabeceraPrincipal() {
+
+        let y = 8;
+
+
+        // Intentar colocar logo
+        try {
+
+            const logo =
+                document.querySelector(
+                    ".admin-header img"
+                );
+
+
+            if (
+                logo &&
+                logo.complete &&
+                logo.naturalWidth > 0
+            ) {
+
+                pdf.addImage(
+                    logo,
+                    "PNG",
+                    9,
+                    7,
+                    22,
+                    22
+                );
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "No se pudo añadir el logo al PDF.",
+                error
+            );
+        }
+
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        pdf.setFontSize(
+            15
+        );
+
+
+        pdf.text(
+            "SISTEMA DE MATERIAL DE GABINETE",
+            anchoPagina / 2,
+            y + 6,
+            {
+                align: "center"
+            }
+        );
+
+
+        pdf.setFontSize(
+            12
+        );
+
+
+        pdf.text(
+            "REGISTRO SEMANAL DE RESERVAS",
+            anchoPagina / 2,
+            y + 13,
+            {
+                align: "center"
+            }
+        );
+
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        pdf.setFontSize(
+            9
+        );
+
+
+        pdf.text(
+            `Semana: ${fechaCompletaAdmin(
+                lunes
+            )} al ${fechaCompletaAdmin(
+                viernes
+            )}`,
+            anchoPagina / 2,
+            y + 20,
+            {
+                align: "center"
+            }
+        );
+
+
+        pdf.setDrawColor(
+            190
+        );
+
+
+        pdf.line(
+            margenIzquierdo,
+            y + 25,
+            anchoPagina - margenDerecho,
+            y + 25
+        );
+
+
+        return y + 30;
+    }
+
+
+    // =====================================================
+    // CABECERA PÁGINAS SIGUIENTES
+    // =====================================================
+
+    function dibujarCabeceraSecundaria() {
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        pdf.setFontSize(
+            10
+        );
+
+
+        pdf.text(
+            `Semana: ${fechaCompletaAdmin(
+                lunes
+            )} al ${fechaCompletaAdmin(
+                viernes
+            )}`,
+            margenIzquierdo,
+            10
+        );
+
+
+        pdf.setDrawColor(
+            190
+        );
+
+
+        pdf.line(
+            margenIzquierdo,
+            14,
+            anchoPagina - margenDerecho,
+            14
+        );
+
+
+        return 18;
+    }
+
+
+    // =====================================================
+    // COLUMNAS
+    // =====================================================
+
+    const anchoDisponible =
+        anchoPagina
+        -
+        margenIzquierdo
+        -
+        margenDerecho;
+
+
+    const anchoHorario =
+        25;
+
+
+    const anchoDia =
+        (
+            anchoDisponible
+            -
+            anchoHorario
+        ) / 5;
+
+
+    // =====================================================
+    // CABECERA DE TABLA
+    // =====================================================
+
+    function dibujarCabeceraTabla(y) {
+
+        const alto = 14;
+
+
+        pdf.setFillColor(
+            17,
+            28,
+            42
+        );
+
+
+        pdf.rect(
+            margenIzquierdo,
+            y,
+            anchoHorario,
+            alto,
+            "F"
+        );
+
+
+        pdf.setTextColor(
+            255,
+            255,
+            255
+        );
+
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+
+        pdf.setFontSize(
+            8
+        );
+
+
+        pdf.text(
+            "HORARIO",
+            margenIzquierdo
+            +
+            anchoHorario / 2,
+            y + 8,
+            {
+                align: "center"
+            }
+        );
+
+
+        const nombresDias = [
+            "LUNES",
+            "MARTES",
+            "MIÉRCOLES",
+            "JUEVES",
+            "VIERNES"
+        ];
+
+
+        for (
+            let i = 0;
+            i < 5;
+            i++
+        ) {
+
+            const x =
+                margenIzquierdo
+                +
+                anchoHorario
+                +
+                anchoDia * i;
+
+
+            pdf.setFillColor(
+                17,
+                28,
+                42
+            );
+
+
+            pdf.rect(
+                x,
+                y,
+                anchoDia,
+                alto,
+                "F"
+            );
+
+
+            pdf.text(
+                nombresDias[i],
+                x + anchoDia / 2,
+                y + 5,
+                {
+                    align: "center"
+                }
+            );
+
+
+            pdf.setFont(
+                "helvetica",
+                "normal"
+            );
+
+
+            pdf.setFontSize(
+                7
+            );
+
+
+            pdf.text(
+                fechaCortaAdmin(
+                    fechasSemana[i]
+                ),
+                x + anchoDia / 2,
+                y + 10,
+                {
+                    align: "center"
+                }
+            );
+
+
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+
+            pdf.setFontSize(
+                8
+            );
+        }
+
+
+        pdf.setTextColor(
+            0,
+            0,
+            0
+        );
+
+
+        return y + alto;
+    }
+
+
+    // =====================================================
+    // NUEVA PÁGINA
+    // =====================================================
+
+    function nuevaPagina() {
+
+        dibujarPiePagina();
+
+
+        pdf.addPage();
+
+
+        numeroPagina++;
+
+
+        let y =
+            dibujarCabeceraSecundaria();
+
+
+        y =
+            dibujarCabeceraTabla(
+                y
+            );
+
+
+        return y;
+    }
+
+
+    // =====================================================
+    // MATERIALES RESERVA
+    // =====================================================
+
+    function obtenerMaterialesReserva(
+        reservaId
+    ) {
+
+        return detallesAdmin
+
+            .filter(
+                detalle =>
+                    Number(
+                        detalle.reserva_id
+                    ) ===
+                    Number(
+                        reservaId
+                    )
+            )
+
+            .map(
+                detalle => {
+
+                    const nombre =
+                        nombreMaterialAdmin(
+                            detalle.material_id
+                        );
+
+
+                    return {
+                        nombre,
+                        cantidad:
+                            detalle.cantidad
+                    };
+                }
+            );
+    }
+
+
+    // =====================================================
+    // CALCULAR ALTURA DE TARJETA
+    // =====================================================
+
+    function calcularAltoTarjeta(
+        reserva,
+        ancho
+    ) {
+
+        const materiales =
+            obtenerMaterialesReserva(
+                reserva.id
+            );
+
+
+        let alto = 6;
+
+
+        const docente =
+            nombreDocenteAdmin(
+                reserva.usuario_id
+            );
+
+
+        const lineasDocente =
+            pdf.splitTextToSize(
+                `Docente: ${docente}`,
+                ancho - 5
+            );
+
+
+        alto +=
+            lineasDocente.length * 3.5;
+
+
+        const lineasGrupo =
+            pdf.splitTextToSize(
+                `Grupo: ${reserva.grupo}`,
+                ancho - 5
+            );
+
+
+        alto +=
+            lineasGrupo.length * 3.5;
+
+
+        const lineasTema =
+            pdf.splitTextToSize(
+                `Tema: ${reserva.tema}`,
+                ancho - 5
+            );
+
+
+        alto +=
+            lineasTema.length * 3.5;
+
+
+        alto += 2;
+
+
+        materiales.forEach(
+            material => {
+
+                const lineas =
+                    pdf.splitTextToSize(
+                        `${material.cantidad} × ${material.nombre}`,
+                        ancho - 7
+                    );
+
+
+                alto +=
+                    lineas.length * 3.5;
+            }
+        );
+
+
+        alto += 5;
+
+
+        return Math.max(
+            alto,
+            24
+        );
+    }
+
+
+    // =====================================================
+    // DIBUJAR TARJETA
+    // =====================================================
+
+    function dibujarTarjeta(
+        reserva,
+        x,
+        y,
+        ancho
+    ) {
+
+        const alto =
+            calcularAltoTarjeta(
+                reserva,
+                ancho
+            );
+
+
+        pdf.setFillColor(
+            247,
+            249,
+            252
+        );
+
+
+        pdf.setDrawColor(
+            205,
+            215,
+            225
+        );
+
+
+        pdf.roundedRect(
+            x,
+            y,
+            ancho,
+            alto,
+            2,
+            2,
+            "FD"
+        );
+
+
+        let textoY =
+            y + 5;
+
+
+        const padding =
+            2.5;
+
+
+        // ESTADO
+        let estadoTexto =
+            reserva.estado.toUpperCase();
+
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+
+        pdf.setFontSize(
+            6.5
+        );
+
+
+        pdf.text(
+            estadoTexto,
+            x + padding,
+            textoY
+        );
+
+
+        textoY += 4;
+
+
+        // DOCENTE
+        pdf.setFontSize(
+            7
+        );
+
+
+        const docente =
+            nombreDocenteAdmin(
+                reserva.usuario_id
+            );
+
+
+        let lineas =
+            pdf.splitTextToSize(
+                `Docente: ${docente}`,
+                ancho - 5
+            );
+
+
+        pdf.text(
+            lineas,
+            x + padding,
+            textoY
+        );
+
+
+        textoY +=
+            lineas.length * 3.5;
+
+
+        // GRUPO
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+
+        lineas =
+            pdf.splitTextToSize(
+                `Grupo: ${reserva.grupo}`,
+                ancho - 5
+            );
+
+
+        pdf.text(
+            lineas,
+            x + padding,
+            textoY
+        );
+
+
+        textoY +=
+            lineas.length * 3.5;
+
+
+        // TEMA
+        lineas =
+            pdf.splitTextToSize(
+                `Tema: ${reserva.tema}`,
+                ancho - 5
+            );
+
+
+        pdf.text(
+            lineas,
+            x + padding,
+            textoY
+        );
+
+
+        textoY +=
+            lineas.length * 3.5 + 1;
+
+
+        // MATERIALES
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+
+        pdf.text(
+            "Materiales:",
+            x + padding,
+            textoY
+        );
+
+
+        textoY += 3.5;
+
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+
+        const materiales =
+            obtenerMaterialesReserva(
+                reserva.id
+            );
+
+
+        materiales.forEach(
+            material => {
+
+                const texto =
+                    `${material.cantidad} × ${material.nombre}`;
+
+
+                const lineasMaterial =
+                    pdf.splitTextToSize(
+                        texto,
+                        ancho - 7
+                    );
+
+
+                pdf.text(
+                    lineasMaterial,
+                    x + padding + 1,
+                    textoY
+                );
+
+
+                textoY +=
+                    lineasMaterial.length * 3.5;
+            }
+        );
+
+
+        return alto;
+    }
+
+
+    // =====================================================
+    // INICIAR PDF
+    // =====================================================
+
+    let y =
+        dibujarCabeceraPrincipal();
+
+
+    y =
+        dibujarCabeceraTabla(
+            y
+        );
+
+
+    // =====================================================
+    // RECORRER HORARIOS
+    // =====================================================
+
+    for (
+        const horario
+        of HORARIOS_ADMIN
+    ) {
+
+        const reservasPorDia = [];
+
+
+        let altoMaximoFila =
+            20;
+
+
+        for (
+            let dia = 0;
+            dia < 5;
+            dia++
+        ) {
+
+            const fecha =
+                fechaISOAdmin(
+                    fechasSemana[dia]
+                );
+
+
+            const reservasCelda =
+                reservasAdmin.filter(
+                    reserva =>
+                        reserva.fecha ===
+                        fecha
+                        &&
+                        reserva.horario ===
+                        horario
+                        &&
+                        reserva.estado !==
+                        "cancelada"
+                );
+
+
+            reservasPorDia.push(
+                reservasCelda
+            );
+
+
+            let altoCelda =
+                6;
+
+
+            reservasCelda.forEach(
+                reserva => {
+
+                    altoCelda +=
+                        calcularAltoTarjeta(
+                            reserva,
+                            anchoDia - 4
+                        );
+
+                    altoCelda +=
+                        3;
+                }
+            );
+
+
+            altoMaximoFila =
+                Math.max(
+                    altoMaximoFila,
+                    altoCelda
+                );
+        }
+
+
+        // =================================================
+        // SALTO DE PÁGINA ANTES DE CORTAR FILA
+        // =================================================
+
+        if (
+            y + altoMaximoFila >
+            limiteInferior
+        ) {
+
+            y =
+                nuevaPagina();
+        }
+
+
+        // =================================================
+        // COLUMNA HORARIO
+        // =================================================
+
+        pdf.setFillColor(
+            241,
+            245,
+            249
+        );
+
+
+        pdf.setDrawColor(
+            210,
+            218,
+            228
+        );
+
+
+        pdf.rect(
+            margenIzquierdo,
+            y,
+            anchoHorario,
+            altoMaximoFila,
+            "FD"
+        );
+
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+
+        pdf.setFontSize(
+            8
+        );
+
+
+        pdf.text(
+            horario.replace(
+                "-",
+                " - "
+            ),
+            margenIzquierdo
+            +
+            anchoHorario / 2,
+            y + altoMaximoFila / 2,
+            {
+                align: "center"
+            }
+        );
+
+
+        // =================================================
+        // CELDAS DÍAS
+        // =================================================
+
+        for (
+            let dia = 0;
+            dia < 5;
+            dia++
+        ) {
+
+            const x =
+                margenIzquierdo
+                +
+                anchoHorario
+                +
+                anchoDia * dia;
+
+
+            pdf.setFillColor(
+                255,
+                255,
+                255
+            );
+
+
+            pdf.rect(
+                x,
+                y,
+                anchoDia,
+                altoMaximoFila,
+                "FD"
+            );
+
+
+            let tarjetaY =
+                y + 3;
+
+
+            reservasPorDia[dia]
+                .forEach(
+                    reserva => {
+
+                        const altoTarjeta =
+                            dibujarTarjeta(
+                                reserva,
+                                x + 2,
+                                tarjetaY,
+                                anchoDia - 4
+                            );
+
+
+                        tarjetaY +=
+                            altoTarjeta + 3;
+                    }
+                );
+        }
+
+
+        y +=
+            altoMaximoFila;
+    }
+
+
+    // =====================================================
+    // PIE ÚLTIMA PÁGINA
+    // =====================================================
+
+    dibujarPiePagina();
+
+
+    // =====================================================
+    // GUARDAR
+    // =====================================================
+
+    const nombreArchivo =
+        `reservas_material_${fechaISOAdmin(
+            lunes
+        )}_${fechaISOAdmin(
+            viernes
+        )}.pdf`;
+
+
+    pdf.save(
+        nombreArchivo
+    );
+}
 iniciarAdmin();

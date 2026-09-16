@@ -3379,7 +3379,6 @@ async function iniciarAdmin() {
 
     limpiarFormulario();
 }
-
 // =========================================================
 // PDF SEMANAL - MATERIAL DE GABINETE
 // =========================================================
@@ -3438,7 +3437,9 @@ async function generarPDFReservasMaterial() {
 
     const margenIzquierdo = 8;
     const margenDerecho = 8;
-    const limiteInferior = altoPagina - 14;
+
+    const limiteInferior =
+        altoPagina - 14;
 
 
     let numeroPagina = 1;
@@ -3523,7 +3524,7 @@ async function generarPDFReservasMaterial() {
 
 
     // =====================================================
-    // CABECERA PRIMERA PÁGINA
+    // CABECERA PRINCIPAL
     // =====================================================
 
     function dibujarCabeceraPrincipal() {
@@ -3531,7 +3532,10 @@ async function generarPDFReservasMaterial() {
         let y = 8;
 
 
-        // Intentar colocar logo
+        // -------------------------------------------------
+        // LOGO CETA
+        // -------------------------------------------------
+
         try {
 
             const logo =
@@ -3564,6 +3568,10 @@ async function generarPDFReservasMaterial() {
             );
         }
 
+
+        // -------------------------------------------------
+        // TÍTULO
+        // -------------------------------------------------
 
         pdf.setFont(
             "helvetica",
@@ -3686,7 +3694,7 @@ async function generarPDFReservasMaterial() {
 
 
     // =====================================================
-    // COLUMNAS
+    // DIMENSIONES DE TABLA
     // =====================================================
 
     const anchoDisponible =
@@ -3697,8 +3705,7 @@ async function generarPDFReservasMaterial() {
         margenDerecho;
 
 
-    const anchoHorario =
-        25;
+    const anchoHorario = 25;
 
 
     const anchoDia =
@@ -3717,6 +3724,8 @@ async function generarPDFReservasMaterial() {
 
         const alto = 14;
 
+
+        // HORARIO
 
         pdf.setFillColor(
             17,
@@ -3754,8 +3763,7 @@ async function generarPDFReservasMaterial() {
 
         pdf.text(
             "HORARIO",
-            margenIzquierdo
-            +
+            margenIzquierdo +
             anchoHorario / 2,
             y + 8,
             {
@@ -3803,6 +3811,16 @@ async function generarPDFReservasMaterial() {
             );
 
 
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+            pdf.setFontSize(
+                8
+            );
+
+
             pdf.text(
                 nombresDias[i],
                 x + anchoDia / 2,
@@ -3818,7 +3836,6 @@ async function generarPDFReservasMaterial() {
                 "normal"
             );
 
-
             pdf.setFontSize(
                 7
             );
@@ -3833,17 +3850,6 @@ async function generarPDFReservasMaterial() {
                 {
                     align: "center"
                 }
-            );
-
-
-            pdf.setFont(
-                "helvetica",
-                "bold"
-            );
-
-
-            pdf.setFontSize(
-                8
             );
         }
 
@@ -3874,22 +3880,22 @@ async function generarPDFReservasMaterial() {
         numeroPagina++;
 
 
-        let y =
+        let nuevaY =
             dibujarCabeceraSecundaria();
 
 
-        y =
+        nuevaY =
             dibujarCabeceraTabla(
-                y
+                nuevaY
             );
 
 
-        return y;
+        return nuevaY;
     }
 
 
     // =====================================================
-    // MATERIALES RESERVA
+    // OBTENER MATERIALES DE UNA RESERVA
     // =====================================================
 
     function obtenerMaterialesReserva(
@@ -3918,13 +3924,32 @@ async function generarPDFReservasMaterial() {
 
 
                     return {
+
                         nombre,
+
                         cantidad:
-                            detalle.cantidad
+                            Number(
+                                detalle.cantidad
+                            )
                     };
                 }
             );
     }
+
+
+    // =====================================================
+    // DIMENSIONES DEL CONTROL DE MATERIAL
+    //
+    // [ 2 ] Batería                 [ ]
+    // =====================================================
+
+    const altoFilaMaterial = 6;
+
+    const anchoCantidad = 8;
+
+    const anchoCheck = 6;
+
+    const separacionMaterial = 2;
 
 
     // =====================================================
@@ -3945,6 +3970,10 @@ async function generarPDFReservasMaterial() {
         let alto = 6;
 
 
+        // -------------------------------------------------
+        // DOCENTE
+        // -------------------------------------------------
+
         const docente =
             nombreDocenteAdmin(
                 reserva.usuario_id
@@ -3962,6 +3991,10 @@ async function generarPDFReservasMaterial() {
             lineasDocente.length * 3.5;
 
 
+        // -------------------------------------------------
+        // GRUPO
+        // -------------------------------------------------
+
         const lineasGrupo =
             pdf.splitTextToSize(
                 `Grupo: ${reserva.grupo}`,
@@ -3972,6 +4005,10 @@ async function generarPDFReservasMaterial() {
         alto +=
             lineasGrupo.length * 3.5;
 
+
+        // -------------------------------------------------
+        // TEMA
+        // -------------------------------------------------
 
         const lineasTema =
             pdf.splitTextToSize(
@@ -3984,37 +4021,230 @@ async function generarPDFReservasMaterial() {
             lineasTema.length * 3.5;
 
 
-        alto += 2;
+        // Separación + título Materiales
 
+        alto += 6;
+
+
+        // -------------------------------------------------
+        // CADA MATERIAL
+        // -------------------------------------------------
 
         materiales.forEach(
             material => {
 
-                const lineas =
+                const anchoNombre =
+                    ancho
+                    -
+                    5
+                    -
+                    anchoCantidad
+                    -
+                    anchoCheck
+                    -
+                    separacionMaterial * 2;
+
+
+                const lineasNombre =
                     pdf.splitTextToSize(
-                        `${material.cantidad} × ${material.nombre}`,
-                        ancho - 7
+                        material.nombre,
+                        anchoNombre
+                    );
+
+
+                const altoNombre =
+                    Math.max(
+                        altoFilaMaterial,
+                        lineasNombre.length * 3.2 + 2
                     );
 
 
                 alto +=
-                    lineas.length * 3.5;
+                    altoNombre;
             }
         );
 
 
-        alto += 5;
+        alto += 4;
 
 
         return Math.max(
             alto,
-            24
+            28
         );
     }
 
 
     // =====================================================
-    // DIBUJAR TARJETA
+    // DIBUJAR UNA FILA DE MATERIAL
+    //
+    // [ CANTIDAD ] NOMBRE                  [ CHECK ]
+    // =====================================================
+
+    function dibujarFilaMaterial(
+        material,
+        x,
+        y,
+        ancho
+    ) {
+
+        const padding = 2.5;
+
+
+        const xCantidad =
+            x + padding;
+
+
+        const xCheck =
+            x
+            +
+            ancho
+            -
+            padding
+            -
+            anchoCheck;
+
+
+        const xNombre =
+            xCantidad
+            +
+            anchoCantidad
+            +
+            separacionMaterial;
+
+
+        const anchoNombre =
+            xCheck
+            -
+            separacionMaterial
+            -
+            xNombre;
+
+
+        // -------------------------------------------------
+        // NOMBRE DEL MATERIAL
+        // -------------------------------------------------
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        pdf.setFontSize(
+            7
+        );
+
+
+        const lineasNombre =
+            pdf.splitTextToSize(
+                material.nombre,
+                anchoNombre
+            );
+
+
+        const altoReal =
+            Math.max(
+                altoFilaMaterial,
+                lineasNombre.length * 3.2 + 2
+            );
+
+
+        // -------------------------------------------------
+        // CASILLA CANTIDAD
+        // -------------------------------------------------
+
+        pdf.setDrawColor(
+            50,
+            50,
+            50
+        );
+
+        pdf.setLineWidth(
+            0.35
+        );
+
+
+        pdf.rect(
+            xCantidad,
+            y,
+            anchoCantidad,
+            5
+        );
+
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        pdf.setFontSize(
+            8
+        );
+
+
+        pdf.text(
+            String(
+                material.cantidad
+            ),
+            xCantidad +
+            anchoCantidad / 2,
+            y + 3.5,
+            {
+                align: "center"
+            }
+        );
+
+
+        // -------------------------------------------------
+        // NOMBRE
+        // -------------------------------------------------
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        pdf.setFontSize(
+            7
+        );
+
+
+        pdf.text(
+            lineasNombre,
+            xNombre,
+            y + 3.5
+        );
+
+
+        // -------------------------------------------------
+        // CASILLA PARA MARCAR ENTREGA
+        // -------------------------------------------------
+
+        pdf.setDrawColor(
+            20,
+            20,
+            20
+        );
+
+        pdf.setLineWidth(
+            0.45
+        );
+
+
+        pdf.rect(
+            xCheck,
+            y,
+            anchoCheck,
+            5
+        );
+
+
+        return altoReal;
+    }
+
+
+    // =====================================================
+    // DIBUJAR TARJETA DE RESERVA
     // =====================================================
 
     function dibujarTarjeta(
@@ -4030,6 +4260,10 @@ async function generarPDFReservasMaterial() {
                 ancho
             );
 
+
+        // -------------------------------------------------
+        // FONDO
+        // -------------------------------------------------
 
         pdf.setFillColor(
             247,
@@ -4056,24 +4290,21 @@ async function generarPDFReservasMaterial() {
         );
 
 
+        const padding = 2.5;
+
+
         let textoY =
             y + 5;
 
 
-        const padding =
-            2.5;
-
-
+        // -------------------------------------------------
         // ESTADO
-        let estadoTexto =
-            reserva.estado.toUpperCase();
-
+        // -------------------------------------------------
 
         pdf.setFont(
             "helvetica",
             "bold"
         );
-
 
         pdf.setFontSize(
             6.5
@@ -4081,7 +4312,7 @@ async function generarPDFReservasMaterial() {
 
 
         pdf.text(
-            estadoTexto,
+            reserva.estado.toUpperCase(),
             x + padding,
             textoY
         );
@@ -4090,16 +4321,24 @@ async function generarPDFReservasMaterial() {
         textoY += 4;
 
 
+        // -------------------------------------------------
         // DOCENTE
-        pdf.setFontSize(
-            7
-        );
-
+        // -------------------------------------------------
 
         const docente =
             nombreDocenteAdmin(
                 reserva.usuario_id
             );
+
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        pdf.setFontSize(
+            7
+        );
 
 
         let lineas =
@@ -4120,10 +4359,17 @@ async function generarPDFReservasMaterial() {
             lineas.length * 3.5;
 
 
+        // -------------------------------------------------
         // GRUPO
+        // -------------------------------------------------
+
         pdf.setFont(
             "helvetica",
             "normal"
+        );
+
+        pdf.setFontSize(
+            7
         );
 
 
@@ -4145,7 +4391,10 @@ async function generarPDFReservasMaterial() {
             lineas.length * 3.5;
 
 
+        // -------------------------------------------------
         // TEMA
+        // -------------------------------------------------
+
         lineas =
             pdf.splitTextToSize(
                 `Tema: ${reserva.tema}`,
@@ -4164,10 +4413,17 @@ async function generarPDFReservasMaterial() {
             lineas.length * 3.5 + 1;
 
 
+        // -------------------------------------------------
         // MATERIALES
+        // -------------------------------------------------
+
         pdf.setFont(
             "helvetica",
             "bold"
+        );
+
+        pdf.setFontSize(
+            7
         );
 
 
@@ -4178,13 +4434,7 @@ async function generarPDFReservasMaterial() {
         );
 
 
-        textoY += 3.5;
-
-
-        pdf.setFont(
-            "helvetica",
-            "normal"
-        );
+        textoY += 4;
 
 
         const materiales =
@@ -4196,26 +4446,17 @@ async function generarPDFReservasMaterial() {
         materiales.forEach(
             material => {
 
-                const texto =
-                    `${material.cantidad} × ${material.nombre}`;
-
-
-                const lineasMaterial =
-                    pdf.splitTextToSize(
-                        texto,
-                        ancho - 7
+                const altoMaterial =
+                    dibujarFilaMaterial(
+                        material,
+                        x,
+                        textoY,
+                        ancho
                     );
 
 
-                pdf.text(
-                    lineasMaterial,
-                    x + padding + 1,
-                    textoY
-                );
-
-
                 textoY +=
-                    lineasMaterial.length * 3.5;
+                    altoMaterial;
             }
         );
 
@@ -4225,7 +4466,7 @@ async function generarPDFReservasMaterial() {
 
 
     // =====================================================
-    // INICIAR PDF
+    // INICIAR DOCUMENTO
     // =====================================================
 
     let y =
@@ -4239,330 +4480,264 @@ async function generarPDFReservasMaterial() {
 
 
     // =====================================================
-    // RECORRER HORARIOS
+    // RECORRER LOS TRES HORARIOS
+    //
+    // Una misma franja puede continuar en varias páginas.
     // =====================================================
-// =====================================================
-// RECORRER HORARIOS
-// Permite continuar una misma franja horaria
-// en varias páginas
-// =====================================================
 
-for (const horario of HORARIOS_ADMIN) {
-
-    // -------------------------------------------------
-    // OBTENER RESERVAS DE LOS 5 DÍAS PARA ESTE HORARIO
-    // -------------------------------------------------
-
-    const reservasPorDia = [];
-
-    for (let dia = 0; dia < 5; dia++) {
-
-        const fecha =
-            fechaISOAdmin(
-                fechasSemana[dia]
-            );
-
-        const reservasCelda =
-            reservasAdmin.filter(
-                reserva =>
-                    reserva.fecha === fecha
-                    &&
-                    reserva.horario === horario
-                    &&
-                    reserva.estado !== "cancelada"
-            );
-
-        reservasPorDia.push(
-            reservasCelda
-        );
-    }
-
-
-    // -------------------------------------------------
-    // POSICIÓN ACTUAL DE CADA DÍA
-    //
-    // Ejemplo:
-    // Lunes tiene 2 reservas
-    // Martes tiene 10
-    // Miércoles tiene 1
-    //
-    // Cada día avanzará independientemente.
-    // -------------------------------------------------
-
-    const indices = [
-        0,
-        0,
-        0,
-        0,
-        0
-    ];
-
-
-    let primeraParteHorario = true;
-
-
-    // -------------------------------------------------
-    // SEGUIR MIENTRAS QUEDE ALGUNA RESERVA
-    // -------------------------------------------------
-
-    while (
-        reservasPorDia.some(
-            (reservas, dia) =>
-                indices[dia] <
-                reservas.length
-        )
-        ||
-        primeraParteHorario
+    for (
+        const horario
+        of HORARIOS_ADMIN
     ) {
 
-        primeraParteHorario = false;
+
+        // -------------------------------------------------
+        // RESERVAS DE CADA DÍA
+        // -------------------------------------------------
+
+        const reservasPorDia = [];
 
 
-        // =============================================
-        // ESPACIO DISPONIBLE EN ESTA PÁGINA
-        // =============================================
+        for (
+            let dia = 0;
+            dia < 5;
+            dia++
+        ) {
 
-        let espacioDisponible =
-            limiteInferior - y;
+            const fecha =
+                fechaISOAdmin(
+                    fechasSemana[dia]
+                );
 
 
-        // Si prácticamente no queda espacio,
-        // pasamos directamente a otra página.
+            const reservasCelda =
+                reservasAdmin.filter(
+                    reserva =>
+                        reserva.fecha ===
+                        fecha
+                        &&
+                        reserva.horario ===
+                        horario
+                        &&
+                        reserva.estado !==
+                        "cancelada"
+                );
 
-        if (espacioDisponible < 25) {
 
-            y =
-                nuevaPagina();
-
-            espacioDisponible =
-                limiteInferior - y;
+            reservasPorDia.push(
+                reservasCelda
+            );
         }
 
 
-        // =============================================
-        // DETERMINAR QUÉ RESERVAS ENTRAN
-        // EN CADA DÍA
-        // =============================================
+        // Posición que llevamos por cada día.
 
-        const reservasPagina = [
-            [],
-            [],
-            [],
-            [],
-            []
+        const indices = [
+            0,
+            0,
+            0,
+            0,
+            0
         ];
 
 
-        let altoNecesarioPagina = 20;
+        let primeraParteHorario =
+            true;
 
 
-        for (let dia = 0; dia < 5; dia++) {
+        // -------------------------------------------------
+        // CONTINUAR MIENTRAS HAYA RESERVAS
+        // -------------------------------------------------
 
-            let altoCelda = 6;
+        while (
+            reservasPorDia.some(
+                (
+                    reservas,
+                    dia
+                ) =>
+                    indices[dia] <
+                    reservas.length
+            )
+            ||
+            primeraParteHorario
+        ) {
 
-            let indice =
-                indices[dia];
+            primeraParteHorario =
+                false;
 
 
-            while (
-                indice <
-                reservasPorDia[dia].length
+            let espacioDisponible =
+                limiteInferior - y;
+
+
+            // ---------------------------------------------
+            // POCO ESPACIO -> NUEVA PÁGINA
+            // ---------------------------------------------
+
+            if (
+                espacioDisponible <
+                30
             ) {
 
-                const reserva =
-                    reservasPorDia[dia][indice];
+                y =
+                    nuevaPagina();
 
 
-                const altoTarjeta =
-                    calcularAltoTarjeta(
-                        reserva,
-                        anchoDia - 4
-                    );
+                espacioDisponible =
+                    limiteInferior - y;
+            }
 
 
-                const altoConSeparacion =
-                    altoTarjeta + 3;
+            // ---------------------------------------------
+            // RESERVAS QUE CABEN EN ESTA PARTE
+            // ---------------------------------------------
+
+            const reservasPagina = [
+                [],
+                [],
+                [],
+                [],
+                []
+            ];
 
 
-                // -------------------------------------
-                // ¿ENTRA ESTA TARJETA?
-                // -------------------------------------
+            let altoNecesarioPagina =
+                20;
 
-                if (
-                    altoCelda +
-                    altoConSeparacion >
-                    espacioDisponible
+
+            for (
+                let dia = 0;
+                dia < 5;
+                dia++
+            ) {
+
+                let altoCelda = 6;
+
+
+                let indice =
+                    indices[dia];
+
+
+                while (
+                    indice <
+                    reservasPorDia[dia].length
                 ) {
 
-                    break;
+                    const reserva =
+                        reservasPorDia[dia][indice];
+
+
+                    const altoTarjeta =
+                        calcularAltoTarjeta(
+                            reserva,
+                            anchoDia - 4
+                        );
+
+
+                    const altoConSeparacion =
+                        altoTarjeta + 3;
+
+
+                    if (
+                        altoCelda +
+                        altoConSeparacion >
+                        espacioDisponible
+                    ) {
+
+                        break;
+                    }
+
+
+                    reservasPagina[dia]
+                        .push(
+                            reserva
+                        );
+
+
+                    altoCelda +=
+                        altoConSeparacion;
+
+
+                    indice++;
                 }
 
 
-                reservasPagina[dia].push(
-                    reserva
-                );
+                indices[dia] =
+                    indice;
 
 
-                altoCelda +=
-                    altoConSeparacion;
-
-
-                indice++;
+                altoNecesarioPagina =
+                    Math.max(
+                        altoNecesarioPagina,
+                        altoCelda
+                    );
             }
 
 
-            // Guardamos hasta dónde llegamos.
+            // ---------------------------------------------
+            // COMPROBAR SI QUEDAN RESERVAS
+            // ---------------------------------------------
 
-            indices[dia] =
-                indice;
-
-
-            altoNecesarioPagina =
-                Math.max(
-                    altoNecesarioPagina,
-                    altoCelda
+            const cantidadEnEstaPagina =
+                reservasPagina.reduce(
+                    (
+                        total,
+                        lista
+                    ) =>
+                        total +
+                        lista.length,
+                    0
                 );
-        }
 
 
-        // =============================================
-        // EVITAR BUCLE SI UNA TARJETA ES MUY GRANDE
-        // =============================================
+            const quedanReservas =
+                reservasPorDia.some(
+                    (
+                        reservas,
+                        dia
+                    ) =>
+                        indices[dia] <
+                        reservas.length
+                );
 
-        const cantidadEnEstaPagina =
-            reservasPagina.reduce(
-                (total, lista) =>
-                    total + lista.length,
+
+            // ---------------------------------------------
+            // SEGURIDAD CONTRA BUCLE
+            // ---------------------------------------------
+
+            if (
+                cantidadEnEstaPagina ===
                 0
-            );
+                &&
+                quedanReservas
+            ) {
+
+                y =
+                    nuevaPagina();
+
+                continue;
+            }
 
 
-        const quedanReservas =
-            reservasPorDia.some(
-                (reservas, dia) =>
-                    indices[dia] <
-                    reservas.length
-            );
+            // ---------------------------------------------
+            // ALTURA DE FILA
+            // ---------------------------------------------
 
-
-        if (
-            cantidadEnEstaPagina === 0
-            &&
-            quedanReservas
-        ) {
-
-            // Estamos demasiado abajo en la página.
-            // Abrimos una nueva.
-
-            y =
-                nuevaPagina();
-
-            continue;
-        }
-
-
-        // =============================================
-        // ALTURA DE ESTA PARTE DE LA FILA
-        // =============================================
-
-        const altoFila =
-            Math.max(
-                20,
-                altoNecesarioPagina
-            );
-
-
-        // =============================================
-        // COLUMNA HORARIO
-        // =============================================
-
-        pdf.setFillColor(
-            241,
-            245,
-            249
-        );
-
-
-        pdf.setDrawColor(
-            210,
-            218,
-            228
-        );
-
-
-        pdf.rect(
-            margenIzquierdo,
-            y,
-            anchoHorario,
-            altoFila,
-            "FD"
-        );
-
-
-        pdf.setFont(
-            "helvetica",
-            "bold"
-        );
-
-
-        pdf.setFontSize(
-            8
-        );
-
-
-        // Si quedan reservas después de esta página,
-        // indicamos que el horario continúa.
-
-        const textoHorario =
-            quedanReservas
-                ? `${horario.replace(
-                    "-",
-                    " - "
-                )}\nCONT.`
-                : horario.replace(
-                    "-",
-                    " - "
+            const altoFila =
+                Math.max(
+                    20,
+                    altoNecesarioPagina
                 );
 
 
-        const lineasHorario =
-            pdf.splitTextToSize(
-                textoHorario,
-                anchoHorario - 4
-            );
-
-
-        pdf.text(
-            lineasHorario,
-            margenIzquierdo +
-            anchoHorario / 2,
-            y + altoFila / 2,
-            {
-                align: "center"
-            }
-        );
-
-
-        // =============================================
-        // DIBUJAR LOS CINCO DÍAS
-        // =============================================
-
-        for (let dia = 0; dia < 5; dia++) {
-
-            const x =
-                margenIzquierdo
-                +
-                anchoHorario
-                +
-                anchoDia * dia;
-
-
-            // Fondo de la celda
+            // =============================================
+            // COLUMNA HORARIO
+            // =============================================
 
             pdf.setFillColor(
-                255,
-                255,
-                255
+                241,
+                245,
+                249
             );
 
 
@@ -4574,62 +4749,141 @@ for (const horario of HORARIOS_ADMIN) {
 
 
             pdf.rect(
-                x,
+                margenIzquierdo,
                 y,
-                anchoDia,
+                anchoHorario,
                 altoFila,
                 "FD"
             );
 
 
-            let tarjetaY =
-                y + 3;
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+            pdf.setFontSize(
+                8
+            );
 
 
-            // -----------------------------------------
-            // RESERVAS QUE ENTRAN EN ESTA PÁGINA
-            // -----------------------------------------
+            const textoHorario =
+                quedanReservas
 
-            reservasPagina[dia]
-                .forEach(
-                    reserva => {
+                    ? `${horario.replace(
+                        "-",
+                        " - "
+                    )}\nCONT.`
 
-                        const altoTarjeta =
-                            dibujarTarjeta(
-                                reserva,
-                                x + 2,
-                                tarjetaY,
-                                anchoDia - 4
-                            );
+                    : horario.replace(
+                        "-",
+                        " - "
+                    );
 
 
-                        tarjetaY +=
-                            altoTarjeta + 3;
-                    }
+            const lineasHorario =
+                pdf.splitTextToSize(
+                    textoHorario,
+                    anchoHorario - 4
                 );
-        }
 
 
-        // =============================================
-        // AVANZAR
-        // =============================================
+            pdf.text(
+                lineasHorario,
+                margenIzquierdo +
+                anchoHorario / 2,
+                y +
+                altoFila / 2,
+                {
+                    align: "center"
+                }
+            );
 
-        y +=
-            altoFila;
+
+            // =============================================
+            // CINCO DÍAS
+            // =============================================
+
+            for (
+                let dia = 0;
+                dia < 5;
+                dia++
+            ) {
+
+                const x =
+                    margenIzquierdo
+                    +
+                    anchoHorario
+                    +
+                    anchoDia * dia;
 
 
-        // =============================================
-        // SI QUEDAN RESERVAS DEL MISMO HORARIO,
-        // CONTINUAR EN UNA NUEVA PÁGINA
-        // =============================================
+                pdf.setFillColor(
+                    255,
+                    255,
+                    255
+                );
 
-        if (quedanReservas) {
 
-            y =
-                nuevaPagina();
+                pdf.setDrawColor(
+                    210,
+                    218,
+                    228
+                );
+
+
+                pdf.rect(
+                    x,
+                    y,
+                    anchoDia,
+                    altoFila,
+                    "FD"
+                );
+
+
+                let tarjetaY =
+                    y + 3;
+
+
+                reservasPagina[dia]
+                    .forEach(
+                        reserva => {
+
+                            const altoTarjeta =
+                                dibujarTarjeta(
+                                    reserva,
+                                    x + 2,
+                                    tarjetaY,
+                                    anchoDia - 4
+                                );
+
+
+                            tarjetaY +=
+                                altoTarjeta + 3;
+                        }
+                    );
+            }
+
+
+            y +=
+                altoFila;
+
+
+            // ---------------------------------------------
+            // CONTINUACIÓN DEL MISMO HORARIO
+            // ---------------------------------------------
+
+            if (
+                quedanReservas
+            ) {
+
+                y =
+                    nuevaPagina();
+            }
         }
     }
-}
+
+
     // =====================================================
     // PIE ÚLTIMA PÁGINA
     // =====================================================
@@ -4638,7 +4892,7 @@ for (const horario of HORARIOS_ADMIN) {
 
 
     // =====================================================
-    // GUARDAR
+    // GUARDAR PDF
     // =====================================================
 
     const nombreArchivo =
@@ -4653,4 +4907,6 @@ for (const horario of HORARIOS_ADMIN) {
         nombreArchivo
     );
 }
+
+
 iniciarAdmin();

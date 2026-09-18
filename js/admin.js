@@ -19,75 +19,385 @@ let imagenActualUrl = null;
 
 
 // =========================================================
-// ELEMENTOS
+// VARIABLES - RESERVAS
+// =========================================================
+
+let reservasAdmin = [];
+
+let detallesAdmin = [];
+
+let materialesAdmin = [];
+
+let perfilesAdmin = [];
+
+let lunesSemanaAdmin = null;
+
+
+// =========================================================
+// VARIABLES - ENTREGA FÍSICA
+// =========================================================
+
+let reservaEntregaFisicaActual = null;
+
+
+// =========================================================
+// VARIABLES - DEVOLUCIÓN
+// =========================================================
+
+let reservaEntregaActual = null;
+
+
+// =========================================================
+// VARIABLES - EDICIÓN DE RESERVA
+// =========================================================
+
+let reservaEdicionActual = null;
+
+let carritoEdicionReserva = [];
+
+let disponibilidadEdicion = [];
+
+let relacionesCategoriasEdicion = [];
+
+
+// =========================================================
+// HORARIOS
+// =========================================================
+
+const HORARIOS_ADMIN = [
+
+    "09:00-12:00",
+
+    "14:00-17:00",
+
+    "19:00-21:30"
+
+];
+
+
+// =========================================================
+// ELEMENTOS GENERALES
 // =========================================================
 
 const nombreAdministrador =
-    document.getElementById("nombreAdministrador");
+    document.getElementById(
+        "nombreAdministrador"
+    );
 
 const btnCerrarSesion =
-    document.getElementById("btnCerrarSesion");
+    document.getElementById(
+        "btnCerrarSesion"
+    );
 
 const btnModoOscuro =
-    document.getElementById("btnModoOscuro");
+    document.getElementById(
+        "btnModoOscuro"
+    );
 
+
+// =========================================================
+// ELEMENTOS - MATERIALES
+// =========================================================
 
 const formMaterial =
-    document.getElementById("formMaterial");
+    document.getElementById(
+        "formMaterial"
+    );
 
 const materialId =
-    document.getElementById("materialId");
+    document.getElementById(
+        "materialId"
+    );
 
 const materialCodigo =
-    document.getElementById("materialCodigo");
+    document.getElementById(
+        "materialCodigo"
+    );
 
 const materialNombre =
-    document.getElementById("materialNombre");
+    document.getElementById(
+        "materialNombre"
+    );
 
 const materialCantidad =
-    document.getElementById("materialCantidad");
+    document.getElementById(
+        "materialCantidad"
+    );
 
 const materialDescripcion =
-    document.getElementById("materialDescripcion");
+    document.getElementById(
+        "materialDescripcion"
+    );
 
 const materialImagen =
-    document.getElementById("materialImagen");
+    document.getElementById(
+        "materialImagen"
+    );
 
 const previewImagenMaterial =
-    document.getElementById("previewImagenMaterial");
+    document.getElementById(
+        "previewImagenMaterial"
+    );
 
 const sinImagenMaterial =
-    document.getElementById("sinImagenMaterial");
+    document.getElementById(
+        "sinImagenMaterial"
+    );
 
 const categoriasMaterial =
-    document.getElementById("categoriasMaterial");
+    document.getElementById(
+        "categoriasMaterial"
+    );
 
 const mensajeMaterial =
-    document.getElementById("mensajeMaterial");
+    document.getElementById(
+        "mensajeMaterial"
+    );
 
 const listaMateriales =
-    document.getElementById("listaMateriales");
+    document.getElementById(
+        "listaMateriales"
+    );
 
 const buscarMaterial =
-    document.getElementById("buscarMaterial");
+    document.getElementById(
+        "buscarMaterial"
+    );
 
 const contadorMateriales =
-    document.getElementById("contadorMateriales");
+    document.getElementById(
+        "contadorMateriales"
+    );
 
 const btnNuevoMaterial =
-    document.getElementById("btnNuevoMaterial");
+    document.getElementById(
+        "btnNuevoMaterial"
+    );
 
 const btnCancelarEdicion =
-    document.getElementById("btnCancelarEdicion");
+    document.getElementById(
+        "btnCancelarEdicion"
+    );
 
 const btnGuardarMaterial =
-    document.getElementById("btnGuardarMaterial");
+    document.getElementById(
+        "btnGuardarMaterial"
+    );
 
 const tituloFormularioMaterial =
-    document.getElementById("tituloFormularioMaterial");
+    document.getElementById(
+        "tituloFormularioMaterial"
+    );
 
 const contenedorFormularioMaterial =
-    document.getElementById("contenedorFormularioMaterial");
+    document.getElementById(
+        "contenedorFormularioMaterial"
+    );
+
+
+// =========================================================
+// ELEMENTOS - RESERVAS
+// =========================================================
+
+const btnSemanaAnteriorAdmin =
+    document.getElementById(
+        "btnSemanaAnteriorAdmin"
+    );
+
+const btnSemanaSiguienteAdmin =
+    document.getElementById(
+        "btnSemanaSiguienteAdmin"
+    );
+
+const textoSemanaAdmin =
+    document.getElementById(
+        "textoSemanaAdmin"
+    );
+
+const cuerpoTablaReservasAdmin =
+    document.getElementById(
+        "cuerpoTablaReservasAdmin"
+    );
+
+const mensajeReservasAdmin =
+    document.getElementById(
+        "mensajeReservasAdmin"
+    );
+
+const btnPDFReservasMaterial =
+    document.getElementById(
+        "btnPDFReservasMaterial"
+    );
+
+
+// =========================================================
+// ELEMENTOS - ENTREGA FÍSICA
+// =========================================================
+
+const panelConfirmarEntrega =
+    document.getElementById(
+        "panelConfirmarEntrega"
+    );
+
+const tituloConfirmarEntrega =
+    document.getElementById(
+        "tituloConfirmarEntrega"
+    );
+
+const datosConfirmarEntrega =
+    document.getElementById(
+        "datosConfirmarEntrega"
+    );
+
+const detalleConfirmarEntrega =
+    document.getElementById(
+        "detalleConfirmarEntrega"
+    );
+
+const observacionGeneralEntrega =
+    document.getElementById(
+        "observacionGeneralEntrega"
+    );
+
+const btnConfirmarEntregaMaterial =
+    document.getElementById(
+        "btnConfirmarEntregaMaterial"
+    );
+
+const btnCancelarConfirmarEntrega =
+    document.getElementById(
+        "btnCancelarConfirmarEntrega"
+    );
+
+const mensajeConfirmarEntrega =
+    document.getElementById(
+        "mensajeConfirmarEntrega"
+    );
+
+
+// =========================================================
+// ELEMENTOS - DEVOLUCIONES
+// =========================================================
+
+const listaEntregasPendientes =
+    document.getElementById(
+        "listaEntregasPendientes"
+    );
+
+const panelGestionEntrega =
+    document.getElementById(
+        "panelGestionEntrega"
+    );
+
+const tituloGestionEntrega =
+    document.getElementById(
+        "tituloGestionEntrega"
+    );
+
+const datosGestionEntrega =
+    document.getElementById(
+        "datosGestionEntrega"
+    );
+
+const detalleGestionEntrega =
+    document.getElementById(
+        "detalleGestionEntrega"
+    );
+
+const btnGuardarDevolucion =
+    document.getElementById(
+        "btnGuardarDevolucion"
+    );
+
+const btnCerrarGestionEntrega =
+    document.getElementById(
+        "btnCerrarGestionEntrega"
+    );
+
+const mensajeEntrega =
+    document.getElementById(
+        "mensajeEntrega"
+    );
+
+
+// =========================================================
+// ELEMENTOS - EDITAR RESERVA
+// =========================================================
+
+const panelEditarReserva =
+    document.getElementById(
+        "panelEditarReserva"
+    );
+
+const formEditarReserva =
+    document.getElementById(
+        "formEditarReserva"
+    );
+
+const editarReservaId =
+    document.getElementById(
+        "editarReservaId"
+    );
+
+const editarReservaDocente =
+    document.getElementById(
+        "editarReservaDocente"
+    );
+
+const editarReservaFecha =
+    document.getElementById(
+        "editarReservaFecha"
+    );
+
+const editarReservaHorario =
+    document.getElementById(
+        "editarReservaHorario"
+    );
+
+const editarReservaGrupo =
+    document.getElementById(
+        "editarReservaGrupo"
+    );
+
+const editarReservaTema =
+    document.getElementById(
+        "editarReservaTema"
+    );
+
+const editarFiltroCategoria =
+    document.getElementById(
+        "editarFiltroCategoria"
+    );
+
+const editarBuscarMaterial =
+    document.getElementById(
+        "editarBuscarMaterial"
+    );
+
+const editarCatalogoMateriales =
+    document.getElementById(
+        "editarCatalogoMateriales"
+    );
+
+const editarCarritoMateriales =
+    document.getElementById(
+        "editarCarritoMateriales"
+    );
+
+const btnGuardarEdicionReserva =
+    document.getElementById(
+        "btnGuardarEdicionReserva"
+    );
+
+const btnCancelarEdicionReserva =
+    document.getElementById(
+        "btnCancelarEdicionReserva"
+    );
+
+const mensajeEditarReserva =
+    document.getElementById(
+        "mensajeEditarReserva"
+    );
 
 
 // =========================================================
@@ -103,17 +413,38 @@ function escaparHTML(valor) {
         return "";
     }
 
+
     return String(valor)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 }
 
 
 // =========================================================
-// MENSAJES
+// MENSAJE MATERIAL
 // =========================================================
 
 function mostrarMensaje(
@@ -121,8 +452,14 @@ function mostrarMensaje(
     tipo = "error"
 ) {
 
+    if (!mensajeMaterial) {
+        return;
+    }
+
+
     mensajeMaterial.textContent =
         mensaje || "";
+
 
     mensajeMaterial.className =
         "mensaje-admin";
@@ -146,6 +483,56 @@ function mostrarMensaje(
             "mensaje-error"
         );
     }
+}
+
+
+// =========================================================
+// MOSTRAR UN PANEL DIRECTAMENTE
+// =========================================================
+
+function mostrarPanelAdmin(
+    panelId
+) {
+
+    document
+        .querySelectorAll(
+            ".admin-panel"
+        )
+        .forEach(
+            panel => {
+
+                panel.classList.remove(
+                    "activo"
+                );
+            }
+        );
+
+
+    const panel =
+        document.getElementById(
+            panelId
+        );
+
+
+    panel?.classList.add(
+        "activo"
+    );
+
+
+    document
+        .querySelectorAll(
+            ".tab-btn[data-panel]"
+        )
+        .forEach(
+            boton => {
+
+                boton.classList.toggle(
+                    "activo",
+                    boton.dataset.panel ===
+                    panelId
+                );
+            }
+        );
 }
 
 
@@ -187,7 +574,9 @@ async function comprobarAdministrador() {
         } =
             await supabaseClient
 
-                .from("perfiles")
+                .from(
+                    "perfiles"
+                )
 
                 .select(`
                     id,
@@ -210,7 +599,8 @@ async function comprobarAdministrador() {
         if (
             error ||
             !perfil ||
-            perfil.rol !== "administrador" ||
+            perfil.rol !==
+                "administrador" ||
             perfil.activo !== true ||
             perfil.eliminado === true
         ) {
@@ -218,8 +608,10 @@ async function comprobarAdministrador() {
             await supabaseClient.auth
                 .signOut();
 
+
             window.location.href =
                 "index.html";
+
 
             return false;
         }
@@ -229,13 +621,17 @@ async function comprobarAdministrador() {
             perfil;
 
 
-        nombreAdministrador.textContent =
-            perfil.nombre ||
-            perfil.usuario ||
-            "Administrador";
+        if (nombreAdministrador) {
+
+            nombreAdministrador.textContent =
+                perfil.nombre ||
+                perfil.usuario ||
+                "Administrador";
+        }
 
 
         return true;
+
 
     } catch (error) {
 
@@ -248,6 +644,7 @@ async function comprobarAdministrador() {
         window.location.href =
             "index.html";
 
+
         return false;
     }
 }
@@ -258,11 +655,14 @@ async function comprobarAdministrador() {
 // =========================================================
 
 btnCerrarSesion?.addEventListener(
+
     "click",
+
     async () => {
 
         await supabaseClient.auth
             .signOut();
+
 
         window.location.href =
             "index.html";
@@ -275,54 +675,24 @@ btnCerrarSesion?.addEventListener(
 // =========================================================
 
 document
-    .querySelectorAll(".tab-btn[data-panel]")
+
+    .querySelectorAll(
+        ".tab-btn[data-panel]"
+    )
+
     .forEach(
+
         boton => {
 
             boton.addEventListener(
+
                 "click",
+
                 () => {
 
-                    const panelId =
-                        boton.dataset.panel;
-
-
-                    document
-                        .querySelectorAll(
-                            ".tab-btn[data-panel]"
-                        )
-                        .forEach(
-                            b =>
-                                b.classList.remove(
-                                    "activo"
-                                )
-                        );
-
-
-                    document
-                        .querySelectorAll(
-                            ".admin-panel"
-                        )
-                        .forEach(
-                            panel =>
-                                panel.classList.remove(
-                                    "activo"
-                                )
-                        );
-
-
-                    boton.classList.add(
-                        "activo"
+                    mostrarPanelAdmin(
+                        boton.dataset.panel
                     );
-
-
-                    document
-                        .getElementById(
-                            panelId
-                        )
-                        ?.classList.add(
-                            "activo"
-                        );
                 }
             );
         }
@@ -347,14 +717,20 @@ function aplicarModoGuardado() {
             "modo-oscuro"
         );
 
-        btnModoOscuro.textContent =
-            "☀️ Modo claro";
+
+        if (btnModoOscuro) {
+
+            btnModoOscuro.textContent =
+                "☀️ Modo claro";
+        }
     }
 }
 
 
 btnModoOscuro?.addEventListener(
+
     "click",
+
     () => {
 
         document.body.classList.toggle(
@@ -369,7 +745,9 @@ btnModoOscuro?.addEventListener(
 
 
         localStorage.setItem(
+
             "ceta_material_modo",
+
             oscuro
                 ? "oscuro"
                 : "claro"
@@ -396,7 +774,9 @@ async function cargarCategorias() {
     } =
         await supabaseClient
 
-            .from("categorias_material")
+            .from(
+                "categorias_material"
+            )
 
             .select(`
                 id,
@@ -424,12 +804,17 @@ async function cargarCategorias() {
             error
         );
 
-        categoriasMaterial.innerHTML =
-            `
-            <p class="mensaje-error">
-                No se pudieron cargar las categorías.
-            </p>
-            `;
+
+        if (categoriasMaterial) {
+
+            categoriasMaterial.innerHTML =
+                `
+                <p class="mensaje-error">
+                    No se pudieron cargar las categorías.
+                </p>
+                `;
+        }
+
 
         return;
     }
@@ -440,6 +825,8 @@ async function cargarCategorias() {
 
 
     renderizarCategorias();
+
+    cargarCategoriasEdicion();
 }
 
 
@@ -450,6 +837,11 @@ async function cargarCategorias() {
 function renderizarCategorias(
     seleccionadas = []
 ) {
+
+    if (!categoriasMaterial) {
+        return;
+    }
+
 
     if (
         !categoriasCargadas.length
@@ -468,15 +860,20 @@ function renderizarCategorias(
 
     const seleccionSet =
         new Set(
+
             seleccionadas.map(
-                id => Number(id)
+                id =>
+                    Number(id)
             )
         );
 
 
     categoriasMaterial.innerHTML =
+
         categoriasCargadas
+
             .map(
+
                 categoria => {
 
                     const checked =
@@ -509,7 +906,44 @@ function renderizarCategorias(
                     `;
                 }
             )
+
             .join("");
+}
+
+
+// =========================================================
+// CATEGORÍAS DEL FORMULARIO DE EDICIÓN DE RESERVA
+// =========================================================
+
+function cargarCategoriasEdicion() {
+
+    if (!editarFiltroCategoria) {
+        return;
+    }
+
+
+    editarFiltroCategoria.innerHTML =
+        `
+        <option value="">
+            Todas las categorías
+        </option>
+
+        ${
+            categoriasCargadas
+
+                .map(
+                    categoria => `
+                        <option value="${categoria.id}">
+                            ${escaparHTML(
+                                categoria.nombre
+                            )}
+                        </option>
+                    `
+                )
+
+                .join("")
+        }
+        `;
 }
 
 
@@ -520,11 +954,14 @@ function renderizarCategorias(
 function obtenerCategoriasSeleccionadas() {
 
     return Array.from(
+
         document.querySelectorAll(
             ".categoria-checkbox:checked"
         )
     )
+
         .map(
+
             checkbox =>
                 Number(
                     checkbox.value
@@ -538,7 +975,9 @@ function obtenerCategoriasSeleccionadas() {
 // =========================================================
 
 materialImagen?.addEventListener(
+
     "change",
+
     () => {
 
         const archivo =
@@ -559,8 +998,10 @@ materialImagen?.addEventListener(
         previewImagenMaterial.src =
             urlTemporal;
 
+
         previewImagenMaterial.style.display =
             "block";
+
 
         sinImagenMaterial.style.display =
             "none";
@@ -581,11 +1022,14 @@ function mostrarImagenFormulario(
         previewImagenMaterial.src =
             url;
 
+
         previewImagenMaterial.style.display =
             "block";
 
+
         sinImagenMaterial.style.display =
             "none";
+
 
     } else {
 
@@ -593,8 +1037,10 @@ function mostrarImagenFormulario(
             "src"
         );
 
+
         previewImagenMaterial.style.display =
             "none";
+
 
         sinImagenMaterial.style.display =
             "flex";
@@ -611,22 +1057,30 @@ async function subirImagenMaterial(
 ) {
 
     if (!archivo) {
+
         return imagenActualUrl;
     }
 
 
     const extension =
         archivo.name
+
             .split(".")
+
             .pop()
+
             ?.toLowerCase() ||
+
         "jpg";
 
 
     const nombreArchivo =
         `material_${Date.now()}_${Math.random()
             .toString(36)
-            .substring(2, 8)}.${extension}`;
+            .substring(
+                2,
+                8
+            )}.${extension}`;
 
 
     const ruta =
@@ -646,8 +1100,11 @@ async function subirImagenMaterial(
                 ruta,
                 archivo,
                 {
-                    cacheControl: "3600",
-                    upsert: false
+                    cacheControl:
+                        "3600",
+
+                    upsert:
+                        false
                 }
             );
 
@@ -658,6 +1115,7 @@ async function subirImagenMaterial(
             "Error subiendo imagen:",
             error
         );
+
 
         throw new Error(
             "No se pudo subir la imagen."
@@ -692,8 +1150,6 @@ async function guardarCategoriasMaterial(
     categorias
 ) {
 
-    // Eliminar relaciones anteriores
-
     const {
         error: errorEliminar
     } =
@@ -720,13 +1176,16 @@ async function guardarCategoriasMaterial(
     if (
         !categorias.length
     ) {
+
         return;
     }
 
 
     const relaciones =
         categorias.map(
+
             categoriaId => ({
+
                 material_id:
                     idMaterial,
 
@@ -762,7 +1221,9 @@ async function guardarCategoriasMaterial(
 // =========================================================
 
 formMaterial?.addEventListener(
+
     "submit",
+
     async event => {
 
         event.preventDefault();
@@ -773,9 +1234,11 @@ formMaterial?.addEventListener(
 
         const id =
             materialId.value
+
                 ? Number(
                     materialId.value
                 )
+
                 : null;
 
 
@@ -815,7 +1278,9 @@ formMaterial?.addEventListener(
 
 
         if (
-            !Number.isInteger(cantidad) ||
+            !Number.isInteger(
+                cantidad
+            ) ||
             cantidad < 0
         ) {
 
@@ -842,18 +1307,19 @@ formMaterial?.addEventListener(
         btnGuardarMaterial.disabled =
             true;
 
+
         btnGuardarMaterial.textContent =
             "Guardando...";
 
 
         try {
 
-            let imagenUrl =
-                imagenActualUrl;
-
-
             const archivo =
                 materialImagen.files?.[0];
+
+
+            let imagenUrl =
+                imagenActualUrl;
 
 
             if (archivo) {
@@ -870,7 +1336,8 @@ formMaterial?.addEventListener(
                 codigo:
                     codigo || null,
 
-                nombre,
+                nombre:
+                    nombre,
 
                 descripcion:
                     descripcion || null,
@@ -881,22 +1348,25 @@ formMaterial?.addEventListener(
                 imagen_url:
                     imagenUrl,
 
+                activo:
+                    true,
+
+                eliminado:
+                    false,
+
                 updated_at:
-                    new Date().toISOString()
+                    new Date()
+                        .toISOString()
             };
 
 
-            let idMaterial;
+            let idMaterialGuardado =
+                id;
 
-
-            // =============================================
-            // EDITAR
-            // =============================================
 
             if (id) {
 
                 const {
-                    data,
                     error
                 } =
                     await supabaseClient
@@ -912,13 +1382,7 @@ formMaterial?.addEventListener(
                         .eq(
                             "id",
                             id
-                        )
-
-                        .select(
-                            "id"
-                        )
-
-                        .single();
+                        );
 
 
                 if (error) {
@@ -926,15 +1390,11 @@ formMaterial?.addEventListener(
                 }
 
 
-                idMaterial =
-                    data.id;
-
-
-            // =============================================
-            // CREAR
-            // =============================================
-
             } else {
+
+                delete datosMaterial
+                    .updated_at;
+
 
                 const {
                     data,
@@ -946,15 +1406,9 @@ formMaterial?.addEventListener(
                             "materiales_gabinete"
                         )
 
-                        .insert({
-
-                            ...datosMaterial,
-
-                            activo: true,
-
-                            eliminado: false
-
-                        })
+                        .insert(
+                            datosMaterial
+                        )
 
                         .select(
                             "id"
@@ -968,26 +1422,30 @@ formMaterial?.addEventListener(
                 }
 
 
-                idMaterial =
+                idMaterialGuardado =
                     data.id;
             }
 
 
             await guardarCategoriasMaterial(
-                idMaterial,
+
+                idMaterialGuardado,
+
                 categorias
             );
 
 
             mostrarMensaje(
+
                 id
                     ? "Material actualizado correctamente."
                     : "Material registrado correctamente.",
+
                 "ok"
             );
 
 
-            limpiarFormulario();
+            limpiarFormularioMaterial();
 
 
             await cargarMateriales();
@@ -1001,26 +1459,17 @@ formMaterial?.addEventListener(
             );
 
 
-            if (
-                error?.code === "23505"
-            ) {
+            mostrarMensaje(
+                error.message ||
+                "No se pudo guardar el material."
+            );
 
-                mostrarMensaje(
-                    "El código ingresado ya pertenece a otro material."
-                );
-
-            } else {
-
-                mostrarMensaje(
-                    error.message ||
-                    "No se pudo guardar el material."
-                );
-            }
 
         } finally {
 
             btnGuardarMaterial.disabled =
                 false;
+
 
             btnGuardarMaterial.textContent =
                 materialId.value
@@ -1029,13 +1478,16 @@ formMaterial?.addEventListener(
         }
     }
 );
-
-
 // =========================================================
-// LIMPIAR FORMULARIO
+// LIMPIAR FORMULARIO MATERIAL
 // =========================================================
 
-function limpiarFormulario() {
+function limpiarFormularioMaterial() {
+
+    if (!formMaterial) {
+        return;
+    }
+
 
     formMaterial.reset();
 
@@ -1043,8 +1495,10 @@ function limpiarFormulario() {
     materialId.value =
         "";
 
+
     materialCantidad.value =
         "1";
+
 
     imagenActualUrl =
         null;
@@ -1077,32 +1531,40 @@ function limpiarFormulario() {
 // =========================================================
 
 btnNuevoMaterial?.addEventListener(
+
     "click",
+
     () => {
 
-        limpiarFormulario();
+        limpiarFormularioMaterial();
 
         mostrarMensaje("");
 
 
         contenedorFormularioMaterial
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
+            ?.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "start"
             });
     }
 );
 
 
 // =========================================================
-// CANCELAR EDICIÓN
+// CANCELAR EDICIÓN DE MATERIAL
 // =========================================================
 
 btnCancelarEdicion?.addEventListener(
+
     "click",
+
     () => {
 
-        limpiarFormulario();
+        limpiarFormularioMaterial();
 
         mostrarMensaje("");
     }
@@ -1115,12 +1577,15 @@ btnCancelarEdicion?.addEventListener(
 
 async function cargarMateriales() {
 
-    listaMateriales.innerHTML =
-        `
-        <p>
-            Cargando materiales...
-        </p>
-        `;
+    if (listaMateriales) {
+
+        listaMateriales.innerHTML =
+            `
+            <p>
+                Cargando materiales...
+            </p>
+            `;
+    }
 
 
     const {
@@ -1160,12 +1625,17 @@ async function cargarMateriales() {
             error
         );
 
-        listaMateriales.innerHTML =
-            `
-            <p class="mensaje-error">
-                No se pudieron cargar los materiales.
-            </p>
-            `;
+
+        if (listaMateriales) {
+
+            listaMateriales.innerHTML =
+                `
+                <p class="mensaje-error">
+                    No se pudieron cargar los materiales.
+                </p>
+                `;
+        }
+
 
         return;
     }
@@ -1196,22 +1666,33 @@ async function cargarMateriales() {
     }
 
 
+    relacionesCategoriasEdicion =
+        relaciones || [];
+
+
     const mapaCategorias =
         new Map();
 
 
     (relaciones || [])
         .forEach(
+
             relacion => {
 
                 if (
                     !mapaCategorias.has(
-                        relacion.material_id
+                        Number(
+                            relacion.material_id
+                        )
                     )
                 ) {
 
                     mapaCategorias.set(
-                        relacion.material_id,
+
+                        Number(
+                            relacion.material_id
+                        ),
+
                         []
                     );
                 }
@@ -1219,10 +1700,14 @@ async function cargarMateriales() {
 
                 mapaCategorias
                     .get(
-                        relacion.material_id
+                        Number(
+                            relacion.material_id
+                        )
                     )
                     .push(
-                        relacion.categoria_id
+                        Number(
+                            relacion.categoria_id
+                        )
                     );
             }
         );
@@ -1230,14 +1715,18 @@ async function cargarMateriales() {
 
     materialesCargados =
         (materiales || [])
+
             .map(
+
                 material => ({
 
                     ...material,
 
                     categoria_ids:
                         mapaCategorias.get(
-                            material.id
+                            Number(
+                                material.id
+                            )
                         ) || []
 
                 })
@@ -1251,7 +1740,7 @@ async function cargarMateriales() {
 
 
 // =========================================================
-// OBTENER NOMBRE CATEGORÍA
+// OBTENER NOMBRE DE CATEGORÍA
 // =========================================================
 
 function obtenerNombreCategoria(
@@ -1260,6 +1749,7 @@ function obtenerNombreCategoria(
 
     const categoria =
         categoriasCargadas.find(
+
             item =>
                 Number(item.id) ===
                 Number(id)
@@ -1280,8 +1770,16 @@ function renderizarMateriales(
     materiales
 ) {
 
-    contadorMateriales.textContent =
-        `${materiales.length} material(es)`;
+    if (contadorMateriales) {
+
+        contadorMateriales.textContent =
+            `${materiales.length} material(es)`;
+    }
+
+
+    if (!listaMateriales) {
+        return;
+    }
 
 
     if (
@@ -1291,36 +1789,47 @@ function renderizarMateriales(
         listaMateriales.innerHTML =
             `
             <div class="lista-vacia">
-                <span>📦</span>
+
+                <span>
+                    📦
+                </span>
 
                 <p>
                     No hay materiales registrados.
                 </p>
+
             </div>
             `;
+
 
         return;
     }
 
 
     listaMateriales.innerHTML =
+
         materiales
+
             .map(
+
                 material => {
 
                     const categorias =
                         material.categoria_ids
+
                             .map(
                                 id =>
                                     obtenerNombreCategoria(
                                         id
                                     )
                             )
+
                             .filter(Boolean);
 
 
                     let estadoTexto =
                         "Disponible";
+
 
                     let estadoClase =
                         "estado-disponible";
@@ -1333,8 +1842,10 @@ function renderizarMateriales(
                         estadoTexto =
                             "Retirado";
 
+
                         estadoClase =
                             "estado-retirado";
+
 
                     } else if (
                         !material.activo
@@ -1342,6 +1853,7 @@ function renderizarMateriales(
 
                         estadoTexto =
                             "No disponible";
+
 
                         estadoClase =
                             "estado-no-disponible";
@@ -1438,18 +1950,23 @@ function renderizarMateriales(
                                     <div>
 
                                         <span class="material-codigo">
+
                                             ${
                                                 escaparHTML(
                                                     material.codigo
                                                 ) ||
                                                 "Sin código"
                                             }
+
                                         </span>
 
+
                                         <h3>
+
                                             ${escaparHTML(
                                                 material.nombre
                                             )}
+
                                         </h3>
 
                                     </div>
@@ -1458,9 +1975,7 @@ function renderizarMateriales(
                                     <div class="material-cantidad">
 
                                         <strong>
-                                            ${
-                                                material.cantidad_total
-                                            }
+                                            ${material.cantidad_total}
                                         </strong>
 
                                         <span>
@@ -1477,9 +1992,11 @@ function renderizarMateriales(
 
                                         ? `
                                             <p class="material-descripcion">
+
                                                 ${escaparHTML(
                                                     material.descripcion
                                                 )}
+
                                             </p>
                                         `
 
@@ -1493,16 +2010,17 @@ function renderizarMateriales(
                                         categorias.length
 
                                             ? categorias
+
                                                 .map(
-                                                    categoria =>
-                                                        `
+                                                    categoria => `
                                                         <span>
                                                             ${escaparHTML(
                                                                 categoria
                                                             )}
                                                         </span>
-                                                        `
+                                                    `
                                                 )
+
                                                 .join("")
 
                                             : `
@@ -1527,21 +2045,26 @@ function renderizarMateriales(
                     `;
                 }
             )
+
             .join("");
 }
 
 
 // =========================================================
-// BUSCADOR
+// BUSCADOR DE MATERIALES
 // =========================================================
 
 buscarMaterial?.addEventListener(
+
     "input",
+
     () => {
 
         const termino =
             buscarMaterial.value
+
                 .trim()
+
                 .toLowerCase();
 
 
@@ -1551,22 +2074,26 @@ buscarMaterial?.addEventListener(
                 materialesCargados
             );
 
+
             return;
         }
 
 
         const filtrados =
             materialesCargados.filter(
+
                 material => {
 
                     const categorias =
                         material.categoria_ids
+
                             .map(
                                 id =>
                                     obtenerNombreCategoria(
                                         id
                                     )
                             )
+
                             .join(" ");
 
 
@@ -1605,6 +2132,7 @@ window.editarMaterial =
 
         const material =
             materialesCargados.find(
+
                 item =>
                     Number(item.id) ===
                     Number(id)
@@ -1619,21 +2147,26 @@ window.editarMaterial =
         materialId.value =
             material.id;
 
+
         materialCodigo.value =
             material.codigo || "";
+
 
         materialNombre.value =
             material.nombre || "";
 
+
         materialCantidad.value =
             material.cantidad_total;
+
 
         materialDescripcion.value =
             material.descripcion || "";
 
 
         imagenActualUrl =
-            material.imagen_url || null;
+            material.imagen_url ||
+            null;
 
 
         mostrarImagenFormulario(
@@ -1665,10 +2198,19 @@ window.editarMaterial =
         );
 
 
+        mostrarPanelAdmin(
+            "panelMateriales"
+        );
+
+
         contenedorFormularioMaterial
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
+            ?.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "start"
             });
     };
 
@@ -1684,6 +2226,7 @@ window.cambiarEstadoMaterial =
 
         const material =
             materialesCargados.find(
+
                 item =>
                     Number(item.id) ===
                     Number(id)
@@ -1701,7 +2244,9 @@ window.cambiarEstadoMaterial =
 
         const texto =
             nuevoEstado
+
                 ? "habilitar"
+
                 : "marcar como no disponible";
 
 
@@ -1710,6 +2255,7 @@ window.cambiarEstadoMaterial =
                 `¿Deseas ${texto} "${material.nombre}"?`
             )
         ) {
+
             return;
         }
 
@@ -1729,7 +2275,8 @@ window.cambiarEstadoMaterial =
                         nuevoEstado,
 
                     updated_at:
-                        new Date().toISOString()
+                        new Date()
+                            .toISOString()
 
                 })
 
@@ -1745,7 +2292,9 @@ window.cambiarEstadoMaterial =
                 "No se pudo cambiar el estado del material."
             );
 
+
             console.error(error);
+
 
             return;
         }
@@ -1767,6 +2316,7 @@ window.quitarMaterial =
 
         const material =
             materialesCargados.find(
+
                 item =>
                     Number(item.id) ===
                     Number(id)
@@ -1780,7 +2330,9 @@ window.quitarMaterial =
 
         const confirmar =
             confirm(
+
                 `¿Quitar "${material.nombre}" del catálogo?\n\n` +
+
                 `No se borrará el historial de reservas.`
             );
 
@@ -1801,12 +2353,15 @@ window.quitarMaterial =
 
                 .update({
 
-                    activo: false,
+                    activo:
+                        false,
 
-                    eliminado: true,
+                    eliminado:
+                        true,
 
                     updated_at:
-                        new Date().toISOString()
+                        new Date()
+                            .toISOString()
 
                 })
 
@@ -1823,9 +2378,11 @@ window.quitarMaterial =
                 error
             );
 
+
             alert(
                 "No se pudo quitar el material."
             );
+
 
             return;
         }
@@ -1846,6 +2403,7 @@ window.restaurarMaterial =
 
         const material =
             materialesCargados.find(
+
                 item =>
                     Number(item.id) ===
                     Number(id)
@@ -1859,9 +2417,10 @@ window.restaurarMaterial =
 
         if (
             !confirm(
-                `¿Restaurar "${material.nombre}"?`
+                `¿Restaurar "${material.nombre}" al catálogo?`
             )
         ) {
+
             return;
         }
 
@@ -1877,12 +2436,15 @@ window.restaurarMaterial =
 
                 .update({
 
-                    activo: true,
+                    activo:
+                        true,
 
-                    eliminado: false,
+                    eliminado:
+                        false,
 
                     updated_at:
-                        new Date().toISOString()
+                        new Date()
+                            .toISOString()
 
                 })
 
@@ -1894,11 +2456,16 @@ window.restaurarMaterial =
 
         if (error) {
 
+            console.error(
+                "Error restaurando material:",
+                error
+            );
+
+
             alert(
                 "No se pudo restaurar el material."
             );
 
-            console.error(error);
 
             return;
         }
@@ -1907,126 +2474,44 @@ window.restaurarMaterial =
         await cargarMateriales();
     };
 
-// =========================================================
-// RESERVAS ADMINISTRADOR
-// =========================================================
-
-let lunesSemanaAdmin =
-    obtenerLunesAdmin(
-        new Date()
-    );
-
-let reservasAdmin = [];
-let detallesAdmin = [];
-let materialesAdmin = [];
-let perfilesAdmin = [];
-
-let reservaEntregaActual = null;
-
 
 // =========================================================
-// ELEMENTOS RESERVAS
+// FECHAS - HELPERS
 // =========================================================
 
-const btnSemanaAnteriorAdmin =
-    document.getElementById(
-        "btnSemanaAnteriorAdmin"
-    );
-
-const btnSemanaSiguienteAdmin =
-    document.getElementById(
-        "btnSemanaSiguienteAdmin"
-    );
-
-const textoSemanaAdmin =
-    document.getElementById(
-        "textoSemanaAdmin"
-    );
-
-const cuerpoTablaReservasAdmin =
-    document.getElementById(
-        "cuerpoTablaReservasAdmin"
-    );
-
-const mensajeReservasAdmin =
-    document.getElementById(
-        "mensajeReservasAdmin"
-    );
-
-
-const listaEntregasPendientes =
-    document.getElementById(
-        "listaEntregasPendientes"
-    );
-
-const panelGestionEntrega =
-    document.getElementById(
-        "panelGestionEntrega"
-    );
-
-const tituloGestionEntrega =
-    document.getElementById(
-        "tituloGestionEntrega"
-    );
-
-const datosGestionEntrega =
-    document.getElementById(
-        "datosGestionEntrega"
-    );
-
-const detalleGestionEntrega =
-    document.getElementById(
-        "detalleGestionEntrega"
-    );
-
-const btnGuardarDevolucion =
-    document.getElementById(
-        "btnGuardarDevolucion"
-    );
-
-const btnCerrarGestionEntrega =
-    document.getElementById(
-        "btnCerrarGestionEntrega"
-    );
-
-const mensajeEntrega =
-    document.getElementById(
-        "mensajeEntrega"
-    );
-
-
-// =========================================================
-// FECHAS ADMIN
-// =========================================================
-
-function obtenerLunesAdmin(fecha) {
+function obtenerLunesAdmin(
+    fecha
+) {
 
     const resultado =
         new Date(
-            fecha.getFullYear(),
-            fecha.getMonth(),
-            fecha.getDate()
+            fecha
         );
+
+
+    resultado.setHours(
+        12,
+        0,
+        0,
+        0
+    );
+
 
     const dia =
         resultado.getDay();
+
 
     const diferencia =
         dia === 0
             ? -6
             : 1 - dia;
 
+
     resultado.setDate(
         resultado.getDate() +
         diferencia
     );
 
-    resultado.setHours(
-        0,
-        0,
-        0,
-        0
-    );
 
     return resultado;
 }
@@ -2037,303 +2522,126 @@ function sumarDiasAdmin(
     dias
 ) {
 
-    const nueva =
-        new Date(fecha);
+    const resultado =
+        new Date(
+            fecha
+        );
 
-    nueva.setDate(
-        nueva.getDate() +
+
+    resultado.setDate(
+        resultado.getDate() +
         dias
     );
 
-    return nueva;
+
+    return resultado;
 }
 
 
-function fechaISOAdmin(fecha) {
+function fechaISOAdmin(
+    fecha
+) {
 
-    const y =
+    const anio =
         fecha.getFullYear();
 
-    const m =
+
+    const mes =
         String(
             fecha.getMonth() + 1
-        )
-        .padStart(
+        ).padStart(
             2,
             "0"
         );
 
-    const d =
+
+    const dia =
         String(
             fecha.getDate()
-        )
-        .padStart(
+        ).padStart(
             2,
             "0"
         );
 
-    return `${y}-${m}-${d}`;
+
+    return `${anio}-${mes}-${dia}`;
 }
 
 
-function fechaCortaAdmin(fecha) {
+function fechaCortaAdmin(
+    fecha
+) {
 
     return fecha.toLocaleDateString(
         "es-BO",
         {
-            day: "2-digit",
-            month: "2-digit"
+            day:
+                "2-digit",
+
+            month:
+                "2-digit"
         }
     );
 }
 
 
-function fechaCompletaAdmin(fecha) {
+function fechaLargaAdmin(
+    fechaISO
+) {
+
+    if (!fechaISO) {
+        return "";
+    }
+
+
+    const partes =
+        fechaISO.split("-");
+
+
+    if (
+        partes.length !== 3
+    ) {
+
+        return fechaISO;
+    }
+
+
+    const fecha =
+        new Date(
+
+            Number(partes[0]),
+
+            Number(partes[1]) - 1,
+
+            Number(partes[2]),
+
+            12,
+            0,
+            0
+        );
+
 
     return fecha.toLocaleDateString(
         "es-BO",
         {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
+            weekday:
+                "long",
+
+            day:
+                "2-digit",
+
+            month:
+                "2-digit",
+
+            year:
+                "numeric"
         }
     );
 }
 
 
 // =========================================================
-// HORARIOS
-// =========================================================
-
-const HORARIOS_ADMIN = [
-    "09:00-12:00",
-    "14:00-17:00",
-    "19:00-21:30"
-];
-
-
-// =========================================================
-// CARGAR RESERVAS SEMANA
-// =========================================================
-
-async function cargarReservasAdmin() {
-
-    if (!cuerpoTablaReservasAdmin) {
-        return;
-    }
-
-
-    const viernes =
-        sumarDiasAdmin(
-            lunesSemanaAdmin,
-            4
-        );
-
-
-    textoSemanaAdmin.textContent =
-        `${fechaCompletaAdmin(
-            lunesSemanaAdmin
-        )} al ${fechaCompletaAdmin(
-            viernes
-        )}`;
-
-
-    actualizarCabecerasAdmin();
-
-
-    const inicio =
-        fechaISOAdmin(
-            lunesSemanaAdmin
-        );
-
-    const fin =
-        fechaISOAdmin(
-            viernes
-        );
-
-
-   const {
-    data: reservas,
-    error
-} =
-    await supabaseClient
-        .from("reservas_material")
-        .select(`
-            id,
-            usuario_id,
-            grupo,
-            fecha,
-            horario,
-            tema,
-            estado,
-            observacion_general
-        `)
-        .gte(
-            "fecha",
-            inicio
-        )
-        .lte(
-            "fecha",
-            fin
-        )
-
-        // NO mostrar reservas canceladas
-        .neq(
-            "estado",
-            "cancelada"
-        )
-
-        .order(
-            "fecha",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (error) {
-
-        console.error(error);
-
-        cuerpoTablaReservasAdmin.innerHTML =
-            `
-            <tr>
-                <td colspan="6">
-                    Error cargando reservas.
-                </td>
-            </tr>
-            `;
-
-        return;
-    }
-
-
-    reservasAdmin =
-        reservas || [];
-
-
-    const idsReservas =
-        reservasAdmin
-            .map(
-                r => r.id
-            );
-
-
-    detallesAdmin = [];
-
-
-    if (idsReservas.length) {
-
-        const {
-            data,
-            error: errorDetalles
-        } =
-            await supabaseClient
-                .from("reserva_material_detalle")
-                .select(`
-                    id,
-                    reserva_id,
-                    material_id,
-                    cantidad,
-                    cantidad_devuelta,
-                    observacion
-                `)
-                .in(
-                    "reserva_id",
-                    idsReservas
-                );
-
-
-        if (!errorDetalles) {
-
-            detallesAdmin =
-                data || [];
-        }
-    }
-
-
-    const idsMateriales =
-        [
-            ...new Set(
-                detallesAdmin
-                    .map(
-                        d => d.material_id
-                    )
-            )
-        ];
-
-
-    materialesAdmin = [];
-
-
-    if (idsMateriales.length) {
-
-        const {
-            data
-        } =
-            await supabaseClient
-                .from("materiales_gabinete")
-                .select(`
-                    id,
-                    nombre,
-                    codigo
-                `)
-                .in(
-                    "id",
-                    idsMateriales
-                );
-
-
-        materialesAdmin =
-            data || [];
-    }
-
-
-    const idsUsuarios =
-        [
-            ...new Set(
-                reservasAdmin
-                    .map(
-                        r => r.usuario_id
-                    )
-            )
-        ];
-
-
-    perfilesAdmin = [];
-
-
-    if (idsUsuarios.length) {
-
-        const {
-            data
-        } =
-            await supabaseClient
-                .from("perfiles")
-                .select(`
-                    id,
-                    nombre,
-                    usuario
-                `)
-                .in(
-                    "id",
-                    idsUsuarios
-                );
-
-
-        perfilesAdmin =
-            data || [];
-    }
-
-
-    renderizarReservasAdmin();
-
-    renderizarEntregasPendientes();
-}
-
-
-// =========================================================
-// CABECERAS
+// CABECERAS DE LA SEMANA
 // =========================================================
 
 function actualizarCabecerasAdmin() {
@@ -2373,11 +2681,14 @@ function actualizarCabecerasAdmin() {
 
 
     dias.forEach(
+
         item => {
 
             const fecha =
                 sumarDiasAdmin(
+
                     lunesSemanaAdmin,
+
                     item[2]
                 );
 
@@ -2393,8 +2704,11 @@ function actualizarCabecerasAdmin() {
                 elemento.innerHTML =
                     `
                     ${item[1]}
+
                     <small>
-                        ${fechaCortaAdmin(fecha)}
+                        ${fechaCortaAdmin(
+                            fecha
+                        )}
                     </small>
                     `;
             }
@@ -2404,99 +2718,701 @@ function actualizarCabecerasAdmin() {
 
 
 // =========================================================
-// HELPERS
+// NOMBRE DEL MATERIAL
 // =========================================================
 
-function nombreMaterialAdmin(id) {
+function nombreMaterialAdmin(
+    id
+) {
 
     const material =
         materialesAdmin.find(
+
             item =>
                 Number(item.id) ===
                 Number(id)
         );
 
-    return material
-        ? material.nombre
+
+    if (material) {
+
+        return material.nombre;
+    }
+
+
+    const materialCatalogo =
+        materialesCargados.find(
+
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    return materialCatalogo
+        ? materialCatalogo.nombre
         : "Material";
 }
 
 
-function nombreDocenteAdmin(id) {
+// =========================================================
+// NOMBRE DEL DOCENTE
+// =========================================================
+
+function nombreDocenteAdmin(
+    id
+) {
 
     const perfil =
         perfilesAdmin.find(
+
             item =>
                 item.id === id
         );
 
+
     return perfil
+
         ? (
             perfil.nombre ||
             perfil.usuario
         )
+
         : "Docente";
 }
 
 
 // =========================================================
-// ESTADO
+// ESTADO DE RESERVA
 // =========================================================
 
-function etiquetaEstadoAdmin(estado) {
+function etiquetaEstadoAdmin(
+    estado
+) {
 
     const mapa = {
 
-        reservada:
-            [
-                "RESERVADA",
-                "estado-reserva-reservada"
-            ],
+        reservada: [
+            "RESERVADA",
+            "estado-reserva-reservada"
+        ],
 
-        parcial:
-            [
-                "PARCIAL",
-                "estado-reserva-parcial"
-            ],
+        entregada: [
+            "ENTREGADA",
+            "estado-reserva-entregada"
+        ],
 
-        completada:
-            [
-                "COMPLETADA",
-                "estado-reserva-completada"
-            ],
+        parcial: [
+            "PARCIAL",
+            "estado-reserva-parcial"
+        ],
 
-        cancelada:
-            [
-                "CANCELADA",
-                "estado-reserva-cancelada"
-            ]
+        completada: [
+            "COMPLETADA",
+            "estado-reserva-completada"
+        ],
+
+        cancelada: [
+            "CANCELADA",
+            "estado-reserva-cancelada"
+        ]
     };
 
 
-    return mapa[estado] ||
-        [
-            estado,
-            ""
-        ];
+    return mapa[estado] || [
+
+        String(
+            estado || ""
+        ).toUpperCase(),
+
+        ""
+    ];
 }
 
 
 // =========================================================
-// RENDER TABLA RESERVAS
+// COMPROBAR SI UNA RESERVA TIENE OBSERVACIÓN DE ENTREGA
+// =========================================================
+
+function reservaTieneObservacionEntrega(
+    reserva
+) {
+
+    if (
+        reserva?.observacion_entrega
+    ) {
+
+        return true;
+    }
+
+
+    return detallesAdmin.some(
+
+        detalle =>
+
+            Number(
+                detalle.reserva_id
+            ) ===
+            Number(
+                reserva.id
+            )
+
+            &&
+
+            Boolean(
+                detalle.observacion_entrega
+            )
+    );
+}
+// =========================================================
+// CARGAR RESERVAS DE LA SEMANA
+// =========================================================
+
+async function cargarReservasAdmin() {
+
+    if (!cuerpoTablaReservasAdmin) {
+        return;
+    }
+
+
+    if (!lunesSemanaAdmin) {
+
+        lunesSemanaAdmin =
+            obtenerLunesAdmin(
+                new Date()
+            );
+    }
+
+
+    const viernes =
+        sumarDiasAdmin(
+            lunesSemanaAdmin,
+            4
+        );
+
+
+    if (textoSemanaAdmin) {
+
+        textoSemanaAdmin.textContent =
+            `${fechaISOAdmin(
+                lunesSemanaAdmin
+            )} al ${fechaISOAdmin(
+                viernes
+            )}`;
+    }
+
+
+    actualizarCabecerasAdmin();
+
+
+    const inicio =
+        fechaISOAdmin(
+            lunesSemanaAdmin
+        );
+
+
+    const fin =
+        fechaISOAdmin(
+            viernes
+        );
+
+
+    cuerpoTablaReservasAdmin.innerHTML =
+        `
+        <tr>
+
+            <td colspan="6">
+                Cargando reservas...
+            </td>
+
+        </tr>
+        `;
+
+
+    const {
+        data: reservas,
+        error
+    } =
+        await supabaseClient
+
+            .from(
+                "reservas_material"
+            )
+
+            .select(`
+                id,
+                usuario_id,
+                grupo,
+                fecha,
+                horario,
+                tema,
+                estado,
+                observacion_general,
+                fecha_entrega,
+                entregado_por,
+                observacion_entrega,
+                created_at,
+                updated_at
+            `)
+
+            .gte(
+                "fecha",
+                inicio
+            )
+
+            .lte(
+                "fecha",
+                fin
+            )
+
+            .neq(
+                "estado",
+                "cancelada"
+            )
+
+            .order(
+                "fecha",
+                {
+                    ascending: true
+                }
+            )
+
+            .order(
+                "horario",
+                {
+                    ascending: true
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Error cargando reservas:",
+            error
+        );
+
+
+        cuerpoTablaReservasAdmin.innerHTML =
+            `
+            <tr>
+
+                <td colspan="6">
+                    Error cargando reservas.
+                </td>
+
+            </tr>
+            `;
+
+
+        return;
+    }
+
+
+    reservasAdmin =
+        reservas || [];
+
+
+    const idsReservas =
+        reservasAdmin.map(
+            reserva =>
+                reserva.id
+        );
+
+
+    detallesAdmin = [];
+
+
+    if (
+        idsReservas.length
+    ) {
+
+        const {
+            data,
+            error: errorDetalles
+        } =
+            await supabaseClient
+
+                .from(
+                    "reserva_material_detalle"
+                )
+
+                .select(`
+                    id,
+                    reserva_id,
+                    material_id,
+                    cantidad,
+                    cantidad_devuelta,
+                    entregado,
+                    observacion,
+                    observacion_entrega,
+                    created_at,
+                    updated_at
+                `)
+
+                .in(
+                    "reserva_id",
+                    idsReservas
+                )
+
+                .order(
+                    "id",
+                    {
+                        ascending: true
+                    }
+                );
+
+
+        if (errorDetalles) {
+
+            console.error(
+                "Error cargando detalles:",
+                errorDetalles
+            );
+
+
+        } else {
+
+            detallesAdmin =
+                data || [];
+        }
+    }
+
+
+    const idsMateriales = [
+
+        ...new Set(
+
+            detallesAdmin.map(
+                detalle =>
+                    Number(
+                        detalle.material_id
+                    )
+            )
+        )
+    ];
+
+
+    materialesAdmin = [];
+
+
+    if (
+        idsMateriales.length
+    ) {
+
+        const {
+            data,
+            error: errorMateriales
+        } =
+            await supabaseClient
+
+                .from(
+                    "materiales_gabinete"
+                )
+
+                .select(`
+                    id,
+                    nombre,
+                    codigo,
+                    descripcion,
+                    cantidad_total,
+                    imagen_url,
+                    activo,
+                    eliminado
+                `)
+
+                .in(
+                    "id",
+                    idsMateriales
+                );
+
+
+        if (errorMateriales) {
+
+            console.error(
+                "Error cargando nombres de materiales:",
+                errorMateriales
+            );
+
+
+        } else {
+
+            materialesAdmin =
+                data || [];
+        }
+    }
+
+
+    const idsUsuarios = [
+
+        ...new Set(
+
+            reservasAdmin.map(
+                reserva =>
+                    reserva.usuario_id
+            )
+        )
+    ];
+
+
+    perfilesAdmin = [];
+
+
+    if (
+        idsUsuarios.length
+    ) {
+
+        const {
+            data,
+            error: errorPerfiles
+        } =
+            await supabaseClient
+
+                .from(
+                    "perfiles"
+                )
+
+                .select(`
+                    id,
+                    nombre,
+                    usuario
+                `)
+
+                .in(
+                    "id",
+                    idsUsuarios
+                );
+
+
+        if (errorPerfiles) {
+
+            console.error(
+                "Error cargando docentes:",
+                errorPerfiles
+            );
+
+
+        } else {
+
+            perfilesAdmin =
+                data || [];
+        }
+    }
+
+
+    renderizarReservasAdmin();
+
+    renderizarEntregasPendientes();
+}
+
+
+// =========================================================
+// MATERIALES DE UNA RESERVA
+// =========================================================
+
+function obtenerDetallesReservaAdmin(
+    reservaId
+) {
+
+    return detallesAdmin.filter(
+
+        detalle =>
+
+            Number(
+                detalle.reserva_id
+            ) ===
+            Number(
+                reservaId
+            )
+    );
+}
+
+
+// =========================================================
+// BOTONES SEGÚN ESTADO
+// =========================================================
+
+function obtenerBotonesReservaAdmin(
+    reserva
+) {
+
+    if (
+        reserva.estado ===
+        "reservada"
+    ) {
+
+        return `
+            <button
+                type="button"
+                class="btn-gestionar-entrega"
+                onclick="abrirConfirmarEntrega(${reserva.id})"
+            >
+                ✓ Material entregado
+            </button>
+
+            <button
+                type="button"
+                class="btn-editar"
+                onclick="abrirEditarReservaAdmin(${reserva.id})"
+            >
+                ✏ Editar
+            </button>
+
+            <button
+                type="button"
+                class="btn-cancelar-reserva-admin"
+                onclick="cancelarReservaAdmin(${reserva.id})"
+            >
+                Cancelar
+            </button>
+        `;
+    }
+
+
+    if (
+        reserva.estado ===
+            "entregada" ||
+
+        reserva.estado ===
+            "parcial"
+    ) {
+
+        return `
+            <button
+                type="button"
+                class="btn-gestionar-entrega"
+                onclick="abrirEntrega(${reserva.id})"
+            >
+                ↩ Gestionar devolución
+            </button>
+        `;
+    }
+
+
+    return "";
+}
+
+
+// =========================================================
+// LISTA DE MATERIALES EN TARJETA DE RESERVA
+// =========================================================
+
+function htmlMaterialesReservaAdmin(
+    reserva
+) {
+
+    const detalles =
+        obtenerDetallesReservaAdmin(
+            reserva.id
+        );
+
+
+    if (
+        !detalles.length
+    ) {
+
+        return `
+            <li>
+                Sin materiales
+            </li>
+        `;
+    }
+
+
+    return detalles
+
+        .map(
+
+            detalle => {
+
+                let indicador =
+                    "";
+
+
+                if (
+                    reserva.estado !==
+                    "reservada"
+                ) {
+
+                    indicador =
+                        detalle.entregado
+
+                            ? `
+                                <span title="Material entregado">
+                                    ✓
+                                </span>
+                            `
+
+                            : `
+                                <span title="Material no entregado">
+                                    —
+                                </span>
+                            `;
+                }
+
+
+                const observacion =
+                    detalle.observacion_entrega
+
+                        ? `
+                            <small>
+                                ⚠ ${escaparHTML(
+                                    detalle.observacion_entrega
+                                )}
+                            </small>
+                        `
+
+                        : "";
+
+
+                return `
+                    <li>
+
+                        ${indicador}
+
+                        ${detalle.cantidad} ×
+
+                        ${escaparHTML(
+                            nombreMaterialAdmin(
+                                detalle.material_id
+                            )
+                        )}
+
+                        ${observacion}
+
+                    </li>
+                `;
+            }
+        )
+
+        .join("");
+}
+
+
+// =========================================================
+// RENDERIZAR TABLA SEMANAL
 // =========================================================
 
 function renderizarReservasAdmin() {
 
+    if (!cuerpoTablaReservasAdmin) {
+        return;
+    }
+
+
     const dias =
         Array.from(
+
             {
                 length: 5
             },
+
             (
                 _,
                 i
             ) =>
                 fechaISOAdmin(
+
                     sumarDiasAdmin(
                         lunesSemanaAdmin,
                         i
@@ -2506,25 +3422,39 @@ function renderizarReservasAdmin() {
 
 
     cuerpoTablaReservasAdmin.innerHTML =
+
         HORARIOS_ADMIN
+
             .map(
+
                 horario => {
 
                     const celdas =
+
                         dias
+
                             .map(
+
                                 fecha => {
 
                                     const reservas =
                                         reservasAdmin.filter(
-                                            r =>
-                                                r.fecha === fecha
+
+                                            reserva =>
+
+                                                reserva.fecha ===
+                                                    fecha
+
                                                 &&
-                                                r.horario === horario
+
+                                                reserva.horario ===
+                                                    horario
                                         );
 
 
-                                    if (!reservas.length) {
+                                    if (
+                                        !reservas.length
+                                    ) {
 
                                         return `
                                             <td class="celda-vacia">
@@ -2535,40 +3465,12 @@ function renderizarReservasAdmin() {
 
 
                                     const contenido =
+
                                         reservas
+
                                             .map(
+
                                                 reserva => {
-
-                                                    const detalles =
-                                                        detallesAdmin
-                                                            .filter(
-                                                                d =>
-                                                                    Number(
-                                                                        d.reserva_id
-                                                                    ) ===
-                                                                    Number(
-                                                                        reserva.id
-                                                                    )
-                                                            );
-
-
-                                                    const materiales =
-                                                        detalles
-                                                            .map(
-                                                                d =>
-                                                                    `
-                                                                    <li>
-                                                                        ${d.cantidad} ×
-                                                                        ${escaparHTML(
-                                                                            nombreMaterialAdmin(
-                                                                                d.material_id
-                                                                            )
-                                                                        )}
-                                                                    </li>
-                                                                    `
-                                                            )
-                                                            .join("");
-
 
                                                     const estado =
                                                         etiquetaEstadoAdmin(
@@ -2576,27 +3478,25 @@ function renderizarReservasAdmin() {
                                                         );
 
 
-                                                    const botones =
-                                                        reserva.estado !== "cancelada"
-                                                        &&
-                                                        reserva.estado !== "completada"
+                                                    const tieneObservacion =
+                                                        reservaTieneObservacionEntrega(
+                                                            reserva
+                                                        );
+
+
+                                                    const observacionGeneral =
+                                                        reserva.observacion_entrega
 
                                                             ? `
-                                                                <button
-                                                                    type="button"
-                                                                    class="btn-gestionar-entrega"
-                                                                    onclick="abrirEntrega(${reserva.id})"
-                                                                >
-                                                                    Gestionar entrega
-                                                                </button>
+                                                                <p>
+                                                                    <strong>
+                                                                        Obs. entrega:
+                                                                    </strong>
 
-                                                                <button
-                                                                    type="button"
-                                                                    class="btn-cancelar-reserva-admin"
-                                                                    onclick="cancelarReservaAdmin(${reserva.id})"
-                                                                >
-                                                                    Cancelar
-                                                                </button>
+                                                                    ${escaparHTML(
+                                                                        reserva.observacion_entrega
+                                                                    )}
+                                                                </p>
                                                             `
 
                                                             : "";
@@ -2605,21 +3505,46 @@ function renderizarReservasAdmin() {
                                                     return `
                                                         <div class="reserva-semanal-card">
 
-                                                            <span
-                                                                class="estado-reserva-admin ${estado[1]}"
-                                                            >
-                                                                ${estado[0]}
-                                                            </span>
+                                                            <div>
+
+                                                                <span
+                                                                    class="estado-reserva-admin ${estado[1]}"
+                                                                >
+                                                                    ${estado[0]}
+                                                                </span>
+
+
+                                                                ${
+                                                                    tieneObservacion
+
+                                                                        ? `
+                                                                            <span
+                                                                                class="estado-reserva-admin"
+                                                                                title="La entrega tiene observaciones"
+                                                                            >
+                                                                                ⚠ OBSERVADA
+                                                                            </span>
+                                                                        `
+
+                                                                        : ""
+                                                                }
+
+                                                            </div>
+
 
                                                             <span class="reserva-docente-nombre">
+
                                                                 ${escaparHTML(
                                                                     nombreDocenteAdmin(
                                                                         reserva.usuario_id
                                                                     )
                                                                 )}
+
                                                             </span>
 
+
                                                             <p>
+
                                                                 <strong>
                                                                     Grupo:
                                                                 </strong>
@@ -2627,9 +3552,12 @@ function renderizarReservasAdmin() {
                                                                 ${escaparHTML(
                                                                     reserva.grupo
                                                                 )}
+
                                                             </p>
 
+
                                                             <p>
+
                                                                 <strong>
                                                                     Tema:
                                                                 </strong>
@@ -2637,30 +3565,48 @@ function renderizarReservasAdmin() {
                                                                 ${escaparHTML(
                                                                     reserva.tema
                                                                 )}
+
                                                             </p>
 
+
                                                             <ul>
-                                                                ${materiales}
+
+                                                                ${htmlMaterialesReservaAdmin(
+                                                                    reserva
+                                                                )}
+
                                                             </ul>
 
+
+                                                            ${observacionGeneral}
+
+
                                                             <div class="acciones-reserva-admin">
-                                                                ${botones}
+
+                                                                ${obtenerBotonesReservaAdmin(
+                                                                    reserva
+                                                                )}
+
                                                             </div>
 
                                                         </div>
                                                     `;
                                                 }
                                             )
+
                                             .join("");
 
 
                                     return `
                                         <td>
+
                                             ${contenido}
+
                                         </td>
                                     `;
                                 }
                             )
+
                             .join("");
 
 
@@ -2668,10 +3614,12 @@ function renderizarReservasAdmin() {
                         <tr>
 
                             <th class="horario-columna">
+
                                 ${horario.replace(
                                     "-",
                                     " - "
                                 )}
+
                             </th>
 
                             ${celdas}
@@ -2680,6 +3628,7 @@ function renderizarReservasAdmin() {
                     `;
                 }
             )
+
             .join("");
 }
 
@@ -2690,7 +3639,9 @@ function renderizarReservasAdmin() {
 
 btnSemanaAnteriorAdmin
     ?.addEventListener(
+
         "click",
+
         async () => {
 
             lunesSemanaAdmin =
@@ -2699,6 +3650,7 @@ btnSemanaAnteriorAdmin
                     -7
                 );
 
+
             await cargarReservasAdmin();
         }
     );
@@ -2706,7 +3658,9 @@ btnSemanaAnteriorAdmin
 
 btnSemanaSiguienteAdmin
     ?.addEventListener(
+
         "click",
+
         async () => {
 
             lunesSemanaAdmin =
@@ -2714,6 +3668,7 @@ btnSemanaSiguienteAdmin
                     lunesSemanaAdmin,
                     7
                 );
+
 
             await cargarReservasAdmin();
         }
@@ -2729,211 +3684,11 @@ window.cancelarReservaAdmin =
         reservaId
     ) {
 
-        if (
-            !confirm(
-                "¿Cancelar esta reserva?\n\nLos materiales volverán a estar disponibles para ese horario."
-            )
-        ) {
-            return;
-        }
-
-
-        try {
-
-            const {
-                error
-            } =
-                await supabaseClient.rpc(
-                    "cancelar_reserva_material",
-                    {
-                        p_reserva_id:
-                            reservaId
-                    }
-                );
-
-
-            if (error) {
-                throw error;
-            }
-
-
-            mensajeReservasAdmin.className =
-                "mensaje-admin mensaje-ok";
-
-
-            mensajeReservasAdmin.textContent =
-                "Reserva cancelada correctamente.";
-
-
-            await cargarReservasAdmin();
-
-
-        } catch (error) {
-
-            console.error(error);
-
-
-            mensajeReservasAdmin.className =
-                "mensaje-admin mensaje-error";
-
-
-            mensajeReservasAdmin.textContent =
-                error.message ||
-                "No se pudo cancelar la reserva.";
-        }
-    };
-
-
-// =========================================================
-// ENTREGAS PENDIENTES
-// =========================================================
-
-function renderizarEntregasPendientes() {
-
-    if (!listaEntregasPendientes) {
-        return;
-    }
-
-
-    const pendientes =
-        reservasAdmin.filter(
-            r =>
-                r.estado === "reservada"
-                ||
-                r.estado === "parcial"
-        );
-
-
-    if (!pendientes.length) {
-
-        listaEntregasPendientes.innerHTML =
-            `
-            <div class="lista-vacia">
-
-                <span>
-                    ✅
-                </span>
-
-                <p>
-                    No hay devoluciones pendientes esta semana.
-                </p>
-
-            </div>
-            `;
-
-        return;
-    }
-
-
-    listaEntregasPendientes.innerHTML =
-        pendientes
-            .map(
-                reserva => {
-
-                    const detalles =
-                        detallesAdmin
-                            .filter(
-                                d =>
-                                    Number(
-                                        d.reserva_id
-                                    ) ===
-                                    Number(
-                                        reserva.id
-                                    )
-                            );
-
-
-                    const pendientesCantidad =
-                        detalles
-                            .reduce(
-                                (
-                                    total,
-                                    d
-                                ) =>
-                                    total
-                                    +
-                                    (
-                                        Number(d.cantidad)
-                                        -
-                                        Number(d.cantidad_devuelta)
-                                    ),
-                                0
-                            );
-
-
-                    return `
-                        <div class="entrega-card">
-
-                            <div>
-
-                                <span class="entrega-fecha">
-                                    ${escaparHTML(
-                                        reserva.fecha
-                                    )}
-                                    ·
-                                    ${escaparHTML(
-                                        reserva.horario
-                                    )}
-                                </span>
-
-                                <h3>
-                                    ${escaparHTML(
-                                        nombreDocenteAdmin(
-                                            reserva.usuario_id
-                                        )
-                                    )}
-                                </h3>
-
-                                <p>
-                                    Grupo:
-                                    ${escaparHTML(
-                                        reserva.grupo
-                                    )}
-                                </p>
-
-                                <p>
-                                    Tema:
-                                    ${escaparHTML(
-                                        reserva.tema
-                                    )}
-                                </p>
-
-                                <strong class="entrega-pendientes">
-                                    ${pendientesCantidad}
-                                    unidad(es) pendientes
-                                </strong>
-
-                            </div>
-
-
-                            <button
-                                type="button"
-                                class="btn-principal btn-auto"
-                                onclick="abrirEntrega(${reserva.id})"
-                            >
-                                Registrar devolución
-                            </button>
-
-                        </div>
-                    `;
-                }
-            )
-            .join("");
-}
-
-
-// =========================================================
-// ABRIR ENTREGA
-// =========================================================
-window.abrirEntrega =
-    function (
-        reservaId
-    ) {
-
         const reserva =
             reservasAdmin.find(
-                r =>
-                    Number(r.id) ===
+
+                item =>
+                    Number(item.id) ===
                     Number(reservaId)
             );
 
@@ -2948,225 +3703,1030 @@ window.abrirEntrega =
         }
 
 
-        reservaEntregaActual =
-            reserva;
+        if (
+            reserva.estado !==
+            "reservada"
+        ) {
 
-
-        const detalles =
-            detallesAdmin
-                .filter(
-                    d =>
-                        Number(
-                            d.reserva_id
-                        ) ===
-                        Number(
-                            reservaId
-                        )
-                );
-
-
-        // =================================================
-        // CAMBIAR AUTOMÁTICAMENTE A LA PESTAÑA ENTREGAS
-        // =================================================
-
-        const botonEntregas =
-            document.querySelector(
-                '.tab-btn[data-panel="panelEntregas"]'
+            alert(
+                "Esta reserva ya tiene movimiento de material y no puede cancelarse."
             );
 
-
-        if (botonEntregas) {
-
-            botonEntregas.click();
+            return;
         }
 
 
-        // =================================================
-        // TÍTULO
-        // =================================================
+        if (
+            !confirm(
+                "¿Cancelar esta reserva?\n\nLos materiales volverán a estar disponibles para ese horario."
+            )
+        ) {
 
-        tituloGestionEntrega.textContent =
-            `Reserva #${reserva.id}`;
+            return;
+        }
 
 
-        // =================================================
-        // DATOS DE LA RESERVA
-        // =================================================
+        try {
 
-        datosGestionEntrega.innerHTML =
-            `
-            <strong>
+            const {
+                error
+            } =
+                await supabaseClient.rpc(
+
+                    "cancelar_reserva_material",
+
+                    {
+                        p_reserva_id:
+                            reservaId
+                    }
+                );
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            if (mensajeReservasAdmin) {
+
+                mensajeReservasAdmin.className =
+                    "mensaje-admin mensaje-ok";
+
+
+                mensajeReservasAdmin.textContent =
+                    "Reserva cancelada correctamente.";
+            }
+
+
+            await cargarReservasAdmin();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error cancelando reserva:",
+                error
+            );
+
+
+            if (mensajeReservasAdmin) {
+
+                mensajeReservasAdmin.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeReservasAdmin.textContent =
+                    error.message ||
+                    "No se pudo cancelar la reserva.";
+            }
+        }
+    };
+
+
+// =========================================================
+// ABRIR CONFIRMACIÓN DE ENTREGA FÍSICA
+// =========================================================
+
+window.abrirConfirmarEntrega =
+    function (
+        reservaId
+    ) {
+
+        const reserva =
+            reservasAdmin.find(
+
+                item =>
+                    Number(item.id) ===
+                    Number(reservaId)
+            );
+
+
+        if (!reserva) {
+
+            alert(
+                "No se encontró la reserva."
+            );
+
+            return;
+        }
+
+
+        if (
+            reserva.estado !==
+            "reservada"
+        ) {
+
+            alert(
+                "Esta reserva ya fue procesada."
+            );
+
+            return;
+        }
+
+
+        const detalles =
+            obtenerDetallesReservaAdmin(
+                reserva.id
+            );
+
+
+        if (
+            !detalles.length
+        ) {
+
+            alert(
+                "La reserva no contiene materiales."
+            );
+
+            return;
+        }
+
+
+        reservaEntregaFisicaActual =
+            reserva;
+
+
+        if (tituloConfirmarEntrega) {
+
+            tituloConfirmarEntrega.textContent =
+                "Confirmar entrega de materiales";
+        }
+
+
+        if (datosConfirmarEntrega) {
+
+            datosConfirmarEntrega.innerHTML =
+                `
+                <strong>
+                    Docente:
+                </strong>
+
                 ${escaparHTML(
                     nombreDocenteAdmin(
                         reserva.usuario_id
                     )
                 )}
-            </strong>
 
-            · Grupo:
-            ${escaparHTML(
-                reserva.grupo
-            )}
+                <br>
 
-            · Fecha:
-            ${escaparHTML(
-                reserva.fecha
-            )}
+                <strong>
+                    Fecha:
+                </strong>
 
-            · Horario:
-            ${escaparHTML(
-                reserva.horario
-            )}
+                ${escaparHTML(
+                    reserva.fecha
+                )}
 
-            <br>
+                ·
 
-            <strong>
-                Tema:
-            </strong>
+                <strong>
+                    Horario:
+                </strong>
 
-            ${escaparHTML(
-                reserva.tema
-            )}
-            `;
+                ${escaparHTML(
+                    reserva.horario
+                )}
+
+                <br>
+
+                <strong>
+                    Grupo:
+                </strong>
+
+                ${escaparHTML(
+                    reserva.grupo
+                )}
+
+                <br>
+
+                <strong>
+                    Tema:
+                </strong>
+
+                ${escaparHTML(
+                    reserva.tema
+                )}
+                `;
+        }
 
 
-        // =================================================
-        // DETALLES
-        // =================================================
+        detalleConfirmarEntrega.innerHTML =
 
-        detalleGestionEntrega.innerHTML =
             detalles
+
                 .map(
-                    detalle => {
 
-                        const pendiente =
-                            Number(
-                                detalle.cantidad
-                            )
-                            -
-                            Number(
-                                detalle.cantidad_devuelta
-                            );
+                    detalle => `
+                        <div
+                            class="entrega-detalle-item"
+                            data-detalle-id="${detalle.id}"
+                        >
 
+                            <label>
 
-                        return `
-                            <div class="detalle-entrega-item">
+                                <input
+                                    type="checkbox"
+                                    class="check-entrega-fisica"
+                                    data-detalle-id="${detalle.id}"
+                                >
 
+                                <strong>
 
-                                <div class="detalle-entrega-info">
+                                    ${detalle.cantidad} ×
 
-                                    <h4>
-                                        ${escaparHTML(
-                                            nombreMaterialAdmin(
-                                                detalle.material_id
-                                            )
-                                        )}
-                                    </h4>
+                                    ${escaparHTML(
+                                        nombreMaterialAdmin(
+                                            detalle.material_id
+                                        )
+                                    )}
 
+                                </strong>
 
-                                    <p>
-                                        Reservado:
-
-                                        <strong>
-                                            ${detalle.cantidad}
-                                        </strong>
-                                    </p>
+                            </label>
 
 
-                                    <p>
-                                        Ya devuelto:
+                            <div class="campo-admin">
 
-                                        <strong>
-                                            ${detalle.cantidad_devuelta}
-                                        </strong>
-                                    </p>
+                                <label
+                                    for="observacionEntregaDetalle${detalle.id}"
+                                >
+                                    Observación
+                                </label>
 
-
-                                    <p>
-                                        Pendiente:
-
-                                        <strong>
-                                            ${pendiente}
-                                        </strong>
-                                    </p>
-
-                                </div>
-
-
-                                <div class="campo-admin">
-
-                                    <label>
-                                        Cantidad devuelta total
-                                    </label>
-
-                                    <input
-                                        type="number"
-
-                                        min="${detalle.cantidad_devuelta}"
-
-                                        max="${detalle.cantidad}"
-
-                                        value="${detalle.cantidad_devuelta}"
-
-                                        class="input-devuelto"
-
-                                        data-detalle-id="${detalle.id}"
-                                    >
-
-                                </div>
-
-
-                                <div class="campo-admin">
-
-                                    <label>
-                                        Observación
-                                    </label>
-
-                                    <textarea
-                                        rows="3"
-
-                                        class="input-observacion-entrega"
-
-                                        data-detalle-id="${detalle.id}"
-
-                                        placeholder="Ej. Fuente 1 revisar cables"
-                                    >${escaparHTML(
-                                        detalle.observacion ||
-                                        ""
-                                    )}</textarea>
-
-                                </div>
-
+                                <input
+                                    type="text"
+                                    id="observacionEntregaDetalle${detalle.id}"
+                                    class="observacion-entrega-detalle"
+                                    data-detalle-id="${detalle.id}"
+                                    placeholder="Opcional. Estado al momento de entregar..."
+                                >
 
                             </div>
-                        `;
-                    }
+
+                        </div>
+                    `
                 )
+
                 .join("");
 
 
-        // =================================================
-        // MOSTRAR PANEL DE GESTIÓN
-        // =================================================
+        if (observacionGeneralEntrega) {
 
-        panelGestionEntrega.classList.remove(
-            "oculto"
+            observacionGeneralEntrega.value =
+                "";
+        }
+
+
+        if (mensajeConfirmarEntrega) {
+
+            mensajeConfirmarEntrega.textContent =
+                "";
+
+
+            mensajeConfirmarEntrega.className =
+                "mensaje-admin";
+        }
+
+
+        mostrarPanelAdmin(
+            "panelConfirmarEntrega"
         );
 
 
-        mensajeEntrega.textContent =
-            "";
+        panelConfirmarEntrega
+            ?.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "start"
+            });
+    };
 
 
-        // =================================================
-        // BAJAR HASTA LA RESERVA
-        // =================================================
+// =========================================================
+// CANCELAR / VOLVER DESDE ENTREGA FÍSICA
+// =========================================================
+
+btnCancelarConfirmarEntrega
+    ?.addEventListener(
+
+        "click",
+
+        () => {
+
+            reservaEntregaFisicaActual =
+                null;
+
+
+            if (detalleConfirmarEntrega) {
+
+                detalleConfirmarEntrega.innerHTML =
+                    "";
+            }
+
+
+            if (observacionGeneralEntrega) {
+
+                observacionGeneralEntrega.value =
+                    "";
+            }
+
+
+            mostrarPanelAdmin(
+                "panelReservas"
+            );
+        }
+    );
+
+
+// =========================================================
+// GUARDAR ENTREGA FÍSICA
+// =========================================================
+
+btnConfirmarEntregaMaterial
+    ?.addEventListener(
+
+        "click",
+
+        async () => {
+
+            if (
+                !reservaEntregaFisicaActual
+            ) {
+
+                return;
+            }
+
+
+            const detalles =
+                obtenerDetallesReservaAdmin(
+                    reservaEntregaFisicaActual.id
+                );
+
+
+            const payload =
+                detalles.map(
+
+                    detalle => {
+
+                        const check =
+                            document.querySelector(
+                                `.check-entrega-fisica[data-detalle-id="${detalle.id}"]`
+                            );
+
+
+                        const inputObservacion =
+                            document.querySelector(
+                                `.observacion-entrega-detalle[data-detalle-id="${detalle.id}"]`
+                            );
+
+
+                        return {
+
+                            detalle_id:
+                                Number(
+                                    detalle.id
+                                ),
+
+                            entregado:
+                                Boolean(
+                                    check?.checked
+                                ),
+
+                            observacion:
+                                inputObservacion
+                                    ?.value
+                                    ?.trim() ||
+                                null
+                        };
+                    }
+                );
+
+
+            const cantidadMarcados =
+                payload.filter(
+                    item =>
+                        item.entregado
+                ).length;
+
+
+            if (
+                cantidadMarcados === 0
+            ) {
+
+                mensajeConfirmarEntrega.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeConfirmarEntrega.textContent =
+                    "Debe marcar al menos un material como entregado.";
+
+
+                return;
+            }
+
+
+            const confirmar =
+                confirm(
+
+                    `Se marcarán ${cantidadMarcados} material(es) como entregados.\n\n` +
+
+                    `¿Confirmar la entrega física al docente?`
+                );
+
+
+            if (!confirmar) {
+                return;
+            }
+
+
+            btnConfirmarEntregaMaterial.disabled =
+                true;
+
+
+            btnConfirmarEntregaMaterial.textContent =
+                "Guardando entrega...";
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient.rpc(
+
+                        "registrar_entrega_material",
+
+                        {
+                            p_reserva_id:
+                                Number(
+                                    reservaEntregaFisicaActual.id
+                                ),
+
+                            p_detalles:
+                                payload,
+
+                            p_observacion_general:
+                                observacionGeneralEntrega
+                                    ?.value
+                                    ?.trim() ||
+                                null
+                        }
+                    );
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                const reservaIdProcesada =
+                    reservaEntregaFisicaActual.id;
+
+
+                reservaEntregaFisicaActual =
+                    null;
+
+
+                mensajeReservasAdmin.className =
+                    "mensaje-admin mensaje-ok";
+
+
+                mensajeReservasAdmin.textContent =
+                    `Entrega de la reserva #${reservaIdProcesada} registrada correctamente.`;
+
+
+                await cargarReservasAdmin();
+
+
+                mostrarPanelAdmin(
+                    "panelReservas"
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error registrando entrega:",
+                    error
+                );
+
+
+                mensajeConfirmarEntrega.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeConfirmarEntrega.textContent =
+                    error.message ||
+                    "No se pudo registrar la entrega.";
+            }
+
+
+            btnConfirmarEntregaMaterial.disabled =
+                false;
+
+
+            btnConfirmarEntregaMaterial.textContent =
+                "✓ Confirmar entrega";
+        }
+    );
+
+
+// =========================================================
+// RESERVAS PENDIENTES DE DEVOLUCIÓN
+// =========================================================
+
+function renderizarEntregasPendientes() {
+
+    if (!listaEntregasPendientes) {
+        return;
+    }
+
+
+    const pendientes =
+        reservasAdmin.filter(
+
+            reserva =>
+
+                reserva.estado ===
+                    "entregada"
+
+                ||
+
+                reserva.estado ===
+                    "parcial"
+        );
+
+
+    if (
+        !pendientes.length
+    ) {
+
+        listaEntregasPendientes.innerHTML =
+            `
+            <div class="lista-vacia">
+
+                <span>
+                    ✅
+                </span>
+
+                <p>
+                    No hay materiales pendientes de devolución esta semana.
+                </p>
+
+            </div>
+            `;
+
+
+        return;
+    }
+
+
+    listaEntregasPendientes.innerHTML =
+
+        pendientes
+
+            .map(
+
+                reserva => {
+
+                    const detallesEntregados =
+                        obtenerDetallesReservaAdmin(
+                            reserva.id
+                        )
+
+                            .filter(
+                                detalle =>
+                                    detalle.entregado ===
+                                    true
+                            );
+
+
+                    const cantidadPendiente =
+                        detallesEntregados
+
+                            .reduce(
+
+                                (
+                                    total,
+                                    detalle
+                                ) =>
+
+                                    total +
+
+                                    Math.max(
+                                        0,
+                                        Number(
+                                            detalle.cantidad
+                                        ) -
+                                        Number(
+                                            detalle.cantidad_devuelta ||
+                                            0
+                                        )
+                                    ),
+
+                                0
+                            );
+
+
+                    return `
+                        <div class="entrega-card">
+
+                            <div>
+
+                                <span class="entrega-fecha">
+
+                                    ${escaparHTML(
+                                        reserva.fecha
+                                    )}
+
+                                    ·
+
+                                    ${escaparHTML(
+                                        reserva.horario
+                                    )}
+
+                                </span>
+
+
+                                <h3>
+
+                                    ${escaparHTML(
+                                        nombreDocenteAdmin(
+                                            reserva.usuario_id
+                                        )
+                                    )}
+
+                                </h3>
+
+
+                                <p>
+
+                                    Grupo:
+
+                                    ${escaparHTML(
+                                        reserva.grupo
+                                    )}
+
+                                </p>
+
+
+                                <p>
+
+                                    Tema:
+
+                                    ${escaparHTML(
+                                        reserva.tema
+                                    )}
+
+                                </p>
+
+
+                                <p>
+
+                                    Pendiente de devolución:
+
+                                    <strong>
+                                        ${cantidadPendiente}
+                                    </strong>
+
+                                    unidad(es)
+
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn-gestionar-entrega"
+                                onclick="abrirEntrega(${reserva.id})"
+                            >
+                                ↩ Gestionar devolución
+                            </button>
+
+                        </div>
+                    `;
+                }
+            )
+
+            .join("");
+}
+// =========================================================
+// ABRIR GESTIÓN DE DEVOLUCIÓN
+// =========================================================
+
+window.abrirEntrega =
+    function (
+        reservaId
+    ) {
+
+        const reserva =
+            reservasAdmin.find(
+
+                item =>
+                    Number(item.id) ===
+                    Number(reservaId)
+            );
+
+
+        if (!reserva) {
+
+            alert(
+                "No se encontró la reserva."
+            );
+
+            return;
+        }
+
+
+        if (
+            reserva.estado !== "entregada" &&
+            reserva.estado !== "parcial"
+        ) {
+
+            alert(
+                "Esta reserva no tiene materiales pendientes de devolución."
+            );
+
+            return;
+        }
+
+
+        const detalles =
+            obtenerDetallesReservaAdmin(
+                reserva.id
+            )
+
+                .filter(
+                    detalle =>
+                        detalle.entregado === true
+                );
+
+
+        if (!detalles.length) {
+
+            alert(
+                "Esta reserva no tiene materiales marcados como entregados."
+            );
+
+            return;
+        }
+
+
+        reservaEntregaActual =
+            reserva;
+
+
+        if (tituloGestionEntrega) {
+
+            tituloGestionEntrega.textContent =
+                "Registrar devolución de materiales";
+        }
+
+
+        if (datosGestionEntrega) {
+
+            datosGestionEntrega.innerHTML =
+                `
+                <strong>
+                    Docente:
+                </strong>
+
+                ${escaparHTML(
+                    nombreDocenteAdmin(
+                        reserva.usuario_id
+                    )
+                )}
+
+                <br>
+
+                <strong>
+                    Fecha:
+                </strong>
+
+                ${escaparHTML(
+                    reserva.fecha
+                )}
+
+                ·
+
+                <strong>
+                    Horario:
+                </strong>
+
+                ${escaparHTML(
+                    reserva.horario
+                )}
+
+                <br>
+
+                <strong>
+                    Grupo:
+                </strong>
+
+                ${escaparHTML(
+                    reserva.grupo
+                )}
+
+                <br>
+
+                <strong>
+                    Tema:
+                </strong>
+
+                ${escaparHTML(
+                    reserva.tema
+                )}
+                `;
+        }
+
+
+        if (detalleGestionEntrega) {
+
+            detalleGestionEntrega.innerHTML =
+
+                detalles
+
+                    .map(
+
+                        detalle => {
+
+                            const cantidad =
+                                Number(
+                                    detalle.cantidad
+                                );
+
+
+                            const devuelta =
+                                Number(
+                                    detalle.cantidad_devuelta ||
+                                    0
+                                );
+
+
+                            const pendiente =
+                                Math.max(
+                                    0,
+                                    cantidad -
+                                    devuelta
+                                );
+
+
+                            const observacionSalida =
+                                detalle.observacion_entrega
+
+                                    ? `
+                                        <div class="mensaje-admin mensaje-info">
+
+                                            <strong>
+                                                Observación de entrega:
+                                            </strong>
+
+                                            ${escaparHTML(
+                                                detalle.observacion_entrega
+                                            )}
+
+                                        </div>
+                                    `
+
+                                    : "";
+
+
+                            return `
+                                <div
+                                    class="entrega-detalle-item"
+                                    data-detalle-id="${detalle.id}"
+                                >
+
+                                    <div>
+
+                                        <strong>
+
+                                            ${cantidad} ×
+
+                                            ${escaparHTML(
+                                                nombreMaterialAdmin(
+                                                    detalle.material_id
+                                                )
+                                            )}
+
+                                        </strong>
+
+
+                                        <p>
+
+                                            Devuelto anteriormente:
+
+                                            <strong>
+                                                ${devuelta}
+                                            </strong>
+
+                                        </p>
+
+
+                                        <p>
+
+                                            Pendiente:
+
+                                            <strong>
+                                                ${pendiente}
+                                            </strong>
+
+                                        </p>
+
+                                    </div>
+
+
+                                    ${observacionSalida}
+
+
+                                    <div class="campo-admin">
+
+                                        <label
+                                            for="cantidadDevuelta${detalle.id}"
+                                        >
+                                            Cantidad total devuelta
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            id="cantidadDevuelta${detalle.id}"
+                                            class="cantidad-devuelta"
+                                            data-detalle-id="${detalle.id}"
+                                            min="${devuelta}"
+                                            max="${cantidad}"
+                                            step="1"
+                                            value="${devuelta}"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="campo-admin">
+
+                                        <label
+                                            for="observacionDevolucion${detalle.id}"
+                                        >
+                                            Observación de devolución
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="observacionDevolucion${detalle.id}"
+                                            class="observacion-devolucion"
+                                            data-detalle-id="${detalle.id}"
+                                            value="${escaparHTML(
+                                                detalle.observacion ||
+                                                ""
+                                            )}"
+                                            placeholder="Opcional. Ej.: revisar cable, borne flojo..."
+                                        >
+
+                                    </div>
+
+                                </div>
+                            `;
+                        }
+                    )
+
+                    .join("");
+        }
+
+
+        if (mensajeEntrega) {
+
+            mensajeEntrega.textContent =
+                "";
+
+            mensajeEntrega.className =
+                "mensaje-admin";
+        }
+
+
+        if (panelGestionEntrega) {
+
+            panelGestionEntrega.classList.remove(
+                "oculto"
+            );
+        }
+
+
+        mostrarPanelAdmin(
+            "panelEntregas"
+        );
+
 
         setTimeout(
             () => {
 
                 panelGestionEntrega
-                    .scrollIntoView({
+                    ?.scrollIntoView({
+
                         behavior:
                             "smooth",
 
@@ -3179,26 +4739,45 @@ window.abrirEntrega =
         );
     };
 
+
 // =========================================================
-// CERRAR ENTREGA
+// CERRAR GESTIÓN DE DEVOLUCIÓN
 // =========================================================
 
 btnCerrarGestionEntrega
     ?.addEventListener(
+
         "click",
+
         () => {
 
             reservaEntregaActual =
                 null;
 
 
-            panelGestionEntrega.classList.add(
-                "oculto"
-            );
+            if (panelGestionEntrega) {
+
+                panelGestionEntrega.classList.add(
+                    "oculto"
+                );
+            }
 
 
-            mensajeEntrega.textContent =
-                "";
+            if (detalleGestionEntrega) {
+
+                detalleGestionEntrega.innerHTML =
+                    "";
+            }
+
+
+            if (mensajeEntrega) {
+
+                mensajeEntrega.textContent =
+                    "";
+
+                mensajeEntrega.className =
+                    "mensaje-admin";
+            }
         }
     );
 
@@ -3209,64 +4788,156 @@ btnCerrarGestionEntrega
 
 btnGuardarDevolucion
     ?.addEventListener(
+
         "click",
+
         async () => {
 
             if (!reservaEntregaActual) {
+
                 return;
             }
 
 
-            const inputsCantidad =
-                Array.from(
-                    document.querySelectorAll(
-                        ".input-devuelto"
-                    )
-                );
-
-
             const detalles =
-                inputsCantidad
-                    .map(
-                        input => {
+                obtenerDetallesReservaAdmin(
+                    reservaEntregaActual.id
+                )
 
-                            const detalleId =
-                                Number(
-                                    input.dataset.detalleId
-                                );
-
-
-                            const observacionInput =
-                                document.querySelector(
-                                    `.input-observacion-entrega[data-detalle-id="${detalleId}"]`
-                                );
-
-
-                            return {
-
-                                detalle_id:
-                                    detalleId,
-
-                                cantidad_devuelta:
-                                    Number(
-                                        input.value
-                                    ),
-
-                                observacion:
-                                    observacionInput
-                                        ?.value
-                                        ?.trim()
-                                        || ""
-                            };
-                        }
+                    .filter(
+                        detalle =>
+                            detalle.entregado === true
                     );
+
+
+            if (!detalles.length) {
+
+                return;
+            }
+
+
+            const payload = [];
+
+
+            for (
+                const detalle
+                of detalles
+            ) {
+
+                const inputCantidad =
+                    document.querySelector(
+                        `.cantidad-devuelta[data-detalle-id="${detalle.id}"]`
+                    );
+
+
+                const inputObservacion =
+                    document.querySelector(
+                        `.observacion-devolucion[data-detalle-id="${detalle.id}"]`
+                    );
+
+
+                const cantidad =
+                    Number(
+                        inputCantidad?.value
+                    );
+
+
+                const cantidadReservada =
+                    Number(
+                        detalle.cantidad
+                    );
+
+
+                const cantidadAnterior =
+                    Number(
+                        detalle.cantidad_devuelta ||
+                        0
+                    );
+
+
+                if (
+                    !Number.isInteger(
+                        cantidad
+                    )
+                ) {
+
+                    mensajeEntrega.className =
+                        "mensaje-admin mensaje-error";
+
+
+                    mensajeEntrega.textContent =
+                        `Ingrese una cantidad válida para ${nombreMaterialAdmin(
+                            detalle.material_id
+                        )}.`;
+
+
+                    return;
+                }
+
+
+                if (
+                    cantidad <
+                    cantidadAnterior
+                ) {
+
+                    mensajeEntrega.className =
+                        "mensaje-admin mensaje-error";
+
+
+                    mensajeEntrega.textContent =
+                        `La cantidad devuelta de ${nombreMaterialAdmin(
+                            detalle.material_id
+                        )} no puede disminuir.`;
+
+
+                    return;
+                }
+
+
+                if (
+                    cantidad >
+                    cantidadReservada
+                ) {
+
+                    mensajeEntrega.className =
+                        "mensaje-admin mensaje-error";
+
+
+                    mensajeEntrega.textContent =
+                        `La cantidad devuelta de ${nombreMaterialAdmin(
+                            detalle.material_id
+                        )} no puede superar ${cantidadReservada}.`;
+
+
+                    return;
+                }
+
+
+                payload.push({
+
+                    detalle_id:
+                        Number(
+                            detalle.id
+                        ),
+
+                    cantidad_devuelta:
+                        cantidad,
+
+                    observacion:
+                        inputObservacion
+                            ?.value
+                            ?.trim() ||
+                        null
+                });
+            }
 
 
             if (
                 !confirm(
-                    "¿Guardar esta devolución?"
+                    "¿Guardar el registro de devolución?"
                 )
             ) {
+
                 return;
             }
 
@@ -3285,14 +4956,17 @@ btnGuardarDevolucion
                     error
                 } =
                     await supabaseClient.rpc(
-                        "registrar_devolucion_material",
-                        {
 
+                        "registrar_devolucion_material",
+
+                        {
                             p_reserva_id:
-                                reservaEntregaActual.id,
+                                Number(
+                                    reservaEntregaActual.id
+                                ),
 
                             p_detalles:
-                                detalles
+                                payload
                         }
                     );
 
@@ -3302,35 +4976,41 @@ btnGuardarDevolucion
                 }
 
 
+                const idProcesado =
+                    reservaEntregaActual.id;
+
+
+                reservaEntregaActual =
+                    null;
+
+
+                panelGestionEntrega
+                    ?.classList.add(
+                        "oculto"
+                    );
+
+
+                detalleGestionEntrega.innerHTML =
+                    "";
+
+
                 mensajeEntrega.className =
                     "mensaje-admin mensaje-ok";
 
 
                 mensajeEntrega.textContent =
-                    "Devolución registrada correctamente.";
+                    `Devolución de la reserva #${idProcesado} registrada correctamente.`;
 
 
                 await cargarReservasAdmin();
 
 
-                setTimeout(
-                    () => {
-
-                        panelGestionEntrega.classList.add(
-                            "oculto"
-                        );
-
-                        reservaEntregaActual =
-                            null;
-
-                    },
-                    700
-                );
-
-
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Error registrando devolución:",
+                    error
+                );
 
 
                 mensajeEntrega.className =
@@ -3340,58 +5020,1526 @@ btnGuardarDevolucion
                 mensajeEntrega.textContent =
                     error.message ||
                     "No se pudo registrar la devolución.";
-
-            } finally {
-
-                btnGuardarDevolucion.disabled =
-                    false;
-
-
-                btnGuardarDevolucion.textContent =
-                    "Guardar devolución";
             }
+
+
+            btnGuardarDevolucion.disabled =
+                false;
+
+
+            btnGuardarDevolucion.textContent =
+                "Guardar devolución";
         }
     );
+
+
 // =========================================================
-// INICIALIZACIÓN
+// ABRIR EDICIÓN DE RESERVA
 // =========================================================
 
-async function iniciarAdmin() {
+window.abrirEditarReservaAdmin =
+    async function (
+        reservaId
+    ) {
 
-    aplicarModoGuardado();
+        const reserva =
+            reservasAdmin.find(
+
+                item =>
+                    Number(item.id) ===
+                    Number(reservaId)
+            );
 
 
-    const autorizado =
-        await comprobarAdministrador();
+        if (!reserva) {
+
+            alert(
+                "No se encontró la reserva."
+            );
+
+            return;
+        }
 
 
-    if (!autorizado) {
+        if (
+            reserva.estado !==
+            "reservada"
+        ) {
+
+            alert(
+                "Solo pueden editarse reservas que todavía no fueron entregadas."
+            );
+
+            return;
+        }
+
+
+        reservaEdicionActual =
+            reserva;
+
+
+        if (editarReservaId) {
+
+            editarReservaId.value =
+                reserva.id;
+        }
+
+
+        if (editarReservaDocente) {
+
+            editarReservaDocente.innerHTML =
+                `
+                <strong>
+                    ${escaparHTML(
+                        nombreDocenteAdmin(
+                            reserva.usuario_id
+                        )
+                    )}
+                </strong>
+
+                <br>
+
+                La reserva pertenece a este docente.
+                `;
+        }
+
+
+        editarReservaFecha.value =
+            reserva.fecha;
+
+
+        editarReservaHorario.value =
+            reserva.horario;
+
+
+        editarReservaGrupo.value =
+            reserva.grupo || "";
+
+
+        editarReservaTema.value =
+            reserva.tema || "";
+
+
+        editarBuscarMaterial.value =
+            "";
+
+
+        editarFiltroCategoria.value =
+            "";
+
+
+        if (mensajeEditarReserva) {
+
+            mensajeEditarReserva.textContent =
+                "";
+
+            mensajeEditarReserva.className =
+                "mensaje-admin";
+        }
+
+
+        const detalles =
+            obtenerDetallesReservaAdmin(
+                reserva.id
+            );
+
+
+        carritoEdicionReserva =
+            detalles.map(
+
+                detalle => ({
+
+                    material_id:
+                        Number(
+                            detalle.material_id
+                        ),
+
+                    cantidad:
+                        Number(
+                            detalle.cantidad
+                        )
+                })
+            );
+
+
+        mostrarPanelAdmin(
+            "panelEditarReserva"
+        );
+
+
+        renderizarCarritoEdicion();
+
+
+        await cargarDisponibilidadEdicion();
+
+
+        panelEditarReserva
+            ?.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "start"
+            });
+    };
+
+
+// =========================================================
+// CARGAR DISPONIBILIDAD PARA EDITAR
+// =========================================================
+
+async function cargarDisponibilidadEdicion() {
+
+    if (
+        !reservaEdicionActual ||
+        !editarReservaFecha?.value ||
+        !editarReservaHorario?.value
+    ) {
+
+        if (editarCatalogoMateriales) {
+
+            editarCatalogoMateriales.innerHTML =
+                `
+                <p>
+                    Selecciona fecha y horario.
+                </p>
+                `;
+        }
+
+
         return;
     }
 
 
-    await cargarCategorias();
+    if (editarCatalogoMateriales) {
 
-    await cargarMateriales();
+        editarCatalogoMateriales.innerHTML =
+            `
+            <p>
+                Consultando disponibilidad...
+            </p>
+            `;
+    }
 
-    await cargarReservasAdmin();
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.rpc(
+
+                "obtener_disponibilidad_material",
+
+                {
+                    p_fecha:
+                        editarReservaFecha.value,
+
+                    p_horario:
+                        editarReservaHorario.value
+                }
+            );
 
 
-    limpiarFormulario();
+        if (error) {
+            throw error;
+        }
+
+
+        /*
+         * La RPC normal incluye la reserva que estamos
+         * editando dentro de "cantidad_reservada".
+         *
+         * Para editar correctamente debemos devolver
+         * temporalmente al disponible la cantidad que
+         * pertenece a ESTA reserva.
+         */
+
+        const cantidadesReservaActual =
+            new Map();
+
+
+        carritoEdicionReserva
+            .forEach(
+
+                item => {
+
+                    cantidadesReservaActual.set(
+
+                        Number(
+                            item.material_id
+                        ),
+
+                        Number(
+                            item.cantidad
+                        )
+                    );
+                }
+            );
+
+
+        disponibilidadEdicion =
+            (data || [])
+
+                .map(
+
+                    material => {
+
+                        const cantidadPropia =
+                            cantidadesReservaActual.get(
+                                Number(
+                                    material.material_id
+                                )
+                            ) || 0;
+
+
+                        return {
+
+                            ...material,
+
+                            cantidad_disponible_edicion:
+
+                                Number(
+                                    material.cantidad_disponible ||
+                                    0
+                                )
+
+                                +
+
+                                cantidadPropia
+                        };
+                    }
+                );
+
+
+        renderizarCatalogoEdicion();
+
+
+    } catch (error) {
+
+        console.error(
+            "Error consultando disponibilidad:",
+            error
+        );
+
+
+        editarCatalogoMateriales.innerHTML =
+            `
+            <p class="mensaje-error">
+                ${
+                    escaparHTML(
+                        error.message ||
+                        "No se pudo consultar la disponibilidad."
+                    )
+                }
+            </p>
+            `;
+    }
 }
+
+
+// =========================================================
+// FILTRAR CATÁLOGO DE EDICIÓN
+// =========================================================
+
+function obtenerMaterialesFiltradosEdicion() {
+
+    const termino =
+        editarBuscarMaterial
+            ?.value
+            ?.trim()
+            ?.toLowerCase() ||
+        "";
+
+
+    const categoriaId =
+        editarFiltroCategoria?.value
+
+            ? Number(
+                editarFiltroCategoria.value
+            )
+
+            : null;
+
+
+    return disponibilidadEdicion.filter(
+
+        material => {
+
+            const materialId =
+                Number(
+                    material.material_id
+                );
+
+
+            const coincideCategoria =
+                !categoriaId ||
+
+                relacionesCategoriasEdicion
+                    .some(
+
+                        relacion =>
+
+                            Number(
+                                relacion.material_id
+                            ) ===
+                                materialId
+
+                            &&
+
+                            Number(
+                                relacion.categoria_id
+                            ) ===
+                                categoriaId
+                    );
+
+
+            const texto =
+                `
+                ${material.codigo || ""}
+                ${material.nombre || ""}
+                ${material.descripcion || ""}
+                `
+                    .toLowerCase();
+
+
+            const coincideTexto =
+                !termino ||
+                texto.includes(
+                    termino
+                );
+
+
+            return (
+                coincideCategoria &&
+                coincideTexto
+            );
+        }
+    );
+}
+
+
+// =========================================================
+// RENDER CATÁLOGO DE EDICIÓN
+// =========================================================
+
+function renderizarCatalogoEdicion() {
+
+    if (!editarCatalogoMateriales) {
+        return;
+    }
+
+
+    const materiales =
+        obtenerMaterialesFiltradosEdicion();
+
+
+    if (!materiales.length) {
+
+        editarCatalogoMateriales.innerHTML =
+            `
+            <div class="lista-vacia">
+
+                <span>
+                    🔎
+                </span>
+
+                <p>
+                    No se encontraron materiales.
+                </p>
+
+            </div>
+            `;
+
+
+        return;
+    }
+
+
+    editarCatalogoMateriales.innerHTML =
+
+        materiales
+
+            .map(
+
+                material => {
+
+                    const materialId =
+                        Number(
+                            material.material_id
+                        );
+
+
+                    const disponible =
+                        Number(
+                            material.cantidad_disponible_edicion ||
+                            0
+                        );
+
+
+                    const seleccionado =
+                        carritoEdicionReserva.find(
+
+                            item =>
+                                Number(
+                                    item.material_id
+                                ) ===
+                                    materialId
+                        );
+
+
+                    const cantidadSeleccionada =
+                        seleccionado
+                            ? Number(
+                                seleccionado.cantidad
+                            )
+                            : 0;
+
+
+                    const imagen =
+                        material.imagen_url
+
+                            ? `
+                                <img
+                                    src="${escaparHTML(
+                                        material.imagen_url
+                                    )}"
+                                    alt="${escaparHTML(
+                                        material.nombre
+                                    )}"
+                                    class="material-card-imagen"
+                                    loading="lazy"
+                                >
+                            `
+
+                            : `
+                                <div class="material-card-sin-imagen">
+                                    📦
+                                </div>
+                            `;
+
+
+                    return `
+                        <article class="material-card">
+
+                            <div class="material-imagen-wrapper">
+
+                                ${imagen}
+
+                            </div>
+
+
+                            <div class="material-card-contenido">
+
+                                <span class="material-codigo">
+
+                                    ${escaparHTML(
+                                        material.codigo
+                                    ) || "Sin código"}
+
+                                </span>
+
+
+                                <h3>
+
+                                    ${escaparHTML(
+                                        material.nombre
+                                    )}
+
+                                </h3>
+
+
+                                ${
+                                    material.descripcion
+
+                                        ? `
+                                            <p class="material-descripcion">
+
+                                                ${escaparHTML(
+                                                    material.descripcion
+                                                )}
+
+                                            </p>
+                                        `
+
+                                        : ""
+                                }
+
+
+                                <p>
+
+                                    Disponible para editar:
+
+                                    <strong>
+                                        ${disponible}
+                                    </strong>
+
+                                </p>
+
+
+                                ${
+                                    cantidadSeleccionada > 0
+
+                                        ? `
+                                            <p>
+
+                                                Actualmente seleccionado:
+
+                                                <strong>
+                                                    ${cantidadSeleccionada}
+                                                </strong>
+
+                                            </p>
+                                        `
+
+                                        : ""
+                                }
+
+
+                                <div class="campo-admin">
+
+                                    <label
+                                        for="editarCantidadMaterial${materialId}"
+                                    >
+                                        Cantidad
+                                    </label>
+
+
+                                    <input
+                                        type="number"
+                                        id="editarCantidadMaterial${materialId}"
+                                        min="1"
+                                        max="${Math.max(
+                                            disponible,
+                                            1
+                                        )}"
+                                        step="1"
+                                        value="1"
+                                        ${disponible <= 0
+                                            ? "disabled"
+                                            : ""}
+                                    >
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="btn-principal btn-auto"
+                                    onclick="agregarMaterialEdicion(${materialId})"
+                                    ${disponible <= 0
+                                        ? "disabled"
+                                        : ""}
+                                >
+                                    + Agregar
+                                </button>
+
+                            </div>
+
+                        </article>
+                    `;
+                }
+            )
+
+            .join("");
+}
+
+
+// =========================================================
+// AGREGAR MATERIAL A LA EDICIÓN
+// =========================================================
+
+window.agregarMaterialEdicion =
+    function (
+        materialId
+    ) {
+
+        const material =
+            disponibilidadEdicion.find(
+
+                item =>
+                    Number(
+                        item.material_id
+                    ) ===
+                    Number(
+                        materialId
+                    )
+            );
+
+
+        if (!material) {
+            return;
+        }
+
+
+        const input =
+            document.getElementById(
+                `editarCantidadMaterial${materialId}`
+            );
+
+
+        const cantidadAgregar =
+            Number(
+                input?.value
+            );
+
+
+        const disponible =
+            Number(
+                material.cantidad_disponible_edicion ||
+                0
+            );
+
+
+        if (
+            !Number.isInteger(
+                cantidadAgregar
+            ) ||
+            cantidadAgregar <= 0
+        ) {
+
+            alert(
+                "Ingrese una cantidad válida."
+            );
+
+            return;
+        }
+
+
+        const existente =
+            carritoEdicionReserva.find(
+
+                item =>
+                    Number(
+                        item.material_id
+                    ) ===
+                    Number(
+                        materialId
+                    )
+            );
+
+
+        const cantidadActual =
+            existente
+                ? Number(
+                    existente.cantidad
+                )
+                : 0;
+
+
+        const nuevaCantidad =
+            cantidadActual +
+            cantidadAgregar;
+
+
+        if (
+            nuevaCantidad >
+            disponible
+        ) {
+
+            alert(
+                `Solo existen ${disponible} unidad(es) disponibles para esta reserva.`
+            );
+
+            return;
+        }
+
+
+        if (existente) {
+
+            existente.cantidad =
+                nuevaCantidad;
+
+
+        } else {
+
+            carritoEdicionReserva.push({
+
+                material_id:
+                    Number(
+                        materialId
+                    ),
+
+                cantidad:
+                    cantidadAgregar
+            });
+        }
+
+
+        renderizarCarritoEdicion();
+
+        renderizarCatalogoEdicion();
+    };
+
+
+// =========================================================
+// RENDER CARRITO DE EDICIÓN
+// =========================================================
+
+function renderizarCarritoEdicion() {
+
+    if (!editarCarritoMateriales) {
+        return;
+    }
+
+
+    if (
+        !carritoEdicionReserva.length
+    ) {
+
+        editarCarritoMateriales.innerHTML =
+            `
+            <div class="lista-vacia">
+
+                <span>
+                    📦
+                </span>
+
+                <p>
+                    No hay materiales seleccionados.
+                </p>
+
+            </div>
+            `;
+
+
+        return;
+    }
+
+
+    editarCarritoMateriales.innerHTML =
+
+        carritoEdicionReserva
+
+            .map(
+
+                item => {
+
+                    const material =
+                        disponibilidadEdicion.find(
+
+                            dato =>
+                                Number(
+                                    dato.material_id
+                                ) ===
+                                Number(
+                                    item.material_id
+                                )
+                        );
+
+
+                    const materialCatalogo =
+                        materialesCargados.find(
+
+                            dato =>
+                                Number(
+                                    dato.id
+                                ) ===
+                                Number(
+                                    item.material_id
+                                )
+                        );
+
+
+                    const nombre =
+                        material?.nombre ||
+                        materialCatalogo?.nombre ||
+                        nombreMaterialAdmin(
+                            item.material_id
+                        );
+
+
+                    const maximo =
+                        material
+
+                            ? Number(
+                                material.cantidad_disponible_edicion ||
+                                item.cantidad
+                            )
+
+                            : Number(
+                                item.cantidad
+                            );
+
+
+                    return `
+                        <div class="entrega-card">
+
+                            <div>
+
+                                <strong>
+
+                                    ${escaparHTML(
+                                        nombre
+                                    )}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="campo-admin">
+
+                                <label
+                                    for="editarCarritoCantidad${item.material_id}"
+                                >
+                                    Cantidad
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    id="editarCarritoCantidad${item.material_id}"
+                                    min="1"
+                                    max="${Math.max(
+                                        maximo,
+                                        1
+                                    )}"
+                                    step="1"
+                                    value="${item.cantidad}"
+                                    onchange="cambiarCantidadEdicion(
+                                        ${item.material_id},
+                                        this.value
+                                    )"
+                                >
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn-quitar"
+                                onclick="quitarMaterialEdicion(${item.material_id})"
+                            >
+                                Quitar
+                            </button>
+
+                        </div>
+                    `;
+                }
+            )
+
+            .join("");
+}
+
+
+// =========================================================
+// CAMBIAR CANTIDAD EN EDICIÓN
+// =========================================================
+
+window.cambiarCantidadEdicion =
+    function (
+        materialId,
+        valor
+    ) {
+
+        const item =
+            carritoEdicionReserva.find(
+
+                dato =>
+                    Number(
+                        dato.material_id
+                    ) ===
+                    Number(
+                        materialId
+                    )
+            );
+
+
+        if (!item) {
+            return;
+        }
+
+
+        const cantidad =
+            Number(
+                valor
+            );
+
+
+        const material =
+            disponibilidadEdicion.find(
+
+                dato =>
+                    Number(
+                        dato.material_id
+                    ) ===
+                    Number(
+                        materialId
+                    )
+            );
+
+
+        const maximo =
+            material
+
+                ? Number(
+                    material.cantidad_disponible_edicion ||
+                    0
+                )
+
+                : Number(
+                    item.cantidad
+                );
+
+
+        if (
+            !Number.isInteger(
+                cantidad
+            ) ||
+            cantidad <= 0 ||
+            cantidad > maximo
+        ) {
+
+            alert(
+                `La cantidad debe estar entre 1 y ${maximo}.`
+            );
+
+
+            renderizarCarritoEdicion();
+
+            return;
+        }
+
+
+        item.cantidad =
+            cantidad;
+
+
+        renderizarCatalogoEdicion();
+    };
+
+
+// =========================================================
+// QUITAR MATERIAL DE LA EDICIÓN
+// =========================================================
+
+window.quitarMaterialEdicion =
+    function (
+        materialId
+    ) {
+
+        carritoEdicionReserva =
+            carritoEdicionReserva.filter(
+
+                item =>
+                    Number(
+                        item.material_id
+                    ) !==
+                    Number(
+                        materialId
+                    )
+            );
+
+
+        renderizarCarritoEdicion();
+
+        renderizarCatalogoEdicion();
+    };
+
+
+// =========================================================
+// RECARGAR DISPONIBILIDAD AL CAMBIAR FECHA/HORARIO
+// =========================================================
+
+editarReservaFecha
+    ?.addEventListener(
+
+        "change",
+
+        async () => {
+
+            await cargarDisponibilidadEdicion();
+
+            renderizarCarritoEdicion();
+        }
+    );
+
+
+editarReservaHorario
+    ?.addEventListener(
+
+        "change",
+
+        async () => {
+
+            await cargarDisponibilidadEdicion();
+
+            renderizarCarritoEdicion();
+        }
+    );
+
+
+editarFiltroCategoria
+    ?.addEventListener(
+
+        "change",
+
+        () => {
+
+            renderizarCatalogoEdicion();
+        }
+    );
+
+
+editarBuscarMaterial
+    ?.addEventListener(
+
+        "input",
+
+        () => {
+
+            renderizarCatalogoEdicion();
+        }
+    );
+// =========================================================
+// GUARDAR EDICIÓN DE RESERVA
+// =========================================================
+
+formEditarReserva
+    ?.addEventListener(
+
+        "submit",
+
+        async event => {
+
+            event.preventDefault();
+
+
+            if (!reservaEdicionActual) {
+
+                return;
+            }
+
+
+            if (
+                reservaEdicionActual.estado !==
+                "reservada"
+            ) {
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEditarReserva.textContent =
+                    "Solo pueden editarse reservas que todavía no fueron entregadas.";
+
+
+                return;
+            }
+
+
+            const grupo =
+                editarReservaGrupo.value
+                    .trim();
+
+
+            const fecha =
+                editarReservaFecha.value;
+
+
+            const horario =
+                editarReservaHorario.value;
+
+
+            const tema =
+                editarReservaTema.value
+                    .trim();
+
+
+            if (!grupo) {
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEditarReserva.textContent =
+                    "Debe ingresar el grupo.";
+
+
+                return;
+            }
+
+
+            if (!fecha) {
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEditarReserva.textContent =
+                    "Debe seleccionar la fecha.";
+
+
+                return;
+            }
+
+
+            if (
+                !HORARIOS_ADMIN.includes(
+                    horario
+                )
+            ) {
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEditarReserva.textContent =
+                    "Seleccione un horario válido.";
+
+
+                return;
+            }
+
+
+            if (!tema) {
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEditarReserva.textContent =
+                    "Debe ingresar el tema o actividad.";
+
+
+                return;
+            }
+
+
+            if (
+                !carritoEdicionReserva.length
+            ) {
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEditarReserva.textContent =
+                    "Debe seleccionar al menos un material.";
+
+
+                return;
+            }
+
+
+            for (
+                const item
+                of carritoEdicionReserva
+            ) {
+
+                const cantidad =
+                    Number(
+                        item.cantidad
+                    );
+
+
+                if (
+                    !Number.isInteger(
+                        cantidad
+                    ) ||
+                    cantidad <= 0
+                ) {
+
+                    mensajeEditarReserva.className =
+                        "mensaje-admin mensaje-error";
+
+
+                    mensajeEditarReserva.textContent =
+                        "Todas las cantidades deben ser números enteros mayores a cero.";
+
+
+                    return;
+                }
+
+
+                const material =
+                    disponibilidadEdicion.find(
+
+                        dato =>
+                            Number(
+                                dato.material_id
+                            ) ===
+                            Number(
+                                item.material_id
+                            )
+                    );
+
+
+                if (
+                    material &&
+                    cantidad >
+                    Number(
+                        material.cantidad_disponible_edicion ||
+                        0
+                    )
+                ) {
+
+                    mensajeEditarReserva.className =
+                        "mensaje-admin mensaje-error";
+
+
+                    mensajeEditarReserva.textContent =
+                        `No existe cantidad suficiente de ${material.nombre}.`;
+
+
+                    return;
+                }
+            }
+
+
+            if (
+                !confirm(
+                    "¿Guardar los cambios realizados en esta reserva?"
+                )
+            ) {
+
+                return;
+            }
+
+
+            btnGuardarEdicionReserva.disabled =
+                true;
+
+
+            btnGuardarEdicionReserva.textContent =
+                "Guardando cambios...";
+
+
+            try {
+
+                const materialesPayload =
+                    carritoEdicionReserva.map(
+
+                        item => ({
+
+                            material_id:
+                                Number(
+                                    item.material_id
+                                ),
+
+                            cantidad:
+                                Number(
+                                    item.cantidad
+                                )
+                        })
+                    );
+
+
+                const {
+                    error
+                } =
+                    await supabaseClient.rpc(
+
+                        "editar_reserva_material",
+
+                        {
+                            p_reserva_id:
+                                Number(
+                                    reservaEdicionActual.id
+                                ),
+
+                            p_grupo:
+                                grupo,
+
+                            p_fecha:
+                                fecha,
+
+                            p_horario:
+                                horario,
+
+                            p_tema:
+                                tema,
+
+                            p_materiales:
+                                materialesPayload
+                        }
+                    );
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                const idEditado =
+                    reservaEdicionActual.id;
+
+
+                reservaEdicionActual =
+                    null;
+
+
+                carritoEdicionReserva =
+                    [];
+
+
+                disponibilidadEdicion =
+                    [];
+
+
+                if (formEditarReserva) {
+
+                    formEditarReserva.reset();
+                }
+
+
+                if (mensajeReservasAdmin) {
+
+                    mensajeReservasAdmin.className =
+                        "mensaje-admin mensaje-ok";
+
+
+                    mensajeReservasAdmin.textContent =
+                        `Reserva #${idEditado} actualizada correctamente.`;
+                }
+
+
+                /*
+                 * Si el administrador cambió la fecha a otra
+                 * semana, movemos automáticamente la vista
+                 * hacia la semana nueva.
+                 */
+
+                const fechaNueva =
+                    new Date(
+                        `${fecha}T12:00:00`
+                    );
+
+
+                lunesSemanaAdmin =
+                    obtenerLunesAdmin(
+                        fechaNueva
+                    );
+
+
+                await cargarReservasAdmin();
+
+
+                mostrarPanelAdmin(
+                    "panelReservas"
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error editando reserva:",
+                    error
+                );
+
+
+                let mensaje =
+                    error.message ||
+                    "No se pudo editar la reserva.";
+
+
+                /*
+                 * El índice único de Supabase/PostgreSQL
+                 * protege que un docente no tenga dos
+                 * reservas activas en la misma fecha y
+                 * horario desde 2026-09-18.
+                 */
+
+                if (
+                    error?.code === "23505"
+                ) {
+
+                    mensaje =
+                        "Este docente ya tiene una reserva para esa fecha y horario.";
+                }
+
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin mensaje-error";
+
+
+                mensajeEditarReserva.textContent =
+                    mensaje;
+            }
+
+
+            btnGuardarEdicionReserva.disabled =
+                false;
+
+
+            btnGuardarEdicionReserva.textContent =
+                "💾 Guardar cambios";
+        }
+    );
+
+
+// =========================================================
+// CANCELAR EDICIÓN DE RESERVA
+// =========================================================
+
+btnCancelarEdicionReserva
+    ?.addEventListener(
+
+        "click",
+
+        () => {
+
+            reservaEdicionActual =
+                null;
+
+
+            carritoEdicionReserva =
+                [];
+
+
+            disponibilidadEdicion =
+                [];
+
+
+            if (formEditarReserva) {
+
+                formEditarReserva.reset();
+            }
+
+
+            if (editarCatalogoMateriales) {
+
+                editarCatalogoMateriales.innerHTML =
+                    "";
+            }
+
+
+            if (editarCarritoMateriales) {
+
+                editarCarritoMateriales.innerHTML =
+                    "";
+            }
+
+
+            if (mensajeEditarReserva) {
+
+                mensajeEditarReserva.textContent =
+                    "";
+
+                mensajeEditarReserva.className =
+                    "mensaje-admin";
+            }
+
+
+            mostrarPanelAdmin(
+                "panelReservas"
+            );
+        }
+    );
+
+
 // =========================================================
 // PDF SEMANAL - MATERIAL DE GABINETE
 // =========================================================
 
-const btnPDFReservasMaterial =
-    document.getElementById(
-        "btnPDFReservasMaterial"
-    );
-
-
 btnPDFReservasMaterial
     ?.addEventListener(
+
         "click",
+
         generarPDFReservasMaterial
     );
 
@@ -3411,38 +6559,69 @@ async function generarPDFReservasMaterial() {
             "No hay reservas para imprimir en esta semana."
         );
 
+
+        return;
+    }
+
+
+    if (
+        !window.jspdf ||
+        !window.jspdf.jsPDF
+    ) {
+
+        alert(
+            "No se pudo cargar el generador de PDF."
+        );
+
+
         return;
     }
 
 
     const {
         jsPDF
-    } = window.jspdf;
+    } =
+        window.jspdf;
 
 
     const pdf =
         new jsPDF({
-            orientation: "landscape",
-            unit: "mm",
-            format: "a4"
+
+            orientation:
+                "landscape",
+
+            unit:
+                "mm",
+
+            format:
+                "a4"
         });
 
 
     const anchoPagina =
-        pdf.internal.pageSize.getWidth();
+        pdf.internal.pageSize
+            .getWidth();
+
 
     const altoPagina =
-        pdf.internal.pageSize.getHeight();
+        pdf.internal.pageSize
+            .getHeight();
 
 
-    const margenIzquierdo = 8;
-    const margenDerecho = 8;
+    const margenIzquierdo =
+        8;
+
+
+    const margenDerecho =
+        8;
+
 
     const limiteInferior =
         altoPagina - 14;
 
 
-    let numeroPagina = 1;
+    let numeroPagina =
+        1;
 
 
     // =====================================================
@@ -3462,9 +6641,11 @@ async function generarPDFReservasMaterial() {
 
     const fechasSemana =
         Array.from(
+
             {
                 length: 5
             },
+
             (
                 _,
                 i
@@ -3487,9 +6668,11 @@ async function generarPDFReservasMaterial() {
             "normal"
         );
 
+
         pdf.setFontSize(
             8
         );
+
 
         pdf.setTextColor(
             90,
@@ -3499,18 +6682,27 @@ async function generarPDFReservasMaterial() {
 
 
         pdf.text(
+
             "Sistema de Material de Gabinete · CETA",
+
             margenIzquierdo,
+
             altoPagina - 6
         );
 
 
         pdf.text(
+
             `Página ${numeroPagina}`,
-            anchoPagina - margenDerecho,
+
+            anchoPagina -
+                margenDerecho,
+
             altoPagina - 6,
+
             {
-                align: "right"
+                align:
+                    "right"
             }
         );
 
@@ -3529,7 +6721,8 @@ async function generarPDFReservasMaterial() {
 
     function dibujarCabeceraPrincipal() {
 
-        let y = 8;
+        let y =
+            8;
 
 
         // -------------------------------------------------
@@ -3551,14 +6744,18 @@ async function generarPDFReservasMaterial() {
             ) {
 
                 pdf.addImage(
+
                     logo,
+
                     "PNG",
+
                     9,
                     7,
                     22,
                     22
                 );
             }
+
 
         } catch (error) {
 
@@ -3578,17 +6775,23 @@ async function generarPDFReservasMaterial() {
             "bold"
         );
 
+
         pdf.setFontSize(
             15
         );
 
 
         pdf.text(
+
             "SISTEMA DE MATERIAL DE GABINETE",
+
             anchoPagina / 2,
+
             y + 6,
+
             {
-                align: "center"
+                align:
+                    "center"
             }
         );
 
@@ -3599,11 +6802,16 @@ async function generarPDFReservasMaterial() {
 
 
         pdf.text(
+
             "REGISTRO SEMANAL DE RESERVAS",
+
             anchoPagina / 2,
+
             y + 13,
+
             {
-                align: "center"
+                align:
+                    "center"
             }
         );
 
@@ -3613,21 +6821,27 @@ async function generarPDFReservasMaterial() {
             "normal"
         );
 
+
         pdf.setFontSize(
             9
         );
 
 
         pdf.text(
-            `Semana: ${fechaCompletaAdmin(
+
+            `Semana: ${fechaCompletaAdminPDF(
                 lunes
-            )} al ${fechaCompletaAdmin(
+            )} al ${fechaCompletaAdminPDF(
                 viernes
             )}`,
+
             anchoPagina / 2,
+
             y + 20,
+
             {
-                align: "center"
+                align:
+                    "center"
             }
         );
 
@@ -3638,9 +6852,14 @@ async function generarPDFReservasMaterial() {
 
 
         pdf.line(
+
             margenIzquierdo,
+
             y + 25,
-            anchoPagina - margenDerecho,
+
+            anchoPagina -
+                margenDerecho,
+
             y + 25
         );
 
@@ -3660,18 +6879,22 @@ async function generarPDFReservasMaterial() {
             "bold"
         );
 
+
         pdf.setFontSize(
             10
         );
 
 
         pdf.text(
-            `Semana: ${fechaCompletaAdmin(
+
+            `Semana: ${fechaCompletaAdminPDF(
                 lunes
-            )} al ${fechaCompletaAdmin(
+            )} al ${fechaCompletaAdminPDF(
                 viernes
             )}`,
+
             margenIzquierdo,
+
             10
         );
 
@@ -3682,9 +6905,14 @@ async function generarPDFReservasMaterial() {
 
 
         pdf.line(
+
             margenIzquierdo,
+
             14,
-            anchoPagina - margenDerecho,
+
+            anchoPagina -
+                margenDerecho,
+
             14
         );
 
@@ -3705,7 +6933,8 @@ async function generarPDFReservasMaterial() {
         margenDerecho;
 
 
-    const anchoHorario = 25;
+    const anchoHorario =
+        25;
 
 
     const anchoDia =
@@ -3720,9 +6949,12 @@ async function generarPDFReservasMaterial() {
     // CABECERA DE TABLA
     // =====================================================
 
-    function dibujarCabeceraTabla(y) {
+    function dibujarCabeceraTabla(
+        y
+    ) {
 
-        const alto = 14;
+        const alto =
+            14;
 
 
         // HORARIO
@@ -3735,10 +6967,15 @@ async function generarPDFReservasMaterial() {
 
 
         pdf.rect(
+
             margenIzquierdo,
+
             y,
+
             anchoHorario,
+
             alto,
+
             "F"
         );
 
@@ -3762,21 +6999,31 @@ async function generarPDFReservasMaterial() {
 
 
         pdf.text(
+
             "HORARIO",
+
             margenIzquierdo +
-            anchoHorario / 2,
+                anchoHorario / 2,
+
             y + 8,
+
             {
-                align: "center"
+                align:
+                    "center"
             }
         );
 
 
         const nombresDias = [
+
             "LUNES",
+
             "MARTES",
+
             "MIÉRCOLES",
+
             "JUEVES",
+
             "VIERNES"
         ];
 
@@ -3803,10 +7050,15 @@ async function generarPDFReservasMaterial() {
 
 
             pdf.rect(
+
                 x,
+
                 y,
+
                 anchoDia,
+
                 alto,
+
                 "F"
             );
 
@@ -3816,17 +7068,24 @@ async function generarPDFReservasMaterial() {
                 "bold"
             );
 
+
             pdf.setFontSize(
                 8
             );
 
 
             pdf.text(
+
                 nombresDias[i],
-                x + anchoDia / 2,
+
+                x +
+                    anchoDia / 2,
+
                 y + 5,
+
                 {
-                    align: "center"
+                    align:
+                        "center"
                 }
             );
 
@@ -3836,19 +7095,26 @@ async function generarPDFReservasMaterial() {
                 "normal"
             );
 
+
             pdf.setFontSize(
                 7
             );
 
 
             pdf.text(
+
                 fechaCortaAdmin(
                     fechasSemana[i]
                 ),
-                x + anchoDia / 2,
+
+                x +
+                    anchoDia / 2,
+
                 y + 10,
+
                 {
-                    align: "center"
+                    align:
+                        "center"
                 }
             );
         }
@@ -3863,639 +7129,888 @@ async function generarPDFReservasMaterial() {
 
         return y + alto;
     }
+// =========================================================
+// FECHA COMPLETA PARA PDF
+// =========================================================
 
+function fechaCompletaAdminPDF(
+    fecha
+) {
 
-    // =====================================================
-    // NUEVA PÁGINA
-    // =====================================================
+    return fecha.toLocaleDateString(
+        "es-BO",
+        {
+            day:
+                "2-digit",
 
-    function nuevaPagina() {
+            month:
+                "2-digit",
 
-        dibujarPiePagina();
+            year:
+                "numeric"
+        }
+    );
+}
 
 
-        pdf.addPage();
+// =========================================================
+// NUEVA PÁGINA
+// =========================================================
 
+function nuevaPagina() {
 
-        numeroPagina++;
+    dibujarPiePagina();
 
 
-        let nuevaY =
-            dibujarCabeceraSecundaria();
+    pdf.addPage();
 
 
-        nuevaY =
-            dibujarCabeceraTabla(
-                nuevaY
-            );
+    numeroPagina++;
 
 
-        return nuevaY;
-    }
+    let nuevaY =
+        dibujarCabeceraSecundaria();
 
 
-    // =====================================================
-    // OBTENER MATERIALES DE UNA RESERVA
-    // =====================================================
-
-    function obtenerMaterialesReserva(
-        reservaId
-    ) {
-
-        return detallesAdmin
-
-            .filter(
-                detalle =>
-                    Number(
-                        detalle.reserva_id
-                    ) ===
-                    Number(
-                        reservaId
-                    )
-            )
-
-            .map(
-                detalle => {
-
-                    const nombre =
-                        nombreMaterialAdmin(
-                            detalle.material_id
-                        );
-
-
-                    return {
-
-                        nombre,
-
-                        cantidad:
-                            Number(
-                                detalle.cantidad
-                            )
-                    };
-                }
-            );
-    }
-
-
-    // =====================================================
-    // DIMENSIONES DEL CONTROL DE MATERIAL
-    //
-    // [ 2 ] Batería                 [ ]
-    // =====================================================
-
-    const altoFilaMaterial = 6;
-
-    const anchoCantidad = 8;
-
-    const anchoCheck = 6;
-
-    const separacionMaterial = 2;
-
-
-    // =====================================================
-    // CALCULAR ALTURA DE TARJETA
-    // =====================================================
-
-    function calcularAltoTarjeta(
-        reserva,
-        ancho
-    ) {
-
-        const materiales =
-            obtenerMaterialesReserva(
-                reserva.id
-            );
-
-
-        let alto = 6;
-
-
-        // -------------------------------------------------
-        // DOCENTE
-        // -------------------------------------------------
-
-        const docente =
-            nombreDocenteAdmin(
-                reserva.usuario_id
-            );
-
-
-        const lineasDocente =
-            pdf.splitTextToSize(
-                `Docente: ${docente}`,
-                ancho - 5
-            );
-
-
-        alto +=
-            lineasDocente.length * 3.5;
-
-
-        // -------------------------------------------------
-        // GRUPO
-        // -------------------------------------------------
-
-        const lineasGrupo =
-            pdf.splitTextToSize(
-                `Grupo: ${reserva.grupo}`,
-                ancho - 5
-            );
-
-
-        alto +=
-            lineasGrupo.length * 3.5;
-
-
-        // -------------------------------------------------
-        // TEMA
-        // -------------------------------------------------
-
-        const lineasTema =
-            pdf.splitTextToSize(
-                `Tema: ${reserva.tema}`,
-                ancho - 5
-            );
-
-
-        alto +=
-            lineasTema.length * 3.5;
-
-
-        // Separación + título Materiales
-
-        alto += 6;
-
-
-        // -------------------------------------------------
-        // CADA MATERIAL
-        // -------------------------------------------------
-
-        materiales.forEach(
-            material => {
-
-                const anchoNombre =
-                    ancho
-                    -
-                    5
-                    -
-                    anchoCantidad
-                    -
-                    anchoCheck
-                    -
-                    separacionMaterial * 2;
-
-
-                const lineasNombre =
-                    pdf.splitTextToSize(
-                        material.nombre,
-                        anchoNombre
-                    );
-
-
-                const altoNombre =
-                    Math.max(
-                        altoFilaMaterial,
-                        lineasNombre.length * 3.2 + 2
-                    );
-
-
-                alto +=
-                    altoNombre;
-            }
-        );
-
-
-        alto += 4;
-
-
-        return Math.max(
-            alto,
-            28
-        );
-    }
-
-
-    // =====================================================
-    // DIBUJAR UNA FILA DE MATERIAL
-    //
-    // [ CANTIDAD ] NOMBRE                  [ CHECK ]
-    // =====================================================
-
-    function dibujarFilaMaterial(
-        material,
-        x,
-        y,
-        ancho
-    ) {
-
-        const padding = 2.5;
-
-
-        const xCantidad =
-            x + padding;
-
-
-        const xCheck =
-            x
-            +
-            ancho
-            -
-            padding
-            -
-            anchoCheck;
-
-
-        const xNombre =
-            xCantidad
-            +
-            anchoCantidad
-            +
-            separacionMaterial;
-
-
-        const anchoNombre =
-            xCheck
-            -
-            separacionMaterial
-            -
-            xNombre;
-
-
-        // -------------------------------------------------
-        // NOMBRE DEL MATERIAL
-        // -------------------------------------------------
-
-        pdf.setFont(
-            "helvetica",
-            "normal"
-        );
-
-        pdf.setFontSize(
-            7
-        );
-
-
-        const lineasNombre =
-            pdf.splitTextToSize(
-                material.nombre,
-                anchoNombre
-            );
-
-
-        const altoReal =
-            Math.max(
-                altoFilaMaterial,
-                lineasNombre.length * 3.2 + 2
-            );
-
-
-        // -------------------------------------------------
-        // CASILLA CANTIDAD
-        // -------------------------------------------------
-
-        pdf.setDrawColor(
-            50,
-            50,
-            50
-        );
-
-        pdf.setLineWidth(
-            0.35
-        );
-
-
-        pdf.rect(
-            xCantidad,
-            y,
-            anchoCantidad,
-            5
-        );
-
-
-        pdf.setFont(
-            "helvetica",
-            "bold"
-        );
-
-        pdf.setFontSize(
-            8
-        );
-
-
-        pdf.text(
-            String(
-                material.cantidad
-            ),
-            xCantidad +
-            anchoCantidad / 2,
-            y + 3.5,
-            {
-                align: "center"
-            }
-        );
-
-
-        // -------------------------------------------------
-        // NOMBRE
-        // -------------------------------------------------
-
-        pdf.setFont(
-            "helvetica",
-            "normal"
-        );
-
-        pdf.setFontSize(
-            7
-        );
-
-
-        pdf.text(
-            lineasNombre,
-            xNombre,
-            y + 3.5
-        );
-
-
-        // -------------------------------------------------
-        // CASILLA PARA MARCAR ENTREGA
-        // -------------------------------------------------
-
-        pdf.setDrawColor(
-            20,
-            20,
-            20
-        );
-
-        pdf.setLineWidth(
-            0.45
-        );
-
-
-        pdf.rect(
-            xCheck,
-            y,
-            anchoCheck,
-            5
-        );
-
-
-        return altoReal;
-    }
-
-
-    // =====================================================
-    // DIBUJAR TARJETA DE RESERVA
-    // =====================================================
-
-    function dibujarTarjeta(
-        reserva,
-        x,
-        y,
-        ancho
-    ) {
-
-        const alto =
-            calcularAltoTarjeta(
-                reserva,
-                ancho
-            );
-
-
-        // -------------------------------------------------
-        // FONDO
-        // -------------------------------------------------
-
-        pdf.setFillColor(
-            247,
-            249,
-            252
-        );
-
-
-        pdf.setDrawColor(
-            205,
-            215,
-            225
-        );
-
-
-        pdf.roundedRect(
-            x,
-            y,
-            ancho,
-            alto,
-            2,
-            2,
-            "FD"
-        );
-
-
-        const padding = 2.5;
-
-
-        let textoY =
-            y + 5;
-
-
-        // -------------------------------------------------
-        // ESTADO
-        // -------------------------------------------------
-
-        pdf.setFont(
-            "helvetica",
-            "bold"
-        );
-
-        pdf.setFontSize(
-            6.5
-        );
-
-
-        pdf.text(
-            reserva.estado.toUpperCase(),
-            x + padding,
-            textoY
-        );
-
-
-        textoY += 4;
-
-
-        // -------------------------------------------------
-        // DOCENTE
-        // -------------------------------------------------
-
-        const docente =
-            nombreDocenteAdmin(
-                reserva.usuario_id
-            );
-
-
-        pdf.setFont(
-            "helvetica",
-            "bold"
-        );
-
-        pdf.setFontSize(
-            7
-        );
-
-
-        let lineas =
-            pdf.splitTextToSize(
-                `Docente: ${docente}`,
-                ancho - 5
-            );
-
-
-        pdf.text(
-            lineas,
-            x + padding,
-            textoY
-        );
-
-
-        textoY +=
-            lineas.length * 3.5;
-
-
-        // -------------------------------------------------
-        // GRUPO
-        // -------------------------------------------------
-
-        pdf.setFont(
-            "helvetica",
-            "normal"
-        );
-
-        pdf.setFontSize(
-            7
-        );
-
-
-        lineas =
-            pdf.splitTextToSize(
-                `Grupo: ${reserva.grupo}`,
-                ancho - 5
-            );
-
-
-        pdf.text(
-            lineas,
-            x + padding,
-            textoY
-        );
-
-
-        textoY +=
-            lineas.length * 3.5;
-
-
-        // -------------------------------------------------
-        // TEMA
-        // -------------------------------------------------
-
-        lineas =
-            pdf.splitTextToSize(
-                `Tema: ${reserva.tema}`,
-                ancho - 5
-            );
-
-
-        pdf.text(
-            lineas,
-            x + padding,
-            textoY
-        );
-
-
-        textoY +=
-            lineas.length * 3.5 + 1;
-
-
-        // -------------------------------------------------
-        // MATERIALES
-        // -------------------------------------------------
-
-        pdf.setFont(
-            "helvetica",
-            "bold"
-        );
-
-        pdf.setFontSize(
-            7
-        );
-
-
-        pdf.text(
-            "Materiales:",
-            x + padding,
-            textoY
-        );
-
-
-        textoY += 4;
-
-
-        const materiales =
-            obtenerMaterialesReserva(
-                reserva.id
-            );
-
-
-        materiales.forEach(
-            material => {
-
-                const altoMaterial =
-                    dibujarFilaMaterial(
-                        material,
-                        x,
-                        textoY,
-                        ancho
-                    );
-
-
-                textoY +=
-                    altoMaterial;
-            }
-        );
-
-
-        return alto;
-    }
-
-
-    // =====================================================
-    // INICIAR DOCUMENTO
-    // =====================================================
-
-    let y =
-        dibujarCabeceraPrincipal();
-
-
-    y =
+    nuevaY =
         dibujarCabeceraTabla(
-            y
+            nuevaY
         );
 
 
-    // =====================================================
-    // RECORRER LOS TRES HORARIOS
-    //
-    // Una misma franja puede continuar en varias páginas.
-    // =====================================================
+    return nuevaY;
+}
+
+
+// =========================================================
+// OBTENER MATERIALES DE UNA RESERVA
+// =========================================================
+
+function obtenerMaterialesReserva(
+    reservaId
+) {
+
+    return detallesAdmin
+
+        .filter(
+
+            detalle =>
+
+                Number(
+                    detalle.reserva_id
+                ) ===
+                Number(
+                    reservaId
+                )
+        )
+
+        .map(
+
+            detalle => {
+
+                const nombre =
+                    nombreMaterialAdmin(
+                        detalle.material_id
+                    );
+
+
+                return {
+
+                    nombre,
+
+                    cantidad:
+                        Number(
+                            detalle.cantidad
+                        )
+                };
+            }
+        );
+}
+
+
+// =========================================================
+// DIMENSIONES DEL CONTROL DE MATERIAL
+//
+// [ 2 ] Batería                         [ ]
+// =========================================================
+
+const altoFilaMaterial =
+    6;
+
+
+const anchoCantidad =
+    8;
+
+
+const anchoCheck =
+    6;
+
+
+const separacionMaterial =
+    2;
+
+
+// =========================================================
+// CALCULAR ALTURA DE TARJETA
+// =========================================================
+
+function calcularAltoTarjeta(
+    reserva,
+    ancho
+) {
+
+    const materiales =
+        obtenerMaterialesReserva(
+            reserva.id
+        );
+
+
+    let alto =
+        6;
+
+
+    // -----------------------------------------------------
+    // DOCENTE
+    // -----------------------------------------------------
+
+    const docente =
+        nombreDocenteAdmin(
+            reserva.usuario_id
+        );
+
+
+    const lineasDocente =
+        pdf.splitTextToSize(
+
+            `Docente: ${docente}`,
+
+            ancho - 5
+        );
+
+
+    alto +=
+        lineasDocente.length *
+        3.5;
+
+
+    // -----------------------------------------------------
+    // GRUPO
+    // -----------------------------------------------------
+
+    const lineasGrupo =
+        pdf.splitTextToSize(
+
+            `Grupo: ${reserva.grupo}`,
+
+            ancho - 5
+        );
+
+
+    alto +=
+        lineasGrupo.length *
+        3.5;
+
+
+    // -----------------------------------------------------
+    // TEMA
+    // -----------------------------------------------------
+
+    const lineasTema =
+        pdf.splitTextToSize(
+
+            `Tema: ${reserva.tema}`,
+
+            ancho - 5
+        );
+
+
+    alto +=
+        lineasTema.length *
+        3.5;
+
+
+    // Separación + título Materiales
+
+    alto +=
+        6;
+
+
+    // -----------------------------------------------------
+    // CADA MATERIAL
+    // -----------------------------------------------------
+
+    materiales.forEach(
+
+        material => {
+
+            const anchoNombre =
+                ancho
+                -
+                5
+                -
+                anchoCantidad
+                -
+                anchoCheck
+                -
+                separacionMaterial *
+                2;
+
+
+            const lineasNombre =
+                pdf.splitTextToSize(
+
+                    material.nombre,
+
+                    anchoNombre
+                );
+
+
+            const altoNombre =
+                Math.max(
+
+                    altoFilaMaterial,
+
+                    lineasNombre.length *
+                    3.2 +
+                    2
+                );
+
+
+            alto +=
+                altoNombre;
+        }
+    );
+
+
+    alto +=
+        4;
+
+
+    return Math.max(
+        alto,
+        28
+    );
+}
+
+
+// =========================================================
+// DIBUJAR UNA FILA DE MATERIAL
+//
+// [ CANTIDAD ] NOMBRE                  [ CHECK ]
+// =========================================================
+
+function dibujarFilaMaterial(
+    material,
+    x,
+    y,
+    ancho
+) {
+
+    const padding =
+        2.5;
+
+
+    const xCantidad =
+        x +
+        padding;
+
+
+    const xCheck =
+        x
+        +
+        ancho
+        -
+        padding
+        -
+        anchoCheck;
+
+
+    const xNombre =
+        xCantidad
+        +
+        anchoCantidad
+        +
+        separacionMaterial;
+
+
+    const anchoNombre =
+        xCheck
+        -
+        separacionMaterial
+        -
+        xNombre;
+
+
+    // -----------------------------------------------------
+    // NOMBRE DEL MATERIAL
+    // -----------------------------------------------------
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    pdf.setFontSize(
+        7
+    );
+
+
+    const lineasNombre =
+        pdf.splitTextToSize(
+
+            material.nombre,
+
+            anchoNombre
+        );
+
+
+    const altoReal =
+        Math.max(
+
+            altoFilaMaterial,
+
+            lineasNombre.length *
+            3.2 +
+            2
+        );
+
+
+    // -----------------------------------------------------
+    // CASILLA CANTIDAD
+    // -----------------------------------------------------
+
+    pdf.setDrawColor(
+        50,
+        50,
+        50
+    );
+
+
+    pdf.setLineWidth(
+        0.35
+    );
+
+
+    pdf.rect(
+
+        xCantidad,
+
+        y,
+
+        anchoCantidad,
+
+        5
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    pdf.setFontSize(
+        8
+    );
+
+
+    pdf.text(
+
+        String(
+            material.cantidad
+        ),
+
+        xCantidad +
+            anchoCantidad / 2,
+
+        y + 3.5,
+
+        {
+            align:
+                "center"
+        }
+    );
+
+
+    // -----------------------------------------------------
+    // NOMBRE
+    // -----------------------------------------------------
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    pdf.setFontSize(
+        7
+    );
+
+
+    pdf.text(
+
+        lineasNombre,
+
+        xNombre,
+
+        y + 3.5
+    );
+
+
+    // -----------------------------------------------------
+    // CASILLA MANUAL
+    // -----------------------------------------------------
+
+    pdf.setDrawColor(
+        20,
+        20,
+        20
+    );
+
+
+    pdf.setLineWidth(
+        0.45
+    );
+
+
+    pdf.rect(
+
+        xCheck,
+
+        y,
+
+        anchoCheck,
+
+        5
+    );
+
+
+    return altoReal;
+}
+
+
+// =========================================================
+// DIBUJAR TARJETA DE RESERVA
+// =========================================================
+
+function dibujarTarjeta(
+    reserva,
+    x,
+    y,
+    ancho
+) {
+
+    const alto =
+        calcularAltoTarjeta(
+            reserva,
+            ancho
+        );
+
+
+    // -----------------------------------------------------
+    // FONDO
+    // -----------------------------------------------------
+
+    pdf.setFillColor(
+        247,
+        249,
+        252
+    );
+
+
+    pdf.setDrawColor(
+        205,
+        215,
+        225
+    );
+
+
+    pdf.roundedRect(
+
+        x,
+
+        y,
+
+        ancho,
+
+        alto,
+
+        2,
+
+        2,
+
+        "FD"
+    );
+
+
+    const padding =
+        2.5;
+
+
+    let textoY =
+        y + 5;
+
+
+    // -----------------------------------------------------
+    // ESTADO
+    // -----------------------------------------------------
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    pdf.setFontSize(
+        6.5
+    );
+
+
+    pdf.text(
+
+        String(
+            reserva.estado ||
+            ""
+        ).toUpperCase(),
+
+        x + padding,
+
+        textoY
+    );
+
+
+    textoY +=
+        4;
+
+
+    // -----------------------------------------------------
+    // DOCENTE
+    // -----------------------------------------------------
+
+    const docente =
+        nombreDocenteAdmin(
+            reserva.usuario_id
+        );
+
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    pdf.setFontSize(
+        7
+    );
+
+
+    let lineas =
+        pdf.splitTextToSize(
+
+            `Docente: ${docente}`,
+
+            ancho - 5
+        );
+
+
+    pdf.text(
+
+        lineas,
+
+        x + padding,
+
+        textoY
+    );
+
+
+    textoY +=
+        lineas.length *
+        3.5;
+
+
+    // -----------------------------------------------------
+    // GRUPO
+    // -----------------------------------------------------
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    pdf.setFontSize(
+        7
+    );
+
+
+    lineas =
+        pdf.splitTextToSize(
+
+            `Grupo: ${reserva.grupo}`,
+
+            ancho - 5
+        );
+
+
+    pdf.text(
+
+        lineas,
+
+        x + padding,
+
+        textoY
+    );
+
+
+    textoY +=
+        lineas.length *
+        3.5;
+
+
+    // -----------------------------------------------------
+    // TEMA
+    // -----------------------------------------------------
+
+    lineas =
+        pdf.splitTextToSize(
+
+            `Tema: ${reserva.tema}`,
+
+            ancho - 5
+        );
+
+
+    pdf.text(
+
+        lineas,
+
+        x + padding,
+
+        textoY
+    );
+
+
+    textoY +=
+        lineas.length *
+        3.5 +
+        1;
+
+
+    // -----------------------------------------------------
+    // MATERIALES
+    // -----------------------------------------------------
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    pdf.setFontSize(
+        7
+    );
+
+
+    pdf.text(
+
+        "Materiales:",
+
+        x + padding,
+
+        textoY
+    );
+
+
+    textoY +=
+        4;
+
+
+    const materiales =
+        obtenerMaterialesReserva(
+            reserva.id
+        );
+
+
+    materiales.forEach(
+
+        material => {
+
+            const altoMaterial =
+                dibujarFilaMaterial(
+
+                    material,
+
+                    x,
+
+                    textoY,
+
+                    ancho
+                );
+
+
+            textoY +=
+                altoMaterial;
+        }
+    );
+
+
+    return alto;
+}
+
+
+// =========================================================
+// INICIAR DOCUMENTO
+// =========================================================
+
+let y =
+    dibujarCabeceraPrincipal();
+
+
+y =
+    dibujarCabeceraTabla(
+        y
+    );
+
+
+// =========================================================
+// RECORRER LOS TRES HORARIOS
+//
+// Una misma franja puede continuar en varias páginas.
+// =========================================================
+
+for (
+    const horario
+    of HORARIOS_ADMIN
+) {
+
+    // -----------------------------------------------------
+    // RESERVAS DE CADA DÍA
+    // -----------------------------------------------------
+
+    const reservasPorDia =
+        [];
+
 
     for (
-        const horario
-        of HORARIOS_ADMIN
+        let dia = 0;
+        dia < 5;
+        dia++
     ) {
 
+        const fecha =
+            fechaISOAdmin(
+                fechasSemana[dia]
+            );
+
+
+        const reservasCelda =
+            reservasAdmin.filter(
+
+                reserva =>
+
+                    reserva.fecha ===
+                        fecha
+
+                    &&
+
+                    reserva.horario ===
+                        horario
+
+                    &&
+
+                    reserva.estado !==
+                        "cancelada"
+            );
+
+
+        reservasPorDia.push(
+            reservasCelda
+        );
+    }
+
+
+    // Posición que llevamos por cada día.
+
+    const indices = [
+        0,
+        0,
+        0,
+        0,
+        0
+    ];
+
+
+    let primeraParteHorario =
+        true;
+
+
+    // -----------------------------------------------------
+    // CONTINUAR MIENTRAS HAYA RESERVAS
+    // -----------------------------------------------------
+
+    while (
+
+        reservasPorDia.some(
+
+            (
+                reservas,
+                dia
+            ) =>
+
+                indices[dia] <
+                reservas.length
+        )
+
+        ||
+
+        primeraParteHorario
+
+    ) {
+
+        primeraParteHorario =
+            false;
+
+
+        let espacioDisponible =
+            limiteInferior -
+            y;
+
 
         // -------------------------------------------------
-        // RESERVAS DE CADA DÍA
+        // POCO ESPACIO -> NUEVA PÁGINA
         // -------------------------------------------------
 
-        const reservasPorDia = [];
+        if (
+            espacioDisponible <
+            30
+        ) {
+
+            y =
+                nuevaPagina();
+
+
+            espacioDisponible =
+                limiteInferior -
+                y;
+        }
+
+
+        // -------------------------------------------------
+        // RESERVAS QUE CABEN EN ESTA PARTE
+        // -------------------------------------------------
+
+        const reservasPagina = [
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
+
+
+        let altoNecesarioPagina =
+            20;
 
 
         for (
@@ -4504,240 +8019,255 @@ async function generarPDFReservasMaterial() {
             dia++
         ) {
 
-            const fecha =
-                fechaISOAdmin(
-                    fechasSemana[dia]
+            let altoCelda =
+                6;
+
+
+            let indice =
+                indices[dia];
+
+
+            while (
+
+                indice <
+                reservasPorDia[dia].length
+
+            ) {
+
+                const reserva =
+                    reservasPorDia[dia][
+                        indice
+                    ];
+
+
+                const altoTarjeta =
+                    calcularAltoTarjeta(
+
+                        reserva,
+
+                        anchoDia - 4
+                    );
+
+
+                const altoConSeparacion =
+                    altoTarjeta +
+                    3;
+
+
+                if (
+
+                    altoCelda +
+                    altoConSeparacion >
+
+                    espacioDisponible
+
+                ) {
+
+                    break;
+                }
+
+
+                reservasPagina[dia]
+                    .push(
+                        reserva
+                    );
+
+
+                altoCelda +=
+                    altoConSeparacion;
+
+
+                indice++;
+            }
+
+
+            indices[dia] =
+                indice;
+
+
+            altoNecesarioPagina =
+                Math.max(
+
+                    altoNecesarioPagina,
+
+                    altoCelda
                 );
-
-
-            const reservasCelda =
-                reservasAdmin.filter(
-                    reserva =>
-                        reserva.fecha ===
-                        fecha
-                        &&
-                        reserva.horario ===
-                        horario
-                        &&
-                        reserva.estado !==
-                        "cancelada"
-                );
-
-
-            reservasPorDia.push(
-                reservasCelda
-            );
         }
 
 
-        // Posición que llevamos por cada día.
-
-        const indices = [
-            0,
-            0,
-            0,
-            0,
-            0
-        ];
-
-
-        let primeraParteHorario =
-            true;
-
-
         // -------------------------------------------------
-        // CONTINUAR MIENTRAS HAYA RESERVAS
+        // COMPROBAR SI QUEDAN RESERVAS
         // -------------------------------------------------
 
-        while (
+        const cantidadEnEstaPagina =
+            reservasPagina.reduce(
+
+                (
+                    total,
+                    lista
+                ) =>
+
+                    total +
+                    lista.length,
+
+                0
+            );
+
+
+        const quedanReservas =
             reservasPorDia.some(
+
                 (
                     reservas,
                     dia
                 ) =>
+
                     indices[dia] <
                     reservas.length
-            )
-            ||
-            primeraParteHorario
+            );
+
+
+        // -------------------------------------------------
+        // SEGURIDAD CONTRA BUCLE
+        // -------------------------------------------------
+
+        if (
+
+            cantidadEnEstaPagina ===
+                0
+
+            &&
+
+            quedanReservas
+
         ) {
 
-            primeraParteHorario =
-                false;
+            y =
+                nuevaPagina();
 
 
-            let espacioDisponible =
-                limiteInferior - y;
+            continue;
+        }
 
 
-            // ---------------------------------------------
-            // POCO ESPACIO -> NUEVA PÁGINA
-            // ---------------------------------------------
+        // -------------------------------------------------
+        // ALTURA DE FILA
+        // -------------------------------------------------
 
-            if (
-                espacioDisponible <
-                30
-            ) {
+        const altoFila =
+            Math.max(
 
-                y =
-                    nuevaPagina();
+                20,
 
-
-                espacioDisponible =
-                    limiteInferior - y;
-            }
+                altoNecesarioPagina
+            );
 
 
-            // ---------------------------------------------
-            // RESERVAS QUE CABEN EN ESTA PARTE
-            // ---------------------------------------------
+        // =================================================
+        // COLUMNA HORARIO
+        // =================================================
 
-            const reservasPagina = [
-                [],
-                [],
-                [],
-                [],
-                []
-            ];
+        pdf.setFillColor(
+            241,
+            245,
+            249
+        );
 
 
-            let altoNecesarioPagina =
-                20;
+        pdf.setDrawColor(
+            210,
+            218,
+            228
+        );
 
 
-            for (
-                let dia = 0;
-                dia < 5;
-                dia++
-            ) {
+        pdf.rect(
 
-                let altoCelda = 6;
+            margenIzquierdo,
 
+            y,
 
-                let indice =
-                    indices[dia];
+            anchoHorario,
 
+            altoFila,
 
-                while (
-                    indice <
-                    reservasPorDia[dia].length
-                ) {
-
-                    const reserva =
-                        reservasPorDia[dia][indice];
+            "FD"
+        );
 
 
-                    const altoTarjeta =
-                        calcularAltoTarjeta(
-                            reserva,
-                            anchoDia - 4
-                        );
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
 
 
-                    const altoConSeparacion =
-                        altoTarjeta + 3;
+        pdf.setFontSize(
+            8
+        );
 
 
-                    if (
-                        altoCelda +
-                        altoConSeparacion >
-                        espacioDisponible
-                    ) {
+        const textoHorario =
+            quedanReservas
 
-                        break;
-                    }
+                ? `${horario.replace(
+                    "-",
+                    " - "
+                )}\nCONT.`
 
-
-                    reservasPagina[dia]
-                        .push(
-                            reserva
-                        );
-
-
-                    altoCelda +=
-                        altoConSeparacion;
-
-
-                    indice++;
-                }
-
-
-                indices[dia] =
-                    indice;
-
-
-                altoNecesarioPagina =
-                    Math.max(
-                        altoNecesarioPagina,
-                        altoCelda
-                    );
-            }
-
-
-            // ---------------------------------------------
-            // COMPROBAR SI QUEDAN RESERVAS
-            // ---------------------------------------------
-
-            const cantidadEnEstaPagina =
-                reservasPagina.reduce(
-                    (
-                        total,
-                        lista
-                    ) =>
-                        total +
-                        lista.length,
-                    0
+                : horario.replace(
+                    "-",
+                    " - "
                 );
 
 
-            const quedanReservas =
-                reservasPorDia.some(
-                    (
-                        reservas,
-                        dia
-                    ) =>
-                        indices[dia] <
-                        reservas.length
-                );
+        const lineasHorario =
+            pdf.splitTextToSize(
+
+                textoHorario,
+
+                anchoHorario - 4
+            );
 
 
-            // ---------------------------------------------
-            // SEGURIDAD CONTRA BUCLE
-            // ---------------------------------------------
+        pdf.text(
 
-            if (
-                cantidadEnEstaPagina ===
-                0
-                &&
-                quedanReservas
-            ) {
+            lineasHorario,
 
-                y =
-                    nuevaPagina();
+            margenIzquierdo +
+                anchoHorario / 2,
 
-                continue;
+            y +
+                altoFila / 2,
+
+            {
+                align:
+                    "center"
             }
+        );
 
 
-            // ---------------------------------------------
-            // ALTURA DE FILA
-            // ---------------------------------------------
+        // =================================================
+        // CINCO DÍAS
+        // =================================================
 
-            const altoFila =
-                Math.max(
-                    20,
-                    altoNecesarioPagina
-                );
+        for (
+            let dia = 0;
+            dia < 5;
+            dia++
+        ) {
 
+            const x =
+                margenIzquierdo
+                +
+                anchoHorario
+                +
+                anchoDia * dia;
 
-            // =============================================
-            // COLUMNA HORARIO
-            // =============================================
 
             pdf.setFillColor(
-                241,
-                245,
-                249
+                255,
+                255,
+                255
             );
 
 
@@ -4749,164 +8279,369 @@ async function generarPDFReservasMaterial() {
 
 
             pdf.rect(
-                margenIzquierdo,
+
+                x,
+
                 y,
-                anchoHorario,
+
+                anchoDia,
+
                 altoFila,
+
                 "FD"
             );
 
 
-            pdf.setFont(
-                "helvetica",
-                "bold"
-            );
-
-            pdf.setFontSize(
-                8
-            );
+            let tarjetaY =
+                y + 3;
 
 
-            const textoHorario =
-                quedanReservas
+            reservasPagina[dia]
+                .forEach(
 
-                    ? `${horario.replace(
-                        "-",
-                        " - "
-                    )}\nCONT.`
+                    reserva => {
 
-                    : horario.replace(
-                        "-",
-                        " - "
-                    );
+                        const altoTarjeta =
+                            dibujarTarjeta(
+
+                                reserva,
+
+                                x + 2,
+
+                                tarjetaY,
+
+                                anchoDia - 4
+                            );
 
 
-            const lineasHorario =
-                pdf.splitTextToSize(
-                    textoHorario,
-                    anchoHorario - 4
+                        tarjetaY +=
+                            altoTarjeta +
+                            3;
+                    }
                 );
+        }
 
 
-            pdf.text(
-                lineasHorario,
-                margenIzquierdo +
-                anchoHorario / 2,
-                y +
-                altoFila / 2,
-                {
-                    align: "center"
-                }
-            );
+        y +=
+            altoFila;
 
 
-            // =============================================
-            // CINCO DÍAS
-            // =============================================
+        // -------------------------------------------------
+        // SI QUEDAN RESERVAS DE ESTE MISMO HORARIO,
+        // CONTINUAR EN OTRA PÁGINA
+        // -------------------------------------------------
 
-            for (
-                let dia = 0;
-                dia < 5;
-                dia++
-            ) {
+        if (
+            quedanReservas
+        ) {
 
-                const x =
-                    margenIzquierdo
-                    +
-                    anchoHorario
-                    +
-                    anchoDia * dia;
-
-
-                pdf.setFillColor(
-                    255,
-                    255,
-                    255
-                );
-
-
-                pdf.setDrawColor(
-                    210,
-                    218,
-                    228
-                );
-
-
-                pdf.rect(
-                    x,
-                    y,
-                    anchoDia,
-                    altoFila,
-                    "FD"
-                );
-
-
-                let tarjetaY =
-                    y + 3;
-
-
-                reservasPagina[dia]
-                    .forEach(
-                        reserva => {
-
-                            const altoTarjeta =
-                                dibujarTarjeta(
-                                    reserva,
-                                    x + 2,
-                                    tarjetaY,
-                                    anchoDia - 4
-                                );
-
-
-                            tarjetaY +=
-                                altoTarjeta + 3;
-                        }
-                    );
-            }
-
-
-            y +=
-                altoFila;
-
-
-            // ---------------------------------------------
-            // CONTINUACIÓN DEL MISMO HORARIO
-            // ---------------------------------------------
-
-            if (
-                quedanReservas
-            ) {
-
-                y =
-                    nuevaPagina();
-            }
+            y =
+                nuevaPagina();
         }
     }
-
-
-    // =====================================================
-    // PIE ÚLTIMA PÁGINA
-    // =====================================================
-
-    dibujarPiePagina();
-
-
-    // =====================================================
-    // GUARDAR PDF
-    // =====================================================
-
-    const nombreArchivo =
-        `reservas_material_${fechaISOAdmin(
-            lunes
-        )}_${fechaISOAdmin(
-            viernes
-        )}.pdf`;
-
-
-    pdf.save(
-        nombreArchivo
-    );
 }
 
 
-iniciarAdmin();
+// =========================================================
+// PIE DE LA ÚLTIMA PÁGINA
+// =========================================================
+
+dibujarPiePagina();
+
+
+// =========================================================
+// GUARDAR PDF
+// =========================================================
+
+pdf.save(
+
+    `reservas_material_${fechaISOAdmin(
+        lunes
+    )}_${fechaISOAdmin(
+        viernes
+    )}.pdf`
+);
+
+}
+// =========================================================
+// INICIALIZACIÓN DEL PANEL ADMINISTRATIVO
+// =========================================================
+
+async function iniciarAdmin() {
+
+    try {
+
+        // =================================================
+        // APLICAR MODO OSCURO GUARDADO
+        // =================================================
+
+        aplicarModoGuardado();
+
+
+        // =================================================
+        // COMPROBAR SESIÓN Y PERMISOS
+        // =================================================
+
+        const autorizado =
+            await comprobarAdministrador();
+
+
+        if (!autorizado) {
+
+            return;
+        }
+
+
+        // =================================================
+        // FECHA INICIAL DE LA TABLA SEMANAL
+        // =================================================
+
+        lunesSemanaAdmin =
+            obtenerLunesAdmin(
+                new Date()
+            );
+
+
+        // =================================================
+        // CARGAR CATEGORÍAS
+        // =================================================
+
+        await cargarCategorias();
+
+
+        // =================================================
+        // CARGAR MATERIALES
+        // =================================================
+
+        await cargarMateriales();
+
+
+        // =================================================
+        // LIMPIAR FORMULARIO DE MATERIAL
+        // =================================================
+
+        limpiarFormularioMaterial();
+
+
+        // =================================================
+        // CARGAR RESERVAS
+        // =================================================
+
+        await cargarReservasAdmin();
+
+
+        // =================================================
+        // DEJAR CERRADO EL PANEL DE DEVOLUCIÓN
+        // =================================================
+
+        if (panelGestionEntrega) {
+
+            panelGestionEntrega.classList.add(
+                "oculto"
+            );
+        }
+
+
+        // =================================================
+        // LIMPIAR VARIABLES TEMPORALES
+        // =================================================
+
+        reservaEntregaFisicaActual =
+            null;
+
+
+        reservaEntregaActual =
+            null;
+
+
+        reservaEdicionActual =
+            null;
+
+
+        carritoEdicionReserva =
+            [];
+
+
+        disponibilidadEdicion =
+            [];
+
+
+        console.log(
+            "CETA Material de Gabinete - Panel administrador iniciado correctamente."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error iniciando panel administrativo:",
+            error
+        );
+
+
+        alert(
+            "Ocurrió un error al iniciar el panel administrativo. Revisa la consola del navegador."
+        );
+    }
+}
+
+
+// =========================================================
+// ACTUALIZAR RESERVAS AL VOLVER A LA PESTAÑA RESERVAS
+// =========================================================
+
+document
+    .querySelectorAll(
+        '.tab-btn[data-panel="panelReservas"]'
+    )
+    .forEach(
+
+        boton => {
+
+            boton.addEventListener(
+
+                "click",
+
+                async () => {
+
+                    if (!perfilActual) {
+
+                        return;
+                    }
+
+
+                    try {
+
+                        await cargarReservasAdmin();
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Error actualizando reservas:",
+                            error
+                        );
+                    }
+                }
+            );
+        }
+    );
+
+
+// =========================================================
+// ACTUALIZAR DEVOLUCIONES AL ABRIR ENTREGAS
+// =========================================================
+
+document
+    .querySelectorAll(
+        '.tab-btn[data-panel="panelEntregas"]'
+    )
+    .forEach(
+
+        boton => {
+
+            boton.addEventListener(
+
+                "click",
+
+                async () => {
+
+                    if (!perfilActual) {
+
+                        return;
+                    }
+
+
+                    try {
+
+                        await cargarReservasAdmin();
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Error actualizando devoluciones:",
+                            error
+                        );
+                    }
+                }
+            );
+        }
+    );
+
+
+// =========================================================
+// LIMPIAR ENTREGA FÍSICA AL CAMBIAR DE PANEL
+// =========================================================
+
+document
+    .querySelectorAll(
+        ".tab-btn[data-panel]"
+    )
+    .forEach(
+
+        boton => {
+
+            boton.addEventListener(
+
+                "click",
+
+                () => {
+
+                    const panelDestino =
+                        boton.dataset.panel;
+
+
+                    if (
+                        panelDestino !==
+                        "panelConfirmarEntrega"
+                    ) {
+
+                        reservaEntregaFisicaActual =
+                            null;
+                    }
+
+
+                    if (
+                        panelDestino !==
+                        "panelEditarReserva"
+                    ) {
+
+                        reservaEdicionActual =
+                            null;
+
+
+                        carritoEdicionReserva =
+                            [];
+
+
+                        disponibilidadEdicion =
+                            [];
+                    }
+                }
+            );
+        }
+    );
+
+
+// =========================================================
+// INICIAR CUANDO EL DOM ESTÉ DISPONIBLE
+// =========================================================
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+
+        "DOMContentLoaded",
+
+        iniciarAdmin
+    );
+
+
+} else {
+
+    iniciarAdmin();
+}

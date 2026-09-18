@@ -14,23 +14,15 @@
         CETA | Administración Material de Gabinete
     </title>
 
-    <!-- ================================================
-         ICONO
-    ================================================= -->
-
     <link
         rel="icon"
         type="image/png"
         href="img/logo-ceta-transparente.png"
     >
 
-    <!-- ================================================
-         ESTILOS
-    ================================================= -->
-
     <link
         rel="stylesheet"
-        href="css/estilos.css?v=4"
+        href="css/estilos.css?v=5"
     >
 
 </head>
@@ -163,12 +155,7 @@
             </div>
 
 
-            <!-- =============================================
-                 CONTROLES SEMANA
-            ============================================== -->
-
             <div class="semana-controles">
-
 
                 <button
                     type="button"
@@ -197,10 +184,6 @@
                 </button>
 
 
-                <!-- =========================================
-                     NUEVO BOTÓN PDF
-                ========================================== -->
-
                 <button
                     type="button"
                     id="btnPDFReservasMaterial"
@@ -208,7 +191,6 @@
                 >
                     🖨️ Imprimir PDF
                 </button>
-
 
             </div>
 
@@ -218,10 +200,6 @@
                 class="mensaje-admin"
             ></div>
 
-
-            <!-- =============================================
-                 TABLA SEMANAL
-            ============================================== -->
 
             <div class="tabla-semanal-wrapper">
 
@@ -354,8 +332,6 @@
                     <div class="form-grid">
 
 
-                        <!-- CÓDIGO -->
-
                         <div class="campo-admin">
 
                             <label for="materialCodigo">
@@ -370,8 +346,6 @@
 
                         </div>
 
-
-                        <!-- NOMBRE -->
 
                         <div class="campo-admin">
 
@@ -388,8 +362,6 @@
 
                         </div>
 
-
-                        <!-- CANTIDAD -->
 
                         <div class="campo-admin">
 
@@ -408,8 +380,6 @@
 
                         </div>
 
-
-                        <!-- DESCRIPCIÓN -->
 
                         <div class="campo-admin campo-ancho">
 
@@ -455,7 +425,7 @@
 
 
                     <!-- =====================================
-                         IMAGEN DEL MATERIAL
+                         IMAGEN
                     ====================================== -->
 
                     <div class="bloque-formulario">
@@ -467,8 +437,6 @@
 
                         <div class="imagen-formulario">
 
-
-                            <!-- VISTA PREVIA -->
 
                             <div class="imagen-preview-contenedor">
 
@@ -489,8 +457,6 @@
                             </div>
 
 
-                            <!-- SELECCIONAR ARCHIVO -->
-
                             <div class="imagen-controles">
 
                                 <input
@@ -510,10 +476,6 @@
 
                     </div>
 
-
-                    <!-- =====================================
-                         BOTONES FORMULARIO
-                    ====================================== -->
 
                     <div class="acciones-formulario">
 
@@ -603,7 +565,7 @@
 
 
         <!-- =================================================
-             03 - ENTREGAS
+             03 - ENTREGAS Y DEVOLUCIONES
         ================================================== -->
 
         <section
@@ -630,7 +592,7 @@
 
 
             <!-- =============================================
-                 RESERVAS PENDIENTES
+                 RESERVAS CON MATERIAL ENTREGADO
             ============================================== -->
 
             <div class="admin-card">
@@ -640,12 +602,12 @@
                     <div>
 
                         <h3>
-                            Reservas pendientes
+                            Materiales pendientes de devolución
                         </h3>
 
                         <p>
-                            Selecciona una reserva para registrar
-                            devoluciones parciales o completas.
+                            Aquí aparecerán las reservas cuyo
+                            material ya fue entregado al docente.
                         </p>
 
                     </div>
@@ -731,6 +693,426 @@
         </section>
 
 
+        <!-- =================================================
+             04 - CONFIRMAR ENTREGA AL DOCENTE
+             Se abre desde la tabla de reservas
+        ================================================== -->
+
+        <section
+            id="panelConfirmarEntrega"
+            class="admin-panel"
+        >
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        04
+                    </span>
+
+                    <h2>
+                        Entregar material al docente
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3 id="tituloConfirmarEntrega">
+                            Confirmar entrega
+                        </h3>
+
+                        <p id="datosConfirmarEntrega">
+                            Marca únicamente los materiales
+                            que realmente se entregarán.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="detalleConfirmarEntrega"
+                    class="detalle-entrega"
+                ></div>
+
+
+                <div class="bloque-formulario">
+
+                    <label for="observacionGeneralEntrega">
+
+                        <strong>
+                            Observación general de entrega
+                        </strong>
+
+                    </label>
+
+                    <textarea
+                        id="observacionGeneralEntrega"
+                        rows="3"
+                        placeholder="Opcional. Ej.: batería B1 entregada con borne flojo..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <button
+                        type="button"
+                        id="btnConfirmarEntregaMaterial"
+                        class="btn-principal btn-auto"
+                    >
+                        ✓ Confirmar entrega
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="btnCancelarConfirmarEntrega"
+                        class="btn-secundario btn-auto"
+                    >
+                        Volver
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeConfirmarEntrega"
+                    class="mensaje-admin"
+                ></p>
+
+            </div>
+
+        </section>
+        <!-- =================================================
+             05 - EDITAR RESERVA
+             Se abre desde la tabla semanal
+        ================================================== -->
+
+        <section
+            id="panelEditarReserva"
+            class="admin-panel"
+        >
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        05
+                    </span>
+
+                    <h2>
+                        Editar reserva
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3 id="tituloEditarReserva">
+                            Modificar reserva
+                        </h3>
+
+                        <p id="datosEditarReserva">
+                            Modifica los datos y materiales de la reserva.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form id="formEditarReserva">
+
+
+                    <!-- ID DE LA RESERVA -->
+
+                    <input
+                        type="hidden"
+                        id="editarReservaId"
+                    >
+
+
+                    <!-- =====================================
+                         DATOS DEL DOCENTE
+                    ====================================== -->
+
+                    <div class="bloque-formulario">
+
+                        <h4>
+                            Docente
+                        </h4>
+
+                        <p
+                            id="editarReservaDocente"
+                            class="texto-ayuda"
+                        >
+                            Cargando docente...
+                        </p>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         DATOS GENERALES
+                    ====================================== -->
+
+                    <div class="form-grid">
+
+
+                        <!-- FECHA -->
+
+                        <div class="campo-admin">
+
+                            <label for="editarReservaFecha">
+                                Fecha *
+                            </label>
+
+                            <input
+                                type="date"
+                                id="editarReservaFecha"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- HORARIO -->
+
+                        <div class="campo-admin">
+
+                            <label for="editarReservaHorario">
+                                Horario *
+                            </label>
+
+                            <select
+                                id="editarReservaHorario"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccionar horario
+                                </option>
+
+                                <option value="09:00-12:00">
+                                    09:00 - 12:00
+                                </option>
+
+                                <option value="14:00-17:00">
+                                    14:00 - 17:00
+                                </option>
+
+                                <option value="19:00-21:30">
+                                    19:00 - 21:30
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- GRUPO -->
+
+                        <div class="campo-admin">
+
+                            <label for="editarReservaGrupo">
+                                Grupo *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="editarReservaGrupo"
+                                placeholder="Ej. 4A"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- TEMA -->
+
+                        <div class="campo-admin campo-ancho">
+
+                            <label for="editarReservaTema">
+                                Tema / actividad *
+                            </label>
+
+                            <textarea
+                                id="editarReservaTema"
+                                rows="3"
+                                placeholder="Ej. Diagnóstico del sistema de encendido"
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- =====================================
+                         FILTROS DE MATERIAL
+                    ====================================== -->
+
+                    <div class="bloque-formulario">
+
+                        <h4>
+                            Materiales de la reserva
+                        </h4>
+
+                        <p class="texto-ayuda">
+                            Puedes quitar materiales, modificar cantidades
+                            o agregar nuevos materiales.
+                        </p>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="campo-admin">
+
+                                <label for="editarFiltroCategoria">
+                                    Categoría
+                                </label>
+
+                                <select id="editarFiltroCategoria">
+
+                                    <option value="">
+                                        Todas las categorías
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="campo-admin">
+
+                                <label for="editarBuscarMaterial">
+                                    Buscar material
+                                </label>
+
+                                <input
+                                    type="search"
+                                    id="editarBuscarMaterial"
+                                    placeholder="Ej. batería, bobina, multímetro..."
+                                >
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         CATÁLOGO PARA AGREGAR
+                    ====================================== -->
+
+                    <div class="bloque-formulario">
+
+                        <h4>
+                            Agregar materiales
+                        </h4>
+
+                        <div
+                            id="editarCatalogoMateriales"
+                            class="materiales-grid"
+                        >
+
+                            <p>
+                                Selecciona fecha y horario para
+                                consultar disponibilidad.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         MATERIALES SELECCIONADOS
+                    ====================================== -->
+
+                    <div class="bloque-formulario">
+
+                        <h4>
+                            Materiales seleccionados
+                        </h4>
+
+                        <div
+                            id="editarCarritoMateriales"
+                            class="lista-entregas"
+                        >
+
+                            <p>
+                                Cargando materiales...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         BOTONES
+                    ====================================== -->
+
+                    <div class="acciones-formulario">
+
+                        <button
+                            type="submit"
+                            id="btnGuardarEdicionReserva"
+                            class="btn-principal btn-auto"
+                        >
+                            💾 Guardar cambios
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="btnCancelarEdicionReserva"
+                            class="btn-secundario btn-auto"
+                        >
+                            Cancelar edición
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        id="mensajeEditarReserva"
+                        class="mensaje-admin"
+                    ></p>
+
+
+                </form>
+
+            </div>
+
+        </section>
+
+
     </main>
 
 
@@ -738,16 +1120,18 @@
          LIBRERÍAS
     ====================================================== -->
 
-    <!-- Supabase -->
+
+    <!-- SUPABASE -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
     ></script>
 
 
-    <!-- jsPDF
-         Necesario para generar el PDF semanal
-    -->
+    <!-- =====================================================
+         jsPDF
+         Se mantiene para el PDF semanal actual
+    ====================================================== -->
 
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
@@ -758,9 +1142,9 @@
          ARCHIVOS DEL SISTEMA
     ====================================================== -->
 
-    <script src="js/supabase.js?v=4"></script>
+    <script src="js/supabase.js?v=5"></script>
 
-    <script src="js/admin.js?v=4"></script>
+    <script src="js/admin.js?v=5"></script>
 
 
 </body>

@@ -3325,6 +3325,10 @@ function htmlMaterialesReservaAdmin(
 
             detalle => {
 
+                // ==========================================
+                // ESTADO DEL MATERIAL
+                // ==========================================
+
                 let indicador =
                     "";
 
@@ -3334,51 +3338,168 @@ function htmlMaterialesReservaAdmin(
                     "reservada"
                 ) {
 
-                    indicador =
-                        detalle.entregado
+                    if (
+                        detalle.entregado === true
+                    ) {
 
-                            ? `
-                                <span title="Material entregado">
-                                    ✓
-                                </span>
-                            `
+                        const cantidad =
+                            Number(
+                                detalle.cantidad || 0
+                            );
 
-                            : `
-                                <span title="Material no entregado">
-                                    —
-                                </span>
-                            `;
+
+                        const cantidadDevuelta =
+                            Number(
+                                detalle.cantidad_devuelta || 0
+                            );
+
+
+                        const devuelto =
+                            cantidad > 0 &&
+                            cantidadDevuelta >= cantidad;
+
+
+                        indicador =
+                            devuelto
+
+                                ? `
+                                    <span
+                                        title="Material devuelto"
+                                        style="
+                                            font-weight:700;
+                                        "
+                                    >
+                                        ✓ DEVUELTO
+                                    </span>
+                                `
+
+                                : `
+                                    <span
+                                        title="Material entregado y pendiente de devolución"
+                                        style="
+                                            font-weight:700;
+                                        "
+                                    >
+                                        ✓ ENTREGADO
+                                    </span>
+                                `;
+
+                    } else {
+
+                        indicador = `
+                            <span
+                                title="Material no entregado"
+                            >
+                                — NO ENTREGADO
+                            </span>
+                        `;
+                    }
                 }
 
 
-                const observacion =
+                // ==========================================
+                // OBSERVACIÓN DE ENTREGA
+                // ==========================================
+
+                const observacionEntrega =
                     detalle.observacion_entrega
+                        ?.trim();
+
+
+                const htmlObservacionEntrega =
+                    observacionEntrega
 
                         ? `
-                            <small>
-                                ⚠ ${escaparHTML(
-                                    detalle.observacion_entrega
+                            <div
+                                style="
+                                    margin-top:6px;
+                                    padding:6px 8px;
+                                    border-radius:6px;
+                                    background:rgba(255, 193, 7, 0.12);
+                                "
+                            >
+
+                                <strong>
+                                    ⚠ Obs. entrega:
+                                </strong>
+
+                                ${escaparHTML(
+                                    observacionEntrega
                                 )}
-                            </small>
+
+                            </div>
                         `
 
                         : "";
 
 
+                // ==========================================
+                // OBSERVACIÓN DE DEVOLUCIÓN
+                // ==========================================
+
+                const observacionDevolucion =
+                    detalle.observacion
+                        ?.trim();
+
+
+                const htmlObservacionDevolucion =
+                    observacionDevolucion
+
+                        ? `
+                            <div
+                                style="
+                                    margin-top:6px;
+                                    padding:6px 8px;
+                                    border-radius:6px;
+                                    background:rgba(33, 150, 243, 0.10);
+                                "
+                            >
+
+                                <strong>
+                                    ↩ Obs. devolución:
+                                </strong>
+
+                                ${escaparHTML(
+                                    observacionDevolucion
+                                )}
+
+                            </div>
+                        `
+
+                        : "";
+
+
+                // ==========================================
+                // HTML DEL MATERIAL
+                // ==========================================
+
                 return `
-                    <li>
+                    <li
+                        style="
+                            margin-bottom:10px;
+                        "
+                    >
 
-                        ${indicador}
+                        <div>
 
-                        ${detalle.cantidad} ×
+                            ${indicador}
 
-                        ${escaparHTML(
-                            nombreMaterialAdmin(
-                                detalle.material_id
-                            )
-                        )}
+                            ${detalle.cantidad} ×
 
-                        ${observacion}
+                            <strong>
+                                ${escaparHTML(
+                                    nombreMaterialAdmin(
+                                        detalle.material_id
+                                    )
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        ${htmlObservacionEntrega}
+
+                        ${htmlObservacionDevolucion}
 
                     </li>
                 `;

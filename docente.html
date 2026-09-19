@@ -508,7 +508,264 @@
 
         </section>
 
+        <!-- =================================================
+             EDITAR RESERVA
+        ================================================== -->
 
+        <section
+            id="panelEditarReservaDocente"
+            class="docente-panel"
+        >
+
+            <div class="seccion-titulo">
+
+                <div>
+
+                    <span class="numero-seccion">
+                        03
+                    </span>
+
+                    <h2>
+                        Editar reserva
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 DATOS DE LA RESERVA
+            ============================================== -->
+
+            <div class="docente-card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Datos de la clase
+                    </h3>
+
+                    <p>
+                        Modifica los datos de tu reserva.
+                    </p>
+
+                </div>
+
+
+                <input
+                    type="hidden"
+                    id="editarReservaDocenteId"
+                >
+
+
+                <div class="reserva-datos-grid">
+
+
+                    <div class="campo-admin">
+
+                        <label for="editarReservaDocenteFecha">
+                            Fecha *
+                        </label>
+
+                        <input
+                            type="date"
+                            id="editarReservaDocenteFecha"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo-admin">
+
+                        <label for="editarReservaDocenteHorario">
+                            Horario *
+                        </label>
+
+                        <select id="editarReservaDocenteHorario">
+
+                            <option value="">
+                                Seleccionar horario
+                            </option>
+
+                            <option value="09:00-12:00">
+                                09:00 - 12:00
+                            </option>
+
+                            <option value="14:00-17:00">
+                                14:00 - 17:00
+                            </option>
+
+                            <option value="19:00-21:30">
+                                19:00 - 21:30
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo-admin">
+
+                        <label for="editarReservaDocenteGrupo">
+                            Grupo *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editarReservaDocenteGrupo"
+                            placeholder="Ej. 201M"
+                        >
+
+                    </div>
+
+
+                    <div class="campo-admin campo-ancho">
+
+                        <label for="editarReservaDocenteTema">
+                            Tema / descripción de la clase *
+                        </label>
+
+                        <textarea
+                            id="editarReservaDocenteTema"
+                            rows="3"
+                            placeholder="Ej. Diagnóstico del sistema de encendido"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 BUSCAR MATERIAL
+            ============================================== -->
+
+            <div class="docente-card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Modificar materiales
+                    </h3>
+
+                    <p>
+                        Puedes añadir, quitar o cambiar
+                        la cantidad de materiales de la reserva.
+                    </p>
+
+                </div>
+
+
+                <div class="filtros-material-docente">
+
+
+                    <div class="campo-admin">
+
+                        <label for="editarFiltroCategoriaDocente">
+                            Área / categoría
+                        </label>
+
+                        <select id="editarFiltroCategoriaDocente">
+
+                            <option value="">
+                                Todas las categorías
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo-admin">
+
+                        <label for="editarBuscarMaterialDocente">
+                            Buscar
+                        </label>
+
+                        <input
+                            type="search"
+                            id="editarBuscarMaterialDocente"
+                            placeholder="Ej. batería, bobina, bujía..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="editarMensajeDisponibilidadDocente"
+                    class="mensaje-docente"
+                ></div>
+
+
+                <div
+                    id="editarCatalogoMaterialesDocente"
+                    class="catalogo-materiales-docente"
+                ></div>
+
+            </div>
+
+
+            <!-- =============================================
+                 MATERIALES DE LA RESERVA
+            ============================================== -->
+
+            <div class="docente-card carrito-card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Materiales de la reserva
+                    </h3>
+
+                    <p>
+                        Revisa las cantidades antes de guardar.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="editarCarritoMaterialesDocente"
+                    class="carrito-materiales"
+                ></div>
+
+
+                <div class="carrito-footer">
+
+                    <button
+                        type="button"
+                        id="btnCancelarEdicionDocente"
+                        class="btn-secundario"
+                    >
+                        Volver sin guardar
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="btnGuardarEdicionDocente"
+                        class="btn-principal btn-auto"
+                    >
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeEditarReservaDocente"
+                    class="mensaje-docente"
+                ></p>
+
+            </div>
+
+        </section>
     </main>
 
 

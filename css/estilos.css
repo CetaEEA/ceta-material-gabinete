@@ -6489,3 +6489,35 @@ body.modo-oscuro ::selection {
 /* =========================================================
    FIN - CETA MATERIAL DE GABINETE
 ========================================================= */
+/* =========================================================
+   CORRECCIÓN FONDO MODO CLARO / OSCURO
+========================================================= */
+
+/* MODO CLARO */
+html {
+    background: #f4f6f8;
+}
+
+body {
+    background-color: #f4f6f8;
+}
+
+body.admin-page,
+body.docente-page {
+    background-color: #f4f6f8;
+}
+
+
+/* MODO OSCURO */
+html:has(body.modo-oscuro) {
+    background: #09111c;
+}
+
+body.modo-oscuro {
+    background-color: #09111c;
+}
+
+body.modo-oscuro.admin-page,
+body.modo-oscuro.docente-page {
+    background-color: #09111c;
+}

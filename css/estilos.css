@@ -1,5 +1,6 @@
 /* =========================================================
-   GENERAL
+   CETA - MATERIAL DE GABINETE
+   ESTILOS GENERALES
 ========================================================= */
 
 * {
@@ -13,6 +14,8 @@ html {
 }
 
 body {
+    min-height: 100vh;
+
     font-family:
         Arial,
         Helvetica,
@@ -21,6 +24,8 @@ body {
     color: #1f2937;
 
     background: #f4f6f8;
+
+    line-height: 1.5;
 }
 
 button,
@@ -34,6 +39,63 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
+img {
+    max-width: 100%;
+}
+
+.oculto {
+    display: none !important;
+}
+
+
+/* =========================================================
+   VARIABLES VISUALES
+========================================================= */
+
+:root {
+    --ceta-oscuro: #111c2a;
+    --ceta-oscuro-2: #1e293b;
+
+    --ceta-azul: #2563eb;
+    --ceta-azul-hover: #1d4ed8;
+
+    --ceta-verde: #16a34a;
+    --ceta-verde-hover: #15803d;
+
+    --ceta-rojo: #dc2626;
+    --ceta-rojo-hover: #b91c1c;
+
+    --ceta-amarillo: #f59e0b;
+    --ceta-amarillo-hover: #d97706;
+
+    --ceta-celeste: #0ea5e9;
+
+    --texto-principal: #111827;
+    --texto-secundario: #64748b;
+
+    --borde: #dbe2ea;
+    --borde-suave: #e2e8f0;
+
+    --fondo: #f4f6f8;
+    --fondo-card: #ffffff;
+    --fondo-suave: #f8fafc;
+
+    --radio: 12px;
+    --radio-grande: 16px;
+
+    --sombra:
+        0 5px 18px
+        rgba(15, 23, 42, 0.07);
+
+    --sombra-hover:
+        0 10px 28px
+        rgba(15, 23, 42, 0.12);
+}
+
 
 /* =========================================================
    LOGIN
@@ -45,7 +107,6 @@ button {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 20px;
@@ -66,22 +127,24 @@ button {
     background-attachment: fixed;
 }
 
+
 .login-container {
     width: 100%;
 
     max-width: 430px;
 }
 
+
 .login-card {
     width: 100%;
 
     padding: 35px;
 
+    border: 1px solid #263548;
+
     border-radius: 18px;
 
-    background: #111c2a;
-
-    border: 1px solid #263548;
+    background: var(--ceta-oscuro);
 
     box-shadow:
         0 12px 35px
@@ -89,6 +152,7 @@ button {
 
     text-align: center;
 }
+
 
 .login-logo {
     width: 105px;
@@ -109,6 +173,7 @@ button {
         rgba(0, 0, 0, 0.30);
 }
 
+
 .login-instituto {
     margin-bottom: 7px;
 
@@ -121,6 +186,7 @@ button {
     letter-spacing: 3px;
 }
 
+
 .login-card h1 {
     margin-bottom: 10px;
 
@@ -128,6 +194,7 @@ button {
 
     font-size: 29px;
 }
+
 
 .login-descripcion {
     margin-bottom: 28px;
@@ -139,11 +206,13 @@ button {
     line-height: 1.6;
 }
 
+
 .campo {
     margin-bottom: 18px;
 
     text-align: left;
 }
+
 
 .campo label {
     display: block;
@@ -156,6 +225,7 @@ button {
 
     font-weight: bold;
 }
+
 
 .campo input {
     width: 100%;
@@ -173,7 +243,12 @@ button {
     font-size: 15px;
 
     outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .campo input:focus {
     border-color: #3b82f6;
@@ -181,6 +256,23 @@ button {
     box-shadow:
         0 0 0 3px
         rgba(59, 130, 246, 0.15);
+}
+
+
+/* =========================================================
+   MENSAJE LOGIN
+========================================================= */
+
+.mensaje-login {
+    min-height: 20px;
+
+    margin-top: 17px;
+
+    color: #fca5a5;
+
+    font-size: 13px;
+
+    font-weight: bold;
 }
 
 
@@ -197,7 +289,7 @@ button {
 
     border-radius: 9px;
 
-    background: #2563eb;
+    background: var(--ceta-azul);
 
     color: #ffffff;
 
@@ -207,24 +299,37 @@ button {
 
     transition:
         background 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.btn-principal:hover {
-    background: #1d4ed8;
+
+.btn-principal:hover:not(:disabled) {
+    background: var(--ceta-azul-hover);
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px
+        rgba(37, 99, 235, 0.20);
 }
+
 
 .btn-principal:disabled {
-    opacity: 0.6;
+    opacity: 0.55;
 
-    cursor: wait;
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
 }
+
 
 .btn-auto {
     width: auto;
 }
+
 
 .btn-secundario {
     padding: 12px 20px;
@@ -238,30 +343,79 @@ button {
     color: #334155;
 
     font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
-.oculto {
-    display: none !important;
+
+.btn-secundario:hover {
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   MENSAJE LOGIN
+   BOTONES DE ACCIÓN REUTILIZABLES
 ========================================================= */
 
-.mensaje-login {
-    min-height: 20px;
+.btn-accion-azul,
+.btn-accion-verde,
+.btn-accion-rojo,
+.btn-accion-amarillo {
+    padding: 9px 12px;
 
-    margin-top: 17px;
+    border: none;
 
-    color: #fca5a5;
+    border-radius: 8px;
 
-    font-size: 13px;
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.btn-accion-azul {
+    background: var(--ceta-azul);
+}
+
+
+.btn-accion-verde {
+    background: var(--ceta-verde);
+}
+
+
+.btn-accion-rojo {
+    background: var(--ceta-rojo);
+}
+
+
+.btn-accion-amarillo {
+    background: var(--ceta-amarillo);
+}
+
+
+.btn-accion-azul:hover,
+.btn-accion-verde:hover,
+.btn-accion-rojo:hover,
+.btn-accion-amarillo:hover {
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   ADMIN BODY
+   ADMIN - FONDO GENERAL
 ========================================================= */
 
 .admin-page {
@@ -285,16 +439,17 @@ button {
 
 
 /* =========================================================
-   ADMIN HEADER
+   ADMIN - HEADER
 ========================================================= */
 
 .admin-header {
-    background: #111c2a;
+    background: var(--ceta-oscuro);
 
     color: #ffffff;
 
     border-bottom: 1px solid #263548;
 }
+
 
 .admin-header-contenido {
     max-width: 1400px;
@@ -312,6 +467,7 @@ button {
     gap: 20px;
 }
 
+
 .admin-identidad {
     display: flex;
 
@@ -320,15 +476,16 @@ button {
     gap: 16px;
 }
 
+
 .admin-identidad img {
     width: 80px;
     height: 80px;
 
     object-fit: contain;
 
-    background: #ffffff;
-
     padding: 8px;
+
+    background: #ffffff;
 
     border-radius: 12px;
 
@@ -337,17 +494,20 @@ button {
         rgba(0, 0, 0, 0.15);
 }
 
-.admin-identidad h1 {
-    font-size: 24px;
 
+.admin-identidad h1 {
     margin-bottom: 5px;
+
+    font-size: 24px;
 }
+
 
 .admin-identidad > div > p:last-child {
     color: #cbd5e1;
 
     font-size: 14px;
 }
+
 
 .admin-etiqueta {
     margin-bottom: 4px;
@@ -359,7 +519,10 @@ button {
     font-weight: bold;
 
     letter-spacing: 2px;
+
+    text-transform: uppercase;
 }
+
 
 .btn-salir {
     padding: 10px 15px;
@@ -370,16 +533,25 @@ button {
 
     background: #1e293b;
 
-    color: white;
+    color: #ffffff;
+
+    font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
 }
+
 
 .btn-salir:hover {
     background: #334155;
+
+    border-color: #64748b;
 }
 
 
 /* =========================================================
-   NAVEGACIÓN
+   ADMIN - NAVEGACIÓN
 ========================================================= */
 
 .admin-tabs {
@@ -399,14 +571,17 @@ button {
 
     padding: 10px;
 
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.97);
 
-    border-bottom: 1px solid #dbe2ea;
+    border-bottom: 1px solid var(--borde);
 
     box-shadow:
         0 3px 10px
         rgba(0, 0, 0, 0.05);
+
+    backdrop-filter: blur(8px);
 }
+
 
 .tab-btn {
     padding: 10px 16px;
@@ -420,21 +595,30 @@ button {
     color: #334155;
 
     font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
+
 
 .tab-btn:hover {
     background: #dce5ef;
+
+    transform: translateY(-1px);
 }
 
+
 .tab-btn.activo {
-    background: #2563eb;
+    background: var(--ceta-azul);
 
     color: #ffffff;
 }
 
 
 /* =========================================================
-   CONTENIDO ADMIN
+   ADMIN - CONTENIDO
 ========================================================= */
 
 .admin-main {
@@ -445,17 +629,39 @@ button {
     padding: 25px 20px 60px;
 }
 
+
 .admin-panel {
     display: none;
 }
 
+
 .admin-panel.activo {
     display: block;
+
+    animation:
+        aparecer-panel
+        0.18s ease;
+}
+
+
+@keyframes aparecer-panel {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
 }
 
 
 /* =========================================================
-   TÍTULOS
+   TÍTULOS DE SECCIÓN
 ========================================================= */
 
 .seccion-titulo {
@@ -470,6 +676,7 @@ button {
     gap: 15px;
 }
 
+
 .seccion-titulo > div {
     display: flex;
 
@@ -478,9 +685,12 @@ button {
     gap: 12px;
 }
 
+
 .numero-seccion {
     width: 42px;
     height: 42px;
+
+    flex: 0 0 42px;
 
     display: flex;
 
@@ -490,24 +700,29 @@ button {
 
     border-radius: 10px;
 
-    background: #111c2a;
+    background: var(--ceta-oscuro);
 
-    color: white;
+    color: #ffffff;
 
     font-size: 12px;
 
     font-weight: bold;
+
+    box-shadow:
+        0 4px 10px
+        rgba(17, 28, 42, 0.15);
 }
 
+
 .seccion-titulo h2 {
-    color: #111827;
+    color: var(--texto-principal);
 
     font-size: 23px;
 }
 
 
 /* =========================================================
-   CARDS
+   ADMIN - CARDS
 ========================================================= */
 
 .admin-card {
@@ -515,32 +730,37 @@ button {
 
     padding: 24px;
 
-    background: rgba(255, 255, 255, 0.97);
+    background:
+        rgba(255, 255, 255, 0.97);
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
-    border-radius: 15px;
+    border-radius: var(--radio-grande);
 
-    box-shadow:
-        0 5px 16px
-        rgba(15, 23, 42, 0.06);
+    box-shadow: var(--sombra);
 }
+
 
 .card-header {
     margin-bottom: 22px;
 }
 
+
 .card-header h3 {
     margin-bottom: 5px;
+
+    color: var(--texto-principal);
 
     font-size: 20px;
 }
 
+
 .card-header p {
-    color: #64748b;
+    color: var(--texto-secundario);
 
     font-size: 14px;
 }
+
 
 .card-header-listado {
     display: flex;
@@ -554,17 +774,18 @@ button {
 
 
 /* =========================================================
-   FORMULARIO MATERIAL
+   ADMIN - FORMULARIOS
 ========================================================= */
 
 .form-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3, minmax(0, 1fr));
 
     gap: 18px;
 }
+
 
 .campo-admin {
     display: flex;
@@ -574,6 +795,7 @@ button {
     gap: 7px;
 }
 
+
 .campo-admin label {
     color: #334155;
 
@@ -582,8 +804,10 @@ button {
     font-weight: bold;
 }
 
+
 .campo-admin input,
 .campo-admin textarea,
+.campo-admin select,
 .buscador-materiales input {
     width: 100%;
 
@@ -598,33 +822,57 @@ button {
     color: #111827;
 
     outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
+
 .campo-admin textarea {
+    min-height: 90px;
+
     resize: vertical;
 }
 
+
 .campo-admin input:focus,
 .campo-admin textarea:focus,
+.campo-admin select:focus,
 .buscador-materiales input:focus {
-    border-color: #2563eb;
+    border-color: var(--ceta-azul);
 
     box-shadow:
         0 0 0 3px
         rgba(37, 99, 235, 0.10);
 }
 
+
+.campo-admin input:disabled,
+.campo-admin textarea:disabled,
+.campo-admin select:disabled {
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    cursor: not-allowed;
+}
+
+
 .campo-ancho {
     grid-column: 1 / -1;
 }
+
 
 .bloque-formulario {
     margin-top: 26px;
 
     padding-top: 22px;
 
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid var(--borde-suave);
 }
+
 
 .bloque-formulario h4 {
     margin-bottom: 4px;
@@ -634,15 +882,63 @@ button {
     font-size: 16px;
 }
 
+
 .texto-ayuda {
-    color: #64748b;
+    color: var(--texto-secundario);
 
     font-size: 13px;
+
+    line-height: 1.5;
 }
 
 
 /* =========================================================
-   CATEGORÍAS
+   ACCIONES DE FORMULARIO
+========================================================= */
+
+.acciones-formulario {
+    margin-top: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   MENSAJES GENERALES DEL ADMIN
+========================================================= */
+
+.mensaje-admin {
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+.mensaje-ok {
+    color: #15803d;
+}
+
+
+.mensaje-error {
+    color: #dc2626;
+}
+
+
+.mensaje-info {
+    color: #2563eb;
+}
+/* =========================================================
+   ADMIN - CATEGORÍAS
 ========================================================= */
 
 .categorias-checks {
@@ -651,10 +947,11 @@ button {
     display: grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(4, minmax(0, 1fr));
 
     gap: 10px;
 }
+
 
 .categoria-check {
     min-height: 48px;
@@ -667,29 +964,44 @@ button {
 
     gap: 9px;
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 9px;
 
-    background: #f8fafc;
+    background: var(--fondo-suave);
+
+    color: #334155;
 
     cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
 }
+
 
 .categoria-check:hover {
     border-color: #93c5fd;
 
     background: #eff6ff;
+
+    transform: translateY(-1px);
 }
+
 
 .categoria-check input {
     width: 17px;
     height: 17px;
+
+    flex: 0 0 17px;
+
+    accent-color: var(--ceta-azul);
 }
 
 
 /* =========================================================
-   IMAGEN FORMULARIO
+   ADMIN - IMAGEN DEL MATERIAL
 ========================================================= */
 
 .imagen-formulario {
@@ -701,6 +1013,7 @@ button {
 
     gap: 20px;
 }
+
 
 .imagen-preview-contenedor {
     width: 160px;
@@ -716,12 +1029,13 @@ button {
 
     overflow: hidden;
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 12px;
 
-    background: #f8fafc;
+    background: var(--fondo-suave);
 }
+
 
 .imagen-preview {
     width: 100%;
@@ -729,8 +1043,11 @@ button {
 
     display: none;
 
+    padding: 6px;
+
     object-fit: contain;
 }
+
 
 .sin-imagen {
     width: 100%;
@@ -742,12 +1059,18 @@ button {
 
     justify-content: center;
 
+    color: #64748b;
+
     font-size: 48px;
 }
 
+
 .imagen-controles {
     flex: 1;
+
+    min-width: 0;
 }
+
 
 .imagen-controles input {
     width: 100%;
@@ -755,55 +1078,18 @@ button {
     margin-bottom: 8px;
 }
 
-.acciones-formulario {
-    margin-top: 25px;
-
-    display: flex;
-
-    gap: 10px;
-
-    flex-wrap: wrap;
-}
-
 
 /* =========================================================
-   MENSAJES
-========================================================= */
-
-.mensaje-admin {
-    min-height: 20px;
-
-    margin-top: 15px;
-
-    font-size: 14px;
-
-    font-weight: bold;
-}
-
-.mensaje-ok {
-    color: #15803d;
-}
-
-.mensaje-error {
-    color: #dc2626;
-}
-
-.mensaje-info {
-    color: #2563eb;
-}
-
-
-/* =========================================================
-   BUSCADOR
+   ADMIN - BUSCADOR
 ========================================================= */
 
 .buscador-materiales {
-    width: min(100%, 320px);
+    width: min(100%, 340px);
 }
 
 
 /* =========================================================
-   GRID MATERIALES
+   ADMIN - GRID DE MATERIALES
 ========================================================= */
 
 .materiales-grid {
@@ -815,27 +1101,47 @@ button {
     gap: 18px;
 }
 
+
 .material-card {
+    position: relative;
+
     overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
 
     background: #ffffff;
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 14px;
 
+    box-shadow:
+        0 2px 8px
+        rgba(15, 23, 42, 0.03);
+
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
+
 
 .material-card:hover {
     transform: translateY(-2px);
 
-    box-shadow:
-        0 8px 24px
-        rgba(15, 23, 42, 0.10);
+    border-color: #cbd5e1;
+
+    box-shadow: var(--sombra-hover);
 }
+
+
+/* =========================================================
+   ADMIN - IMAGEN TARJETA MATERIAL
+========================================================= */
 
 .material-imagen-wrapper {
     position: relative;
@@ -849,23 +1155,34 @@ button {
 
     justify-content: center;
 
+    overflow: hidden;
+
     background: #f1f5f9;
 
-    overflow: hidden;
+    border-bottom: 1px solid #e2e8f0;
 }
+
 
 .material-card-imagen {
     width: 100%;
     height: 100%;
 
-    object-fit: contain;
-
     padding: 10px;
+
+    object-fit: contain;
 }
+
 
 .material-card-sin-imagen {
+    color: #64748b;
+
     font-size: 62px;
 }
+
+
+/* =========================================================
+   ADMIN - ESTADO DEL MATERIAL
+========================================================= */
 
 .estado-material {
     position: absolute;
@@ -873,32 +1190,53 @@ button {
     top: 10px;
     right: 10px;
 
+    z-index: 2;
+
     padding: 6px 9px;
 
     border-radius: 20px;
 
-    color: white;
+    color: #ffffff;
 
     font-size: 11px;
 
     font-weight: bold;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.12);
 }
+
 
 .estado-disponible {
-    background: #16a34a;
+    background: var(--ceta-verde);
 }
+
 
 .estado-no-disponible {
-    background: #f59e0b;
+    background: var(--ceta-amarillo);
 }
+
 
 .estado-retirado {
-    background: #dc2626;
+    background: var(--ceta-rojo);
 }
 
+
+/* =========================================================
+   ADMIN - CONTENIDO TARJETA MATERIAL
+========================================================= */
+
 .material-card-contenido {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
     padding: 17px;
 }
+
 
 .material-card-cabecera {
     display: flex;
@@ -910,57 +1248,83 @@ button {
     gap: 12px;
 }
 
+
+.material-card-cabecera > div:first-child {
+    min-width: 0;
+}
+
+
 .material-codigo {
     display: block;
 
     margin-bottom: 4px;
 
-    color: #64748b;
+    color: var(--texto-secundario);
 
     font-size: 11px;
 
     font-weight: bold;
 
     text-transform: uppercase;
+
+    letter-spacing: 0.4px;
 }
 
+
 .material-card h3 {
-    color: #111827;
+    color: var(--texto-principal);
 
     font-size: 18px;
 
     line-height: 1.25;
+
+    overflow-wrap: anywhere;
 }
+
 
 .material-cantidad {
     min-width: 65px;
 
+    flex: 0 0 auto;
+
     text-align: right;
 }
+
 
 .material-cantidad strong {
     display: block;
 
-    color: #2563eb;
+    color: var(--ceta-azul);
 
     font-size: 24px;
+
+    line-height: 1.1;
 }
 
+
 .material-cantidad span {
-    color: #64748b;
+    color: var(--texto-secundario);
 
     font-size: 10px;
 }
 
+
 .material-descripcion {
     margin-top: 12px;
 
-    color: #64748b;
+    color: var(--texto-secundario);
 
     font-size: 13px;
 
     line-height: 1.5;
+
+    overflow-wrap: anywhere;
 }
+
+
+/* =========================================================
+   ADMIN - CATEGORÍAS EN TARJETA
+========================================================= */
 
 .material-categorias {
     margin-top: 14px;
@@ -971,6 +1335,7 @@ button {
 
     gap: 6px;
 }
+
 
 .material-categorias span {
     padding: 5px 8px;
@@ -986,8 +1351,15 @@ button {
     font-weight: bold;
 }
 
+
+/* =========================================================
+   ADMIN - ACCIONES DE MATERIAL
+========================================================= */
+
 .material-acciones {
-    margin-top: 17px;
+    margin-top: auto;
+
+    padding-top: 17px;
 
     display: flex;
 
@@ -995,6 +1367,7 @@ button {
 
     flex-wrap: wrap;
 }
+
 
 .material-acciones button {
     padding: 8px 10px;
@@ -1008,27 +1381,60 @@ button {
     font-size: 11px;
 
     font-weight: bold;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
 }
+
+
+.material-acciones button:hover {
+    transform: translateY(-1px);
+}
+
 
 .btn-editar {
-    background: #2563eb;
+    background: var(--ceta-azul);
 }
+
+
+.btn-editar:hover {
+    background: var(--ceta-azul-hover);
+}
+
 
 .btn-estado {
-    background: #f59e0b;
+    background: var(--ceta-amarillo);
 }
+
+
+.btn-estado:hover {
+    background: var(--ceta-amarillo-hover);
+}
+
 
 .btn-quitar {
-    background: #dc2626;
+    background: var(--ceta-rojo);
 }
 
+
+.btn-quitar:hover {
+    background: var(--ceta-rojo-hover);
+}
+
+
 .btn-restaurar {
-    background: #16a34a;
+    background: var(--ceta-verde);
+}
+
+
+.btn-restaurar:hover {
+    background: var(--ceta-verde-hover);
 }
 
 
 /* =========================================================
-   VACÍO
+   ADMIN - LISTA VACÍA
 ========================================================= */
 
 .lista-vacia {
@@ -1038,8 +1444,9 @@ button {
 
     text-align: center;
 
-    color: #64748b;
+    color: var(--texto-secundario);
 }
+
 
 .lista-vacia span {
     display: block;
@@ -1051,956 +1458,39 @@ button {
 
 
 /* =========================================================
-   PRÓXIMAMENTE
+   PANEL INFORMATIVO
 ========================================================= */
 
 .panel-proximamente {
     padding: 45px;
 
-    background: rgba(255, 255, 255, 0.96);
+    background:
+        rgba(255, 255, 255, 0.96);
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 14px;
 
     text-align: center;
+
+    box-shadow: var(--sombra);
 }
+
 
 .panel-proximamente h3 {
     margin-bottom: 8px;
+
+    color: var(--texto-principal);
 }
+
 
 .panel-proximamente p {
-    color: #64748b;
+    color: var(--texto-secundario);
 }
 
 
 /* =========================================================
-   MODO OSCURO
-========================================================= */
-
-body.modo-oscuro {
-    color: #e2e8f0;
-
-    background: #09111c;
-}
-
-body.modo-oscuro.admin-page {
-    background:
-        linear-gradient(
-            rgba(9, 17, 28, 0.96),
-            rgba(9, 17, 28, 0.96)
-        ),
-        url("../img/logo-ceta-transparente.png");
-
-    background-repeat: no-repeat;
-
-    background-position: center;
-
-    background-size: 520px;
-
-    background-attachment: fixed;
-}
-
-body.modo-oscuro .admin-tabs {
-    background: #111c2a;
-
-    border-color: #263548;
-}
-
-body.modo-oscuro .tab-btn {
-    background: #1e293b;
-
-    color: #e2e8f0;
-}
-
-body.modo-oscuro .tab-btn.activo {
-    background: #2563eb;
-
-    color: white;
-}
-
-body.modo-oscuro .seccion-titulo h2 {
-    color: #ffffff;
-}
-
-body.modo-oscuro .admin-card,
-body.modo-oscuro .material-card,
-body.modo-oscuro .panel-proximamente {
-    background: #111c2a;
-
-    border-color: #263548;
-}
-
-body.modo-oscuro .card-header p,
-body.modo-oscuro .texto-ayuda,
-body.modo-oscuro .material-descripcion,
-body.modo-oscuro .material-codigo,
-body.modo-oscuro .panel-proximamente p {
-    color: #94a3b8;
-}
-
-body.modo-oscuro .card-header h3,
-body.modo-oscuro .bloque-formulario h4,
-body.modo-oscuro .material-card h3 {
-    color: #ffffff;
-}
-
-body.modo-oscuro .campo-admin label {
-    color: #e2e8f0;
-}
-
-body.modo-oscuro .campo-admin input,
-body.modo-oscuro .campo-admin textarea,
-body.modo-oscuro .buscador-materiales input {
-    background: #1e293b;
-
-    border-color: #475569;
-
-    color: #ffffff;
-}
-
-body.modo-oscuro .bloque-formulario {
-    border-color: #263548;
-}
-
-body.modo-oscuro .categoria-check {
-    background: #1e293b;
-
-    border-color: #334155;
-}
-
-body.modo-oscuro .categoria-check:hover {
-    background: #243247;
-}
-
-body.modo-oscuro .imagen-preview-contenedor,
-body.modo-oscuro .material-imagen-wrapper {
-    background: #1e293b;
-
-    border-color: #334155;
-}
-
-body.modo-oscuro .material-categorias span {
-    background: #263548;
-
-    color: #e2e8f0;
-}
-
-body.modo-oscuro .btn-secundario {
-    background: #1e293b;
-
-    border-color: #475569;
-
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 1050px) {
-
-    .materiales-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .categorias-checks {
-        grid-template-columns:
-            repeat(3, 1fr);
-    }
-}
-
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .login-page {
-        background-size: 300px;
-    }
-
-    .login-card {
-        padding: 28px 20px;
-    }
-
-    .login-logo {
-        width: 88px;
-        height: 88px;
-    }
-
-    .login-card h1 {
-        font-size: 25px;
-    }
-
-
-    .admin-header-contenido {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-    .admin-identidad img {
-        width: 65px;
-        height: 65px;
-    }
-
-    .admin-identidad h1 {
-        font-size: 20px;
-    }
-
-    .btn-salir {
-        width: 100%;
-    }
-
-    .admin-tabs {
-        justify-content: flex-start;
-
-        overflow-x: auto;
-
-        flex-wrap: nowrap;
-    }
-
-    .tab-btn {
-        flex: 0 0 auto;
-
-        white-space: nowrap;
-    }
-
-    .admin-main {
-        padding:
-            20px 12px
-            50px;
-    }
-
-    .seccion-titulo {
-        align-items: stretch;
-
-        flex-direction: column;
-    }
-
-    .seccion-titulo .btn-principal {
-        width: 100%;
-    }
-
-    .admin-card {
-        padding: 17px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .campo-ancho {
-        grid-column: auto;
-    }
-
-    .categorias-checks {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .imagen-formulario {
-        align-items: stretch;
-
-        flex-direction: column;
-    }
-
-    .imagen-preview-contenedor {
-        width: 100%;
-        height: 180px;
-
-        flex: none;
-    }
-
-    .acciones-formulario {
-        flex-direction: column;
-    }
-
-    .acciones-formulario button {
-        width: 100%;
-    }
-
-    .card-header-listado {
-        align-items: stretch;
-
-        flex-direction: column;
-    }
-
-    .buscador-materiales {
-        width: 100%;
-    }
-
-    .materiales-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .material-imagen-wrapper {
-        height: 230px;
-    }
-
-}
-
-
-/* =========================================================
-   TELÉFONOS PEQUEÑOS
-========================================================= */
-
-@media (max-width: 430px) {
-
-    .categorias-checks {
-        grid-template-columns: 1fr;
-    }
-
-    .material-card-cabecera {
-        flex-direction: column;
-    }
-
-    .material-cantidad {
-        text-align: left;
-    }
-}
-/* =========================================================
-   PANEL DOCENTE - MATERIAL DE GABINETE
-========================================================= */
-
-.docente-page {
-    min-height: 100vh;
-
-    background:
-        linear-gradient(
-            rgba(244, 246, 248, 0.95),
-            rgba(244, 246, 248, 0.95)
-        ),
-        url("../img/logo-ceta-transparente.png");
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 520px;
-    background-attachment: fixed;
-}
-
-
-/* =========================================================
-   HEADER DOCENTE
-========================================================= */
-
-.docente-header {
-    background: #111c2a;
-
-    color: #ffffff;
-
-    border-bottom: 1px solid #263548;
-}
-
-.docente-header-contenido {
-    max-width: 1400px;
-
-    margin: 0 auto;
-
-    padding: 20px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 20px;
-}
-
-.docente-identidad {
-    display: flex;
-
-    align-items: center;
-
-    gap: 16px;
-}
-
-.docente-identidad img {
-    width: 80px;
-    height: 80px;
-
-    object-fit: contain;
-
-    background: #ffffff;
-
-    padding: 8px;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 4px 12px
-        rgba(0, 0, 0, 0.15);
-}
-
-.docente-identidad h1 {
-    margin-bottom: 5px;
-
-    font-size: 24px;
-}
-
-.docente-identidad > div > p:last-child {
-    color: #cbd5e1;
-
-    font-size: 14px;
-}
-
-.docente-etiqueta {
-    margin-bottom: 4px;
-
-    color: #94a3b8;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================================================
-   TABS DOCENTE
-========================================================= */
-
-.docente-tabs {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 30;
-
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-
-    padding: 10px;
-
-    background: #ffffff;
-
-    border-bottom: 1px solid #dbe2ea;
-
-    box-shadow:
-        0 3px 10px
-        rgba(0, 0, 0, 0.05);
-}
-
-.docente-tab {
-    padding: 10px 16px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #e9eef4;
-
-    color: #334155;
-
-    font-weight: bold;
-}
-
-.docente-tab:hover {
-    background: #dce5ef;
-}
-
-.docente-tab.activo {
-    background: #2563eb;
-
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   CONTENIDO
-========================================================= */
-
-.docente-main {
-    max-width: 1400px;
-
-    margin: 0 auto;
-
-    padding: 25px 20px 60px;
-}
-
-.docente-panel {
-    display: none;
-}
-
-.docente-panel.activo {
-    display: block;
-}
-
-.docente-card {
-    margin-bottom: 24px;
-
-    padding: 24px;
-
-    background: rgba(255, 255, 255, 0.97);
-
-    border: 1px solid #dbe2ea;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 16px
-        rgba(15, 23, 42, 0.06);
-}
-
-
-/* =========================================================
-   DATOS RESERVA
-========================================================= */
-
-.reserva-datos-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 18px;
-}
-
-.campo-admin select {
-    width: 100%;
-
-    padding: 12px 13px;
-
-    border: 1px solid #cbd5e1;
-
-    border-radius: 8px;
-
-    background: #ffffff;
-
-    color: #111827;
-
-    outline: none;
-}
-
-.campo-admin select:focus {
-    border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(37, 99, 235, 0.10);
-}
-
-
-/* =========================================================
-   FILTROS
-========================================================= */
-
-.filtros-material-docente {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-bottom: 20px;
-}
-
-
-/* =========================================================
-   MENSAJES
-========================================================= */
-
-.mensaje-docente {
-    min-height: 20px;
-
-    margin: 12px 0;
-
-    color: #64748b;
-
-    font-size: 14px;
-
-    font-weight: bold;
-}
-
-.mensaje-docente-ok {
-    color: #15803d;
-}
-
-.mensaje-docente-error {
-    color: #dc2626;
-}
-
-
-/* =========================================================
-   CATÁLOGO
-========================================================= */
-
-.catalogo-materiales-docente {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-top: 18px;
-}
-
-.docente-material-card {
-    overflow: hidden;
-
-    display: flex;
-
-    flex-direction: column;
-
-    background: #ffffff;
-
-    border: 1px solid #dbe2ea;
-
-    border-radius: 14px;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.docente-material-card:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 22px
-        rgba(15, 23, 42, 0.10);
-}
-
-.docente-material-imagen {
-    height: 210px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    overflow: hidden;
-
-    background: #f1f5f9;
-}
-
-.docente-material-imagen img {
-    width: 100%;
-    height: 100%;
-
-    padding: 10px;
-
-    object-fit: contain;
-}
-
-.docente-material-sin-imagen {
-    font-size: 60px;
-}
-
-.docente-material-info {
-    flex: 1;
-
-    display: flex;
-
-    flex-direction: column;
-
-    padding: 17px;
-}
-
-.docente-material-info h3 {
-    margin-bottom: 8px;
-
-    color: #111827;
-
-    font-size: 18px;
-}
-
-.docente-material-info > p {
-    margin-bottom: 12px;
-
-    color: #64748b;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   DISPONIBILIDAD
-========================================================= */
-
-.disponibilidad-box {
-    margin-top: 15px;
-
-    padding: 12px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    border-radius: 9px;
-
-    background: #ecfdf5;
-
-    color: #166534;
-}
-
-.disponibilidad-box span {
-    font-size: 13px;
-
-    font-weight: bold;
-}
-
-.disponibilidad-box strong {
-    font-size: 25px;
-}
-
-.ya-seleccionado {
-    margin-top: 8px;
-
-    padding: 7px 10px;
-
-    border-radius: 7px;
-
-    background: #eff6ff;
-
-    color: #1d4ed8;
-
-    font-size: 12px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   SELECTOR CANTIDAD
-========================================================= */
-
-.selector-cantidad {
-    margin-top: 12px;
-
-    display: grid;
-
-    grid-template-columns: 80px 1fr;
-
-    gap: 8px;
-}
-
-.selector-cantidad input {
-    width: 100%;
-
-    padding: 10px;
-
-    border: 1px solid #cbd5e1;
-
-    border-radius: 7px;
-
-    text-align: center;
-}
-
-.selector-cantidad button {
-    border: none;
-
-    border-radius: 7px;
-
-    background: #2563eb;
-
-    color: #ffffff;
-
-    font-weight: bold;
-}
-
-.selector-cantidad button:hover {
-    background: #1d4ed8;
-}
-
-.selector-cantidad button:disabled,
-.selector-cantidad input:disabled {
-    opacity: 0.5;
-
-    cursor: not-allowed;
-}
-
-.catalogo-vacio {
-    grid-column: 1 / -1;
-
-    padding: 45px;
-
-    text-align: center;
-
-    color: #64748b;
-}
-
-.catalogo-vacio span {
-    display: block;
-
-    margin-bottom: 10px;
-
-    font-size: 50px;
-}
-
-
-/* =========================================================
-   CARRITO
-========================================================= */
-
-.carrito-materiales {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-.carrito-vacio {
-    padding: 35px;
-
-    text-align: center;
-
-    color: #64748b;
-
-    border: 1px dashed #cbd5e1;
-
-    border-radius: 10px;
-}
-
-.carrito-vacio span {
-    display: block;
-
-    margin-bottom: 8px;
-
-    font-size: 40px;
-}
-
-.carrito-item {
-    padding: 12px;
-
-    display: grid;
-
-    grid-template-columns:
-        70px
-        minmax(150px, 1fr)
-        110px
-        auto;
-
-    align-items: center;
-
-    gap: 12px;
-
-    border: 1px solid #dbe2ea;
-
-    border-radius: 10px;
-
-    background: #f8fafc;
-}
-
-.carrito-item-imagen {
-    width: 70px;
-    height: 60px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    overflow: hidden;
-
-    border-radius: 8px;
-
-    background: #ffffff;
-}
-
-.carrito-item-imagen img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-}
-
-.carrito-icono {
-    font-size: 30px;
-}
-
-.carrito-item-info {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-.carrito-item-info span {
-    color: #64748b;
-
-    font-size: 12px;
-}
-
-.carrito-item-cantidad {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
-}
-
-.carrito-item-cantidad label {
-    color: #64748b;
-
-    font-size: 11px;
-}
-
-.carrito-item-cantidad input {
-    width: 100%;
-
-    padding: 8px;
-
-    border: 1px solid #cbd5e1;
-
-    border-radius: 7px;
-}
-
-.btn-eliminar-carrito {
-    padding: 9px 11px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #dc2626;
-
-    color: white;
-
-    font-weight: bold;
-}
-
-.carrito-footer {
-    margin-top: 20px;
-
-    padding-top: 18px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
-
-    border-top: 1px solid #e2e8f0;
-}
-
-
-/* =========================================================
-   CONTROLES SEMANA
+   RESERVAS - CONTROLES DE SEMANA
 ========================================================= */
 
 .semana-controles {
@@ -2018,10 +1508,27 @@ body.modo-oscuro .btn-secundario {
 
     background: #ffffff;
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(15, 23, 42, 0.04);
 }
+
+
+.semana-controles > div {
+    min-width: 0;
+
+    text-align: center;
+}
+
+
+.semana-controles strong {
+    color: var(--texto-principal);
+}
+
 
 .btn-semana {
     padding: 9px 13px;
@@ -2035,15 +1542,24 @@ body.modo-oscuro .btn-secundario {
     color: #334155;
 
     font-weight: bold;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
+
 
 .btn-semana:hover {
     background: #dce5ef;
+
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   TABLA SEMANAL
+   RESERVAS - TABLA SEMANAL
 ========================================================= */
 
 .tabla-semanal-wrapper {
@@ -2051,12 +1567,19 @@ body.modo-oscuro .btn-secundario {
 
     overflow-x: auto;
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 12px;
 
     background: #ffffff;
+
+    box-shadow:
+        0 3px 12px
+        rgba(15, 23, 42, 0.05);
+
+    -webkit-overflow-scrolling: touch;
 }
+
 
 .tabla-semanal-material {
     width: 100%;
@@ -2067,6 +1590,7 @@ body.modo-oscuro .btn-secundario {
 
     table-layout: fixed;
 }
+
 
 .tabla-semanal-material th,
 .tabla-semanal-material td {
@@ -2079,13 +1603,33 @@ body.modo-oscuro .btn-secundario {
     border-bottom: 1px solid #e2e8f0;
 }
 
-.tabla-semanal-material thead th {
-    background: #111c2a;
 
-    color: white;
+.tabla-semanal-material th:last-child,
+.tabla-semanal-material td:last-child {
+    border-right: none;
+}
+
+
+.tabla-semanal-material tbody tr:last-child td,
+.tabla-semanal-material tbody tr:last-child th {
+    border-bottom: none;
+}
+
+
+.tabla-semanal-material thead th {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 2;
+
+    background: var(--ceta-oscuro);
+
+    color: #ffffff;
 
     text-align: center;
 }
+
 
 .tabla-semanal-material thead small {
     display: block;
@@ -2093,7 +1637,10 @@ body.modo-oscuro .btn-secundario {
     margin-top: 4px;
 
     color: #cbd5e1;
+
+    font-size: 11px;
 }
+
 
 .horario-columna {
     width: 130px;
@@ -2105,7 +1652,10 @@ body.modo-oscuro .btn-secundario {
     text-align: center;
 
     vertical-align: middle !important;
+
+    font-weight: bold;
 }
+
 
 .celda-vacia {
     color: #94a3b8;
@@ -2117,24 +1667,34 @@ body.modo-oscuro .btn-secundario {
 
 
 /* =========================================================
-   TARJETA RESERVA TABLA
+   RESERVAS - TARJETA SEMANAL
 ========================================================= */
 
 .reserva-semanal-card {
+    position: relative;
+
     margin-bottom: 8px;
 
     padding: 10px;
+
+    overflow: hidden;
 
     border: 1px solid #bfdbfe;
 
     border-radius: 9px;
 
     background: #eff6ff;
+
+    box-shadow:
+        0 1px 4px
+        rgba(37, 99, 235, 0.05);
 }
+
 
 .reserva-semanal-card:last-child {
     margin-bottom: 0;
 }
+
 
 .reserva-docente-nombre {
     display: block;
@@ -2146,7 +1706,10 @@ body.modo-oscuro .btn-secundario {
     font-size: 13px;
 
     font-weight: bold;
+
+    overflow-wrap: anywhere;
 }
+
 
 .reserva-semanal-card p {
     margin-bottom: 5px;
@@ -2155,8 +1718,11 @@ body.modo-oscuro .btn-secundario {
 
     font-size: 11px;
 
-    line-height: 1.4;
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
 }
+
 
 .reserva-semanal-card ul {
     margin: 7px 0 0 16px;
@@ -2165,6 +1731,20 @@ body.modo-oscuro .btn-secundario {
 
     font-size: 11px;
 }
+
+
+.reserva-semanal-card li {
+    margin-bottom: 4px;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   RESERVA PROPIA
+========================================================= */
 
 .reserva-propia {
     display: inline-block;
@@ -2175,250 +1755,144 @@ body.modo-oscuro .btn-secundario {
 
     border-radius: 20px;
 
-    background: #2563eb;
+    background: var(--ceta-azul);
 
-    color: white;
+    color: #ffffff;
 
     font-size: 10px;
 
     font-weight: bold;
 }
 
-.btn-cancelar-reserva-docente {
-    width: 100%;
 
-    margin-top: 8px;
+/* =========================================================
+   ESTADOS DE RESERVA
+========================================================= */
 
-    padding: 7px;
+.estado-reserva-admin {
+    display: inline-flex;
 
-    border: none;
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 7px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+}
+
+
+.estado-reserva-reservada {
+    background: var(--ceta-azul);
+}
+
+
+/*
+   Estado nuevo:
+   el material ya fue entregado físicamente.
+*/
+.estado-reserva-entregada {
+    background: #7c3aed;
+}
+
+
+.estado-reserva-parcial {
+    background: var(--ceta-amarillo);
+}
+
+
+.estado-reserva-completada {
+    background: var(--ceta-verde);
+}
+
+
+.estado-reserva-cancelada {
+    background: var(--ceta-rojo);
+}
+
+
+/* =========================================================
+   INDICADORES DE MATERIAL EN LA RESERVA
+========================================================= */
+
+.material-entregado,
+.material-devuelto,
+.material-no-entregado {
+    display: inline-block;
+
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+.material-entregado {
+    color: #7c3aed;
+}
+
+
+.material-devuelto {
+    color: #15803d;
+}
+
+
+.material-no-entregado {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   OBSERVACIONES EN TARJETA DE RESERVA
+========================================================= */
+
+.observacion-entrega-inline,
+.observacion-devolucion-inline {
+    display: block;
+
+    margin-top: 5px;
+
+    padding: 5px 7px;
 
     border-radius: 6px;
 
-    background: #dc2626;
-
-    color: white;
-
     font-size: 10px;
 
-    font-weight: bold;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+.observacion-entrega-inline {
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+
+.observacion-devolucion-inline {
+    background: #dbeafe;
+
+    color: #1e40af;
 }
 
 
 /* =========================================================
-   MODO OSCURO DOCENTE
-========================================================= */
-
-body.modo-oscuro.docente-page {
-    background:
-        linear-gradient(
-            rgba(9, 17, 28, 0.96),
-            rgba(9, 17, 28, 0.96)
-        ),
-        url("../img/logo-ceta-transparente.png");
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 520px;
-    background-attachment: fixed;
-}
-
-body.modo-oscuro .docente-tabs,
-body.modo-oscuro .docente-card,
-body.modo-oscuro .semana-controles,
-body.modo-oscuro .tabla-semanal-wrapper {
-    background: #111c2a;
-
-    border-color: #263548;
-}
-
-body.modo-oscuro .docente-tab,
-body.modo-oscuro .btn-semana {
-    background: #1e293b;
-
-    color: #e2e8f0;
-}
-
-body.modo-oscuro .docente-tab.activo {
-    background: #2563eb;
-
-    color: white;
-}
-
-body.modo-oscuro .docente-material-card {
-    background: #111c2a;
-
-    border-color: #263548;
-}
-
-body.modo-oscuro .docente-material-imagen {
-    background: #1e293b;
-}
-
-body.modo-oscuro .docente-material-info h3 {
-    color: #ffffff;
-}
-
-body.modo-oscuro .docente-material-info > p {
-    color: #94a3b8;
-}
-
-body.modo-oscuro .carrito-item {
-    background: #1e293b;
-
-    border-color: #334155;
-}
-
-body.modo-oscuro .carrito-item-imagen {
-    background: #111c2a;
-}
-
-body.modo-oscuro .carrito-vacio {
-    border-color: #475569;
-
-    color: #94a3b8;
-}
-
-body.modo-oscuro .carrito-footer {
-    border-color: #263548;
-}
-
-body.modo-oscuro .campo-admin select,
-body.modo-oscuro .selector-cantidad input,
-body.modo-oscuro .carrito-item-cantidad input {
-    background: #1e293b;
-
-    border-color: #475569;
-
-    color: white;
-}
-
-body.modo-oscuro .tabla-semanal-material th,
-body.modo-oscuro .tabla-semanal-material td {
-    border-color: #263548;
-}
-
-body.modo-oscuro .horario-columna {
-    background: #1e293b;
-
-    color: #e2e8f0;
-}
-
-body.modo-oscuro .reserva-semanal-card {
-    background: #172554;
-
-    border-color: #1d4ed8;
-}
-
-body.modo-oscuro .reserva-semanal-card p,
-body.modo-oscuro .reserva-semanal-card ul {
-    color: #dbeafe;
-}
-
-body.modo-oscuro .reserva-docente-nombre {
-    color: #93c5fd;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 1050px) {
-
-    .catalogo-materiales-docente {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-}
-
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .docente-header-contenido {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-    .docente-identidad img {
-        width: 65px;
-        height: 65px;
-    }
-
-    .docente-identidad h1 {
-        font-size: 20px;
-    }
-
-    .docente-tabs {
-        justify-content: flex-start;
-
-        flex-wrap: nowrap;
-
-        overflow-x: auto;
-    }
-
-    .docente-tab {
-        flex: 0 0 auto;
-
-        white-space: nowrap;
-    }
-
-    .docente-main {
-        padding:
-            20px 12px
-            50px;
-    }
-
-    .docente-card {
-        padding: 17px;
-    }
-
-    .reserva-datos-grid,
-    .filtros-material-docente,
-    .catalogo-materiales-docente {
-        grid-template-columns: 1fr;
-    }
-
-    .docente-material-imagen {
-        height: 230px;
-    }
-
-    .carrito-item {
-        grid-template-columns:
-            60px 1fr;
-    }
-
-    .carrito-item-cantidad,
-    .btn-eliminar-carrito {
-        grid-column: 1 / -1;
-    }
-
-    .carrito-footer {
-        align-items: stretch;
-
-        flex-direction: column;
-    }
-
-    .carrito-footer button {
-        width: 100%;
-    }
-
-    .semana-controles {
-        flex-direction: column;
-    }
-
-    .semana-controles button {
-        width: 100%;
-    }
-
-}
-/* =========================================================
-   ADMIN RESERVAS Y ENTREGAS
+   ADMIN - ACCIONES DE RESERVA
 ========================================================= */
 
 .acciones-reserva-admin {
@@ -2432,9 +1906,148 @@ body.modo-oscuro .reserva-docente-nombre {
 }
 
 
-.btn-gestionar-entrega,
-.btn-cancelar-reserva-admin {
+.acciones-reserva-admin button {
     width: 100%;
+
+    padding: 7px 8px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    line-height: 1.3;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.acciones-reserva-admin button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+
+.acciones-reserva-admin button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ✓ MATERIAL ENTREGADO
+========================================================= */
+
+.btn-confirmar-entrega,
+.btn-material-entregado,
+.btn-gestionar-entrega {
+    background: var(--ceta-verde);
+}
+
+
+.btn-confirmar-entrega:hover,
+.btn-material-entregado:hover,
+.btn-gestionar-entrega:hover {
+    background: var(--ceta-verde-hover);
+}
+
+
+/* =========================================================
+   ✏ EDITAR RESERVA ADMIN
+========================================================= */
+
+.btn-editar-reserva-admin {
+    background: var(--ceta-azul);
+}
+
+
+.btn-editar-reserva-admin:hover {
+    background: var(--ceta-azul-hover);
+}
+
+
+/* =========================================================
+   CANCELAR RESERVA ADMIN
+========================================================= */
+
+.btn-cancelar-reserva-admin {
+    background: var(--ceta-rojo);
+}
+
+
+.btn-cancelar-reserva-admin:hover {
+    background: var(--ceta-rojo-hover);
+}
+
+
+/* =========================================================
+   ↩ GESTIONAR DEVOLUCIÓN
+========================================================= */
+
+.btn-devolucion,
+.btn-gestionar-devolucion {
+    background: #7c3aed;
+}
+
+
+.btn-devolucion:hover,
+.btn-gestionar-devolucion:hover {
+    background: #6d28d9;
+}
+
+
+/* =========================================================
+   BOTÓN PDF
+========================================================= */
+
+.btn-pdf,
+.btn-generar-pdf {
+    background: #334155;
+
+    color: #ffffff;
+}
+
+
+.btn-pdf:hover,
+.btn-generar-pdf:hover {
+    background: #1e293b;
+}
+
+
+/* =========================================================
+   ADMIN - BOTÓN EDITAR GENÉRICO EN RESERVA
+========================================================= */
+
+/*
+   Algunos botones generados por JavaScript pueden conservar
+   la clase .btn-editar. Dentro de acciones de reserva
+   mantenemos el tamaño compacto.
+*/
+
+.acciones-reserva-admin .btn-editar {
+    width: 100%;
+
+    background: var(--ceta-azul);
+}
+
+
+/* =========================================================
+   BOTÓN CANCELAR DOCENTE
+   BASE COMPARTIDA PARA LA TABLA
+========================================================= */
+
+.btn-cancelar-reserva-docente {
+    width: 100%;
+
+    margin-top: 8px;
 
     padding: 7px;
 
@@ -2442,67 +2055,111 @@ body.modo-oscuro .reserva-docente-nombre {
 
     border-radius: 6px;
 
-    color: white;
+    background: var(--ceta-rojo);
+
+    color: #ffffff;
 
     font-size: 10px;
 
     font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 
-.btn-gestionar-entrega {
-    background: #2563eb;
-}
+.btn-cancelar-reserva-docente:hover {
+    background: var(--ceta-rojo-hover);
 
-
-.btn-cancelar-reserva-admin {
-    background: #dc2626;
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   ESTADOS
+   ✏ EDITAR RESERVA DOCENTE
 ========================================================= */
 
-.estado-reserva-admin {
-    display: inline-block;
+.btn-editar-reserva-docente {
+    width: 100%;
 
-    margin-bottom: 7px;
+    margin-top: 8px;
 
-    padding: 4px 7px;
+    padding: 7px;
 
-    border-radius: 20px;
+    border: none;
 
-    color: white;
+    border-radius: 6px;
 
-    font-size: 9px;
+    background: var(--ceta-azul);
+
+    color: #ffffff;
+
+    font-size: 10px;
 
     font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 
-.estado-reserva-reservada {
-    background: #2563eb;
-}
+.btn-editar-reserva-docente:hover {
+    background: var(--ceta-azul-hover);
 
-
-.estado-reserva-parcial {
-    background: #f59e0b;
-}
-
-
-.estado-reserva-completada {
-    background: #16a34a;
-}
-
-
-.estado-reserva-cancelada {
-    background: #dc2626;
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   LISTA DE ENTREGAS
+   ACCIONES DOCENTE EN RESERVA
+========================================================= */
+
+.acciones-reserva-docente {
+    margin-top: 8px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.acciones-reserva-docente
+.btn-editar-reserva-docente,
+.acciones-reserva-docente
+.btn-cancelar-reserva-docente {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   MENSAJE DE RESERVA NO MODIFICABLE
+========================================================= */
+
+.reserva-no-modificable {
+    display: block;
+
+    margin-top: 8px;
+
+    padding: 6px 8px;
+
+    border-radius: 6px;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+}
+/* =========================================================
+   ADMIN - LISTA DE ENTREGAS / DEVOLUCIONES
 ========================================================= */
 
 .lista-entregas {
@@ -2525,32 +2182,61 @@ body.modo-oscuro .reserva-docente-nombre {
 
     gap: 20px;
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 11px;
 
-    background: #f8fafc;
+    background: var(--fondo-suave);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.entrega-card:hover {
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 5px 15px
+        rgba(15, 23, 42, 0.06);
+
+    transform: translateY(-1px);
+}
+
+
+.entrega-card > div {
+    min-width: 0;
 }
 
 
 .entrega-card h3 {
     margin: 4px 0 6px;
 
-    color: #111827;
+    color: var(--texto-principal);
+
+    font-size: 17px;
+
+    overflow-wrap: anywhere;
 }
 
 
 .entrega-card p {
     margin: 3px 0;
 
-    color: #64748b;
+    color: var(--texto-secundario);
 
     font-size: 13px;
+
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
 }
 
 
 .entrega-fecha {
-    color: #2563eb;
+    color: var(--ceta-azul);
 
     font-size: 12px;
 
@@ -2566,11 +2252,43 @@ body.modo-oscuro .reserva-docente-nombre {
     color: #b45309;
 
     font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.entrega-card button {
+    flex: 0 0 auto;
+
+    padding: 10px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #7c3aed;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.entrega-card button:hover {
+    background: #6d28d9;
+
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   DETALLE DE DEVOLUCIÓN
+   ADMIN - PANEL DE ENTREGA / DEVOLUCIÓN
 ========================================================= */
 
 .detalle-entrega {
@@ -2589,42 +2307,2695 @@ body.modo-oscuro .reserva-docente-nombre {
 
     grid-template-columns:
         minmax(180px, 1fr)
-        190px
+        minmax(170px, 0.65fr)
         minmax(220px, 1fr);
 
     gap: 18px;
 
     align-items: start;
 
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--borde);
 
     border-radius: 11px;
 
-    background: #f8fafc;
+    background: var(--fondo-suave);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.detalle-entrega-item:hover {
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 3px 10px
+        rgba(15, 23, 42, 0.05);
+}
+
+
+.detalle-entrega-info {
+    min-width: 0;
 }
 
 
 .detalle-entrega-info h4 {
     margin-bottom: 8px;
 
-    color: #111827;
+    color: var(--texto-principal);
+
+    font-size: 15px;
+
+    overflow-wrap: anywhere;
 }
 
 
 .detalle-entrega-info p {
     margin-bottom: 4px;
 
-    color: #64748b;
+    color: var(--texto-secundario);
 
     font-size: 13px;
+
+    line-height: 1.45;
 }
 
 
 /* =========================================================
-   OSCURO
+   CHECKBOX DE ENTREGA / DEVOLUCIÓN
 ========================================================= */
 
-body.modo-oscuro .entrega-card,
+.check-entrega-contenedor,
+.check-devolucion-contenedor,
+.entrega-check,
+.devolucion-check {
+    min-height: 48px;
+
+    padding: 10px 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.check-entrega-contenedor:hover,
+.check-devolucion-contenedor:hover,
+.entrega-check:hover,
+.devolucion-check:hover {
+    border-color: #93c5fd;
+
+    background: #eff6ff;
+}
+
+
+.check-entrega-contenedor input,
+.check-devolucion-contenedor input,
+.entrega-check input,
+.devolucion-check input,
+.check-entrega-fisica,
+.check-devuelto {
+    width: 20px;
+    height: 20px;
+
+    flex: 0 0 20px;
+
+    accent-color: var(--ceta-verde);
+
+    cursor: pointer;
+}
+
+
+.check-entrega-fisica:disabled,
+.check-devuelto:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CHECKBOX DIRECTAMENTE GENERADO POR JS
+========================================================= */
+
+.detalle-entrega-item label {
+    color: #334155;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+}
+
+
+.detalle-entrega-item
+input[type="checkbox"] {
+    accent-color: var(--ceta-verde);
+}
+
+
+/* =========================================================
+   MATERIAL YA DEVUELTO
+========================================================= */
+
+.material-ya-devuelto {
+    padding: 8px 10px;
+
+    border: 1px solid #bbf7d0;
+
+    border-radius: 8px;
+
+    background: #f0fdf4;
+
+    color: #166534;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   OBSERVACIONES DE ENTREGA Y DEVOLUCIÓN
+========================================================= */
+
+.observacion-entrega-detalle,
+.observacion-devolucion {
+    width: 100%;
+
+    min-height: 78px;
+
+    padding: 10px 11px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    outline: none;
+
+    resize: vertical;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.observacion-entrega-detalle:focus,
+.observacion-devolucion:focus {
+    border-color: var(--ceta-azul);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   OBSERVACIÓN DE ENTREGA MOSTRADA EN DEVOLUCIÓN
+========================================================= */
+
+.observacion-entrega-previa {
+    margin-bottom: 8px;
+
+    padding: 8px 10px;
+
+    border-left: 4px solid var(--ceta-amarillo);
+
+    border-radius: 6px;
+
+    background: #fffbeb;
+
+    color: #92400e;
+
+    font-size: 12px;
+
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   OBSERVACIÓN GENERAL DE ENTREGA
+========================================================= */
+
+#observacionGeneralEntrega {
+    width: 100%;
+
+    min-height: 90px;
+
+    padding: 11px 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    outline: none;
+
+    resize: vertical;
+}
+
+
+#observacionGeneralEntrega:focus {
+    border-color: var(--ceta-azul);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   DATOS DE LA RESERVA EN ENTREGA
+========================================================= */
+
+#datosReservaEntregaFisica,
+#datosReservaEntrega {
+    margin-bottom: 18px;
+
+    padding: 14px;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+
+    color: #334155;
+}
+
+
+#datosReservaEntregaFisica p,
+#datosReservaEntrega p {
+    margin-bottom: 5px;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+}
+
+
+#datosReservaEntregaFisica p:last-child,
+#datosReservaEntrega p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   PANEL CONFIRMAR ENTREGA FÍSICA
+========================================================= */
+
+#panelConfirmarEntrega {
+    scroll-margin-top: 90px;
+}
+
+
+#panelConfirmarEntrega .admin-card {
+    border-top:
+        4px solid
+        var(--ceta-verde);
+}
+
+
+#detalleEntregaFisica {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   PANEL GESTIÓN DE DEVOLUCIÓN
+========================================================= */
+
+#panelGestionEntrega {
+    scroll-margin-top: 90px;
+}
+
+
+#panelGestionEntrega .admin-card {
+    border-top:
+        4px solid
+        #7c3aed;
+}
+
+
+/* =========================================================
+   BOTONES DEL PANEL DE ENTREGA
+========================================================= */
+
+#btnConfirmarEntregaFisica,
+#btnGuardarDevolucion {
+    background: var(--ceta-verde);
+}
+
+
+#btnConfirmarEntregaFisica:hover,
+#btnGuardarDevolucion:hover {
+    background: var(--ceta-verde-hover);
+}
+
+
+#btnCancelarEntregaFisica,
+#btnCancelarGestionEntrega {
+    background: #ffffff;
+
+    color: #334155;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+#btnCancelarEntregaFisica:hover,
+#btnCancelarGestionEntrega:hover {
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   ADMIN - PANEL EDITAR RESERVA
+========================================================= */
+
+#panelEditarReserva {
+    scroll-margin-top: 90px;
+}
+
+
+#panelEditarReserva .admin-card {
+    border-top:
+        4px solid
+        var(--ceta-azul);
+}
+
+
+/* =========================================================
+   ADMIN - DATOS EDICIÓN DE RESERVA
+========================================================= */
+
+#panelEditarReserva .reserva-datos-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   ADMIN - FILTROS EDICIÓN
+========================================================= */
+
+#panelEditarReserva
+.filtros-material-docente {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   ADMIN - CATÁLOGO DE EDICIÓN
+========================================================= */
+
+#editarCatalogoMateriales {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   ADMIN - CARRITO DE EDICIÓN
+========================================================= */
+
+#editarCarritoMateriales {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   TARJETA DE MATERIAL PARA EDICIÓN
+========================================================= */
+
+.docente-material-card {
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    background: #ffffff;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 14px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.docente-material-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #bfdbfe;
+
+    box-shadow: var(--sombra-hover);
+}
+
+
+.docente-material-imagen {
+    height: 210px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #f1f5f9;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+.docente-material-imagen img {
+    width: 100%;
+    height: 100%;
+
+    padding: 10px;
+
+    object-fit: contain;
+}
+
+
+.docente-material-sin-imagen {
+    color: #64748b;
+
+    font-size: 60px;
+}
+
+
+.docente-material-info {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 17px;
+}
+
+
+.docente-material-info h3 {
+    margin-bottom: 8px;
+
+    color: var(--texto-principal);
+
+    font-size: 18px;
+
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+}
+
+
+.docente-material-info > p {
+    margin-bottom: 12px;
+
+    color: var(--texto-secundario);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DISPONIBILIDAD DE MATERIAL
+========================================================= */
+
+.disponibilidad-box {
+    margin-top: 15px;
+
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    border: 1px solid #bbf7d0;
+
+    border-radius: 9px;
+
+    background: #ecfdf5;
+
+    color: #166534;
+}
+
+
+.disponibilidad-box span {
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+.disponibilidad-box strong {
+    font-size: 25px;
+
+    line-height: 1;
+}
+
+
+.ya-seleccionado {
+    margin-top: 8px;
+
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   SELECTOR DE CANTIDAD
+========================================================= */
+
+.selector-cantidad {
+    margin-top: auto;
+
+    padding-top: 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        80px
+        minmax(0, 1fr);
+
+    gap: 8px;
+}
+
+
+.selector-cantidad input {
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 10px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    text-align: center;
+
+    outline: none;
+}
+
+
+.selector-cantidad input:focus {
+    border-color: var(--ceta-azul);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+.selector-cantidad button {
+    border: none;
+
+    border-radius: 7px;
+
+    background: var(--ceta-azul);
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.selector-cantidad button:hover:not(:disabled) {
+    background: var(--ceta-azul-hover);
+
+    transform: translateY(-1px);
+}
+
+
+.selector-cantidad button:disabled,
+.selector-cantidad input:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CATÁLOGO VACÍO
+========================================================= */
+
+.catalogo-vacio {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: var(--texto-secundario);
+}
+
+
+.catalogo-vacio span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 50px;
+}
+
+
+/* =========================================================
+   CARRITO DE EDICIÓN / RESERVA
+========================================================= */
+
+.carrito-materiales {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.carrito-vacio {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    color: var(--texto-secundario);
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 10px;
+
+    background:
+        rgba(248, 250, 252, 0.55);
+}
+
+
+.carrito-vacio span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 40px;
+}
+
+
+.carrito-item {
+    padding: 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        70px
+        minmax(150px, 1fr)
+        110px
+        auto;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 10px;
+
+    background: var(--fondo-suave);
+}
+
+
+.carrito-item-imagen {
+    width: 70px;
+    height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+}
+
+
+.carrito-item-imagen img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+.carrito-icono {
+    font-size: 30px;
+}
+
+
+.carrito-item-info {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.carrito-item-info strong {
+    color: var(--texto-principal);
+
+    overflow-wrap: anywhere;
+}
+
+
+.carrito-item-info span,
+.carrito-item-info small {
+    color: var(--texto-secundario);
+
+    font-size: 12px;
+
+    line-height: 1.35;
+}
+
+
+.carrito-item-info
+.mensaje-docente-error {
+    color: var(--ceta-rojo);
+}
+
+
+.carrito-item-cantidad {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.carrito-item-cantidad label {
+    color: var(--texto-secundario);
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.carrito-item-cantidad input {
+    width: 100%;
+
+    padding: 8px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    text-align: center;
+
+    outline: none;
+}
+
+
+.carrito-item-cantidad input:focus {
+    border-color: var(--ceta-azul);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+.btn-eliminar-carrito {
+    padding: 9px 11px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: var(--ceta-rojo);
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-eliminar-carrito:hover {
+    background: var(--ceta-rojo-hover);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FOOTER DEL CARRITO
+========================================================= */
+
+.carrito-footer {
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-top: 1px solid var(--borde-suave);
+}
+
+
+/* =========================================================
+   ADMIN - BOTONES GUARDAR / CANCELAR EDICIÓN
+========================================================= */
+
+#btnGuardarEdicion {
+    background: var(--ceta-azul);
+}
+
+
+#btnGuardarEdicion:hover:not(:disabled) {
+    background: var(--ceta-azul-hover);
+}
+
+
+#btnCancelarEdicion {
+    background: #ffffff;
+
+    color: #334155;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+#btnCancelarEdicion:hover {
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   INDICADOR VISUAL DE OBSERVACIÓN
+========================================================= */
+
+.reserva-observada,
+.badge-observada {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 6px;
+
+    padding: 4px 7px;
+
+    border: 1px solid #fde68a;
+
+    border-radius: 20px;
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TEXTO DE OBSERVACIÓN DENTRO DE RESERVA
+========================================================= */
+
+.obs-entrega,
+.obs-devolucion {
+    display: block;
+
+    margin-top: 5px;
+
+    padding: 5px 7px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+.obs-entrega {
+    border-left:
+        3px solid
+        var(--ceta-amarillo);
+
+    background: #fffbeb;
+
+    color: #92400e;
+}
+
+
+.obs-devolucion {
+    border-left:
+        3px solid
+        var(--ceta-azul);
+
+    background: #eff6ff;
+
+    color: #1e40af;
+}
+/* =========================================================
+   DOCENTE - FONDO GENERAL
+========================================================= */
+
+.docente-page {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            rgba(244, 246, 248, 0.95),
+            rgba(244, 246, 248, 0.95)
+        ),
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: 520px;
+
+    background-attachment: fixed;
+}
+
+
+/* =========================================================
+   DOCENTE - HEADER
+========================================================= */
+
+.docente-header {
+    background: var(--ceta-oscuro);
+
+    color: #ffffff;
+
+    border-bottom: 1px solid #263548;
+}
+
+
+.docente-header-contenido {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.docente-identidad {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    min-width: 0;
+}
+
+
+.docente-identidad img {
+    width: 80px;
+    height: 80px;
+
+    flex: 0 0 80px;
+
+    object-fit: contain;
+
+    padding: 8px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+.docente-identidad > div {
+    min-width: 0;
+}
+
+
+.docente-identidad h1 {
+    margin-bottom: 5px;
+
+    font-size: 24px;
+
+    line-height: 1.2;
+
+    overflow-wrap: anywhere;
+}
+
+
+.docente-identidad > div > p:last-child {
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    overflow-wrap: anywhere;
+}
+
+
+.docente-etiqueta {
+    margin-bottom: 4px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DOCENTE - TABS
+========================================================= */
+
+.docente-tabs {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 30;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    padding: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border-bottom: 1px solid var(--borde);
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+
+    backdrop-filter: blur(8px);
+}
+
+
+.docente-tab {
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #e9eef4;
+
+    color: #334155;
+
+    font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.docente-tab:hover {
+    background: #dce5ef;
+
+    transform: translateY(-1px);
+}
+
+
+.docente-tab.activo {
+    background: var(--ceta-azul);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DOCENTE - CONTENIDO
+========================================================= */
+
+.docente-main {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 25px 20px 60px;
+}
+
+
+.docente-panel {
+    display: none;
+}
+
+
+.docente-panel.activo {
+    display: block;
+
+    animation:
+        aparecer-panel
+        0.18s ease;
+}
+
+
+/* =========================================================
+   DOCENTE - CARDS
+========================================================= */
+
+.docente-card {
+    margin-bottom: 24px;
+
+    padding: 24px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border: 1px solid var(--borde);
+
+    border-radius: var(--radio-grande);
+
+    box-shadow: var(--sombra);
+}
+
+
+/* =========================================================
+   DOCENTE - DATOS DE RESERVA
+========================================================= */
+
+.reserva-datos-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   DOCENTE - FILTROS DE MATERIAL
+========================================================= */
+
+.filtros-material-docente {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   DOCENTE - MENSAJES
+========================================================= */
+
+.mensaje-docente {
+    min-height: 20px;
+
+    margin: 12px 0;
+
+    color: var(--texto-secundario);
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    line-height: 1.45;
+}
+
+
+.mensaje-docente-ok {
+    color: #15803d;
+}
+
+
+.mensaje-docente-error {
+    color: var(--ceta-rojo);
+}
+
+
+/* =========================================================
+   DOCENTE - CATÁLOGO DE MATERIALES
+========================================================= */
+
+.catalogo-materiales-docente {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 18px;
+}
+
+
+/*
+   .docente-material-card
+   .docente-material-imagen
+   .docente-material-info
+   .disponibilidad-box
+   .selector-cantidad
+
+   ya fueron definidos en la Parte 3 porque también
+   los utiliza el panel de edición del administrador.
+*/
+
+
+/* =========================================================
+   DOCENTE - NUEVA RESERVA
+========================================================= */
+
+#panelNuevaReserva {
+    scroll-margin-top: 90px;
+}
+
+
+#panelNuevaReserva .docente-card:first-of-type {
+    border-top:
+        4px solid
+        var(--ceta-azul);
+}
+
+
+/* =========================================================
+   DOCENTE - CARRITO DE NUEVA RESERVA
+========================================================= */
+
+#carritoMaterialesDocente {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   DOCENTE - PANEL EDITAR RESERVA
+========================================================= */
+
+#panelEditarReservaDocente {
+    scroll-margin-top: 90px;
+}
+
+
+#panelEditarReservaDocente
+.docente-card:first-of-type {
+    border-top:
+        4px solid
+        var(--ceta-azul);
+}
+
+
+/* =========================================================
+   DOCENTE - ENCABEZADO DEL PANEL EDITAR
+========================================================= */
+
+#panelEditarReservaDocente
+.seccion-titulo {
+    margin-bottom: 22px;
+}
+
+
+#panelEditarReservaDocente
+.numero-seccion {
+    background: var(--ceta-azul);
+}
+
+
+/* =========================================================
+   DOCENTE - FORMULARIO EDITAR
+========================================================= */
+
+#panelEditarReservaDocente
+.reserva-datos-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   DOCENTE - FILTROS DEL EDITOR
+========================================================= */
+
+#panelEditarReservaDocente
+.filtros-material-docente {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   DOCENTE - CATÁLOGO DEL EDITOR
+========================================================= */
+
+#editarCatalogoMaterialesDocente {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   DOCENTE - CARRITO DEL EDITOR
+========================================================= */
+
+#editarCarritoMaterialesDocente {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   DOCENTE - BOTONES EDITOR
+========================================================= */
+
+#btnGuardarEdicionDocente,
+#btnCancelarEdicionDocente {
+    min-height: 42px;
+}
+
+
+#btnGuardarEdicionDocente {
+    background: var(--ceta-azul);
+
+    color: #ffffff;
+}
+
+
+#btnGuardarEdicionDocente:hover:not(:disabled) {
+    background: var(--ceta-azul-hover);
+}
+
+
+#btnGuardarEdicionDocente:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+
+#btnCancelarEdicionDocente {
+    background: #ffffff;
+
+    color: #334155;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+#btnCancelarEdicionDocente:hover {
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   DOCENTE - DISPONIBILIDAD EN EDICIÓN
+========================================================= */
+
+#editarMensajeDisponibilidadDocente {
+    margin: 12px 0;
+
+    padding: 0;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   DOCENTE - MATERIAL SIN DISPONIBILIDAD
+========================================================= */
+
+.material-sin-disponibilidad {
+    margin-top: 10px;
+
+    padding: 9px 10px;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 8px;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   DOCENTE - MATERIAL CON POCA DISPONIBILIDAD
+========================================================= */
+
+.material-poca-disponibilidad {
+    margin-top: 10px;
+
+    padding: 9px 10px;
+
+    border: 1px solid #fde68a;
+
+    border-radius: 8px;
+
+    background: #fffbeb;
+
+    color: #92400e;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   DOCENTE - ACCIONES EN RESERVA SEMANAL
+========================================================= */
+
+.acciones-reserva-docente {
+    margin-top: 9px;
+
+    padding-top: 8px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    border-top:
+        1px solid
+        rgba(37, 99, 235, 0.14);
+}
+
+
+.acciones-reserva-docente
+button {
+    width: 100%;
+
+    margin-top: 0;
+
+    padding: 8px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    line-height: 1.3;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.acciones-reserva-docente
+button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DOCENTE - EDITAR RESERVA
+========================================================= */
+
+.acciones-reserva-docente
+.btn-editar-reserva-docente {
+    background: var(--ceta-azul);
+}
+
+
+.acciones-reserva-docente
+.btn-editar-reserva-docente:hover {
+    background: var(--ceta-azul-hover);
+}
+
+
+/* =========================================================
+   DOCENTE - CANCELAR RESERVA
+========================================================= */
+
+.acciones-reserva-docente
+.btn-cancelar-reserva-docente {
+    background: var(--ceta-rojo);
+}
+
+
+.acciones-reserva-docente
+.btn-cancelar-reserva-docente:hover {
+    background: var(--ceta-rojo-hover);
+}
+
+
+/* =========================================================
+   DOCENTE - RESERVA NO MODIFICABLE
+========================================================= */
+
+.reserva-no-modificable {
+    display: block;
+
+    margin-top: 8px;
+
+    padding: 7px 8px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 7px;
+
+    background: #f8fafc;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   DOCENTE - ESTADOS DE MATERIALES DENTRO DE RESERVA
+========================================================= */
+
+.reserva-material-estado {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+.reserva-material-entregado {
+    color: #7c3aed;
+}
+
+
+.reserva-material-devuelto {
+    color: #15803d;
+}
+
+
+.reserva-material-no-entregado {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   DOCENTE - ESTADO GENERAL DE RESERVA
+========================================================= */
+
+.estado-reserva-docente {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 7px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+}
+
+
+.estado-docente-reservada {
+    background: var(--ceta-azul);
+}
+
+
+.estado-docente-entregada {
+    background: #7c3aed;
+}
+
+
+.estado-docente-parcial {
+    background: var(--ceta-amarillo);
+}
+
+
+.estado-docente-completada {
+    background: var(--ceta-verde);
+}
+
+
+.estado-docente-cancelada {
+    background: var(--ceta-rojo);
+}
+
+
+/* =========================================================
+   DOCENTE - OBSERVACIONES EN RESERVA
+========================================================= */
+
+.docente-observacion-entrega,
+.docente-observacion-devolucion {
+    display: block;
+
+    margin-top: 5px;
+
+    padding: 5px 7px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+.docente-observacion-entrega {
+    border-left:
+        3px solid
+        var(--ceta-amarillo);
+
+    background: #fffbeb;
+
+    color: #92400e;
+}
+
+
+.docente-observacion-devolucion {
+    border-left:
+        3px solid
+        var(--ceta-azul);
+
+    background: #eff6ff;
+
+    color: #1e40af;
+}
+
+
+/* =========================================================
+   DOCENTE - SEMANA
+========================================================= */
+
+#panelReservasDocente
+.semana-controles {
+    margin-bottom: 18px;
+}
+
+
+#panelReservasDocente
+.tabla-semanal-wrapper {
+    position: relative;
+}
+
+
+/* =========================================================
+   DOCENTE - RESERVA PROPIA DESTACADA
+========================================================= */
+
+#panelReservasDocente
+.reserva-semanal-card:has(.reserva-propia) {
+    border-color: #93c5fd;
+
+    box-shadow:
+        inset 3px 0 0
+        var(--ceta-azul);
+}
+
+
+/* =========================================================
+   DOCENTE - INDICADOR "MI RESERVA"
+========================================================= */
+
+.reserva-propia {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 8px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: var(--ceta-azul);
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   CAMPOS DATE / TIME / SELECT
+========================================================= */
+
+input[type="date"],
+input[type="time"],
+input[type="number"],
+select {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   CHECKBOXES GENERALES
+========================================================= */
+
+input[type="checkbox"] {
+    accent-color: var(--ceta-azul);
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   SELECCIÓN DE TEXTO
+========================================================= */
+
+::selection {
+    background: #bfdbfe;
+
+    color: #1e3a8a;
+}
+
+
+/* =========================================================
+   SCROLLBAR - ESCRITORIO
+========================================================= */
+
+@media (min-width: 701px) {
+
+    .tabla-semanal-wrapper::-webkit-scrollbar {
+        height: 10px;
+    }
+
+
+    .tabla-semanal-wrapper::-webkit-scrollbar-track {
+        background: #e2e8f0;
+    }
+
+
+    .tabla-semanal-wrapper::-webkit-scrollbar-thumb {
+        background: #94a3b8;
+
+        border-radius: 10px;
+    }
+
+
+    .tabla-semanal-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+}
+/* =========================================================
+   MODO OSCURO - BASE GLOBAL
+
+   IMPORTANTE:
+   Se oscurece html + body + página completa.
+   Esto evita que aparezcan laterales blancos alrededor
+   del fondo con el logo CETA.
+========================================================= */
+
+html {
+    background: #09111c;
+}
+
+
+body.modo-oscuro {
+    min-height: 100vh;
+
+    color: #e2e8f0;
+
+    background: #09111c;
+}
+
+
+/* =========================================================
+   MODO OSCURO - FONDO ADMINISTRADOR
+
+   La primera capa es completamente oscura.
+   Encima se mantiene el logo institucional como marca
+   de agua mediante la imagen existente.
+========================================================= */
+
+body.modo-oscuro.admin-page {
+    min-height: 100vh;
+
+    background-color: #09111c;
+
+    background-image:
+        linear-gradient(
+            rgba(9, 17, 28, 0.94),
+            rgba(9, 17, 28, 0.94)
+        ),
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat:
+        no-repeat,
+        no-repeat;
+
+    background-position:
+        center,
+        center;
+
+    background-size:
+        cover,
+        520px;
+
+    background-attachment:
+        fixed,
+        fixed;
+}
+
+
+/* =========================================================
+   MODO OSCURO - FONDO DOCENTE
+========================================================= */
+
+body.modo-oscuro.docente-page {
+    min-height: 100vh;
+
+    background-color: #09111c;
+
+    background-image:
+        linear-gradient(
+            rgba(9, 17, 28, 0.94),
+            rgba(9, 17, 28, 0.94)
+        ),
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat:
+        no-repeat,
+        no-repeat;
+
+    background-position:
+        center,
+        center;
+
+    background-size:
+        cover,
+        520px;
+
+    background-attachment:
+        fixed,
+        fixed;
+}
+
+
+/* =========================================================
+   MODO OSCURO - CONTENEDORES PRINCIPALES
+
+   Se mantienen transparentes para que el fondo oscuro
+   institucional continúe hasta los bordes de la pantalla.
+========================================================= */
+
+body.modo-oscuro .admin-main,
+body.modo-oscuro .docente-main {
+    background: transparent;
+}
+
+
+/* =========================================================
+   MODO OSCURO - HEADERS
+========================================================= */
+
+body.modo-oscuro .admin-header,
+body.modo-oscuro .docente-header {
+    background: #070d16;
+
+    border-bottom-color: #263548;
+}
+
+
+/* =========================================================
+   MODO OSCURO - NAVEGACIÓN
+========================================================= */
+
+body.modo-oscuro .admin-tabs,
+body.modo-oscuro .docente-tabs {
+    background:
+        rgba(17, 28, 42, 0.97);
+
+    border-color: #263548;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(8px);
+}
+
+
+body.modo-oscuro .tab-btn,
+body.modo-oscuro .docente-tab {
+    background: #1e293b;
+
+    color: #e2e8f0;
+}
+
+
+body.modo-oscuro .tab-btn:hover,
+body.modo-oscuro .docente-tab:hover {
+    background: #334155;
+}
+
+
+body.modo-oscuro .tab-btn.activo,
+body.modo-oscuro .docente-tab.activo {
+    background: var(--ceta-azul);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MODO OSCURO - TÍTULOS
+========================================================= */
+
+body.modo-oscuro .seccion-titulo h2 {
+    color: #f8fafc;
+}
+
+
+body.modo-oscuro .numero-seccion {
+    background: #2563eb;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 12px
+        rgba(37, 99, 235, 0.20);
+}
+
+
+/* =========================================================
+   MODO OSCURO - CARDS PRINCIPALES
+========================================================= */
+
+body.modo-oscuro .admin-card,
+body.modo-oscuro .docente-card,
+body.modo-oscuro .panel-proximamente {
+    background:
+        rgba(17, 28, 42, 0.97);
+
+    border-color: #263548;
+
+    box-shadow:
+        0 6px 20px
+        rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   MODO OSCURO - ENCABEZADOS DE CARDS
+========================================================= */
+
+body.modo-oscuro .card-header h3,
+body.modo-oscuro .bloque-formulario h4,
+body.modo-oscuro .panel-proximamente h3 {
+    color: #f8fafc;
+}
+
+
+body.modo-oscuro .card-header p,
+body.modo-oscuro .texto-ayuda,
+body.modo-oscuro .panel-proximamente p {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   MODO OSCURO - FORMULARIOS
+========================================================= */
+
+body.modo-oscuro .campo-admin label {
+    color: #e2e8f0;
+}
+
+
+body.modo-oscuro .campo-admin input,
+body.modo-oscuro .campo-admin textarea,
+body.modo-oscuro .campo-admin select,
+body.modo-oscuro .buscador-materiales input,
+body.modo-oscuro .selector-cantidad input,
+body.modo-oscuro .carrito-item-cantidad input,
+body.modo-oscuro #observacionGeneralEntrega,
+body.modo-oscuro .observacion-entrega-detalle,
+body.modo-oscuro .observacion-devolucion {
+    background: #1e293b;
+
+    border-color: #475569;
+
+    color: #f8fafc;
+}
+
+
+body.modo-oscuro .campo-admin input:focus,
+body.modo-oscuro .campo-admin textarea:focus,
+body.modo-oscuro .campo-admin select:focus,
+body.modo-oscuro .buscador-materiales input:focus,
+body.modo-oscuro .selector-cantidad input:focus,
+body.modo-oscuro .carrito-item-cantidad input:focus,
+body.modo-oscuro #observacionGeneralEntrega:focus,
+body.modo-oscuro .observacion-entrega-detalle:focus,
+body.modo-oscuro .observacion-devolucion:focus {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(59, 130, 246, 0.16);
+}
+
+
+body.modo-oscuro .campo-admin input:disabled,
+body.modo-oscuro .campo-admin textarea:disabled,
+body.modo-oscuro .campo-admin select:disabled {
+    background: #111827;
+
+    color: #64748b;
+
+    border-color: #334155;
+}
+
+
+body.modo-oscuro input::placeholder,
+body.modo-oscuro textarea::placeholder {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   MODO OSCURO - BLOQUES DE FORMULARIO
+========================================================= */
+
+body.modo-oscuro .bloque-formulario {
+    border-color: #263548;
+}
+
+
+/* =========================================================
+   MODO OSCURO - CATEGORÍAS
+========================================================= */
+
+body.modo-oscuro .categoria-check {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    color: #e2e8f0;
+}
+
+
+body.modo-oscuro .categoria-check:hover {
+    background: #243247;
+
+    border-color: #475569;
+}
+
+
+/* =========================================================
+   MODO OSCURO - PREVISUALIZACIÓN DE IMAGEN
+========================================================= */
+
+body.modo-oscuro .imagen-preview-contenedor {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+
+body.modo-oscuro .sin-imagen {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   MODO OSCURO - TARJETAS DE MATERIALES ADMIN
+========================================================= */
+
+body.modo-oscuro .material-card {
+    background: #111c2a;
+
+    border-color: #263548;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+body.modo-oscuro .material-card:hover {
+    border-color: #475569;
+
+    box-shadow:
+        0 10px 28px
+        rgba(0, 0, 0, 0.28);
+}
+
+
+body.modo-oscuro .material-imagen-wrapper {
+    background: #1e293b;
+
+    border-bottom-color: #334155;
+}
+
+
+body.modo-oscuro .material-card h3 {
+    color: #ffffff;
+}
+
+
+body.modo-oscuro .material-codigo,
+body.modo-oscuro .material-descripcion {
+    color: #94a3b8;
+}
+
+
+body.modo-oscuro .material-cantidad strong {
+    color: #60a5fa;
+}
+
+
+body.modo-oscuro .material-cantidad span {
+    color: #94a3b8;
+}
+
+
+body.modo-oscuro .material-categorias span {
+    background: #263548;
+
+    color: #e2e8f0;
+}
+
+
+/* =========================================================
+   MODO OSCURO - TARJETAS CATÁLOGO DOCENTE
+========================================================= */
+
+body.modo-oscuro .docente-material-card {
+    background: #111c2a;
+
+    border-color: #263548;
+}
+
+
+body.modo-oscuro .docente-material-card:hover {
+    border-color: #475569;
+
+    box-shadow:
+        0 10px 28px
+        rgba(0, 0, 0, 0.28);
+}
+
+
+body.modo-oscuro .docente-material-imagen {
+    background: #1e293b;
+
+    border-bottom-color: #334155;
+}
+
+
+body.modo-oscuro .docente-material-info h3 {
+    color: #ffffff;
+}
+
+
+body.modo-oscuro .docente-material-info > p {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   MODO OSCURO - DISPONIBILIDAD
+========================================================= */
+
+body.modo-oscuro .disponibilidad-box {
+    background: #052e24;
+
+    border-color: #166534;
+
+    color: #86efac;
+}
+
+
+body.modo-oscuro .ya-seleccionado {
+    background: #172554;
+
+    color: #93c5fd;
+}
+
+
+/* =========================================================
+   MODO OSCURO - MATERIAL SIN DISPONIBILIDAD
+========================================================= */
+
+body.modo-oscuro .material-sin-disponibilidad {
+    background: #450a0a;
+
+    border-color: #7f1d1d;
+
+    color: #fecaca;
+}
+
+
+body.modo-oscuro .material-poca-disponibilidad {
+    background: #451a03;
+
+    border-color: #92400e;
+
+    color: #fde68a;
+}
+
+
+/* =========================================================
+   MODO OSCURO - CARRITO
+========================================================= */
+
+body.modo-oscuro .carrito-item {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+
+body.modo-oscuro .carrito-item-imagen {
+    background: #111c2a;
+
+    border-color: #334155;
+}
+
+
+body.modo-oscuro .carrito-item-info strong {
+    color: #f8fafc;
+}
+
+
+body.modo-oscuro .carrito-item-info span,
+body.modo-oscuro .carrito-item-info small,
+body.modo-oscuro .carrito-item-cantidad label {
+    color: #94a3b8;
+}
+
+
+body.modo-oscuro .carrito-vacio {
+    background:
+        rgba(30, 41, 59, 0.55);
+
+    border-color: #475569;
+
+    color: #94a3b8;
+}
+
+
+body.modo-oscuro .carrito-footer {
+    border-color: #263548;
+}
+
+
+/* =========================================================
+   MODO OSCURO - CONTROLES DE SEMANA
+========================================================= */
+
+body.modo-oscuro .semana-controles {
+    background: #111c2a;
+
+    border-color: #263548;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+body.modo-oscuro .semana-controles strong {
+    color: #f8fafc;
+}
+
+
+body.modo-oscuro .btn-semana {
+    background: #1e293b;
+
+    color: #e2e8f0;
+}
+
+
+body.modo-oscuro .btn-semana:hover {
+    background: #334155;
+}
+
+
+/* =========================================================
+   MODO OSCURO - TABLA SEMANAL
+========================================================= */
+
+body.modo-oscuro .tabla-semanal-wrapper {
+    background: #111c2a;
+
+    border-color: #263548;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.20);
+}
+
+
+body.modo-oscuro .tabla-semanal-material th,
+body.modo-oscuro .tabla-semanal-material td {
+    border-color: #263548;
+}
+
+
+body.modo-oscuro
+.tabla-semanal-material
+thead th {
+    background: #070d16;
+
+    color: #ffffff;
+}
+
+
+body.modo-oscuro
+.tabla-semanal-material
+thead small {
+    color: #94a3b8;
+}
+
+
+body.modo-oscuro .horario-columna {
+    background: #1e293b;
+
+    color: #e2e8f0;
+}
+
+
+body.modo-oscuro .celda-vacia {
+    background:
+        rgba(17, 28, 42, 0.65);
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   MODO OSCURO - TARJETAS DE RESERVA
+========================================================= */
+
+body.modo-oscuro .reserva-semanal-card {
+    background: #172554;
+
+    border-color: #1d4ed8;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.16);
+}
+
+
+body.modo-oscuro .reserva-semanal-card p,
+body.modo-oscuro .reserva-semanal-card ul,
+body.modo-oscuro .reserva-semanal-card li {
+    color: #dbeafe;
+}
+
+
+body.modo-oscuro .reserva-docente-nombre {
+    color: #93c5fd;
+}
+
+
+body.modo-oscuro .acciones-reserva-docente {
+    border-top-color:
+        rgba(147, 197, 253, 0.18);
+}
+
+
+/* =========================================================
+   MODO OSCURO - RESERVA NO MODIFICABLE
+========================================================= */
+
+body.modo-oscuro .reserva-no-modificable {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   MODO OSCURO - OBSERVACIONES INLINE
+========================================================= */
+
+body.modo-oscuro .observacion-entrega-inline,
+body.modo-oscuro .obs-entrega,
+body.modo-oscuro .docente-observacion-entrega {
+    background: #451a03;
+
+    border-color: #92400e;
+
+    color: #fde68a;
+}
+
+
+body.modo-oscuro .observacion-devolucion-inline,
+body.modo-oscuro .obs-devolucion,
+body.modo-oscuro .docente-observacion-devolucion {
+    background: #172554;
+
+    border-color: #2563eb;
+
+    color: #bfdbfe;
+}
+
+
+/* =========================================================
+   MODO OSCURO - INDICADOR OBSERVADA
+========================================================= */
+
+body.modo-oscuro .reserva-observada,
+body.modo-oscuro .badge-observada {
+    background: #451a03;
+
+    border-color: #92400e;
+
+    color: #fde68a;
+}
+
+
+/* =========================================================
+   MODO OSCURO - LISTA DE ENTREGAS
+========================================================= */
+
+body.modo-oscuro .entrega-card {
+    background: #1e293b;
+
+    border-color: #334155;
+}
+
+
+body.modo-oscuro .entrega-card:hover {
+    border-color: #475569;
+
+    box-shadow:
+        0 6px 18px
+        rgba(0, 0, 0, 0.22);
+}
+
+
+body.modo-oscuro .entrega-card h3 {
+    color: #ffffff;
+}
+
+
+body.modo-oscuro .entrega-card p {
+    color: #94a3b8;
+}
+
+
+body.modo-oscuro .entrega-fecha {
+    color: #60a5fa;
+}
+
+
+body.modo-oscuro .entrega-pendientes {
+    color: #fbbf24;
+}
+
+
+/* =========================================================
+   MODO OSCURO - DETALLE ENTREGA / DEVOLUCIÓN
+========================================================= */
+
 body.modo-oscuro .detalle-entrega-item {
     background: #1e293b;
 
@@ -2632,38 +5003,1489 @@ body.modo-oscuro .detalle-entrega-item {
 }
 
 
-body.modo-oscuro .entrega-card h3,
+body.modo-oscuro .detalle-entrega-item:hover {
+    border-color: #475569;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.18);
+}
+
+
 body.modo-oscuro .detalle-entrega-info h4 {
     color: #ffffff;
 }
 
 
-body.modo-oscuro .entrega-card p,
 body.modo-oscuro .detalle-entrega-info p {
     color: #94a3b8;
 }
 
 
+body.modo-oscuro .detalle-entrega-item label {
+    color: #e2e8f0;
+}
+
+
 /* =========================================================
-   RESPONSIVE
+   MODO OSCURO - CHECK ENTREGA / DEVOLUCIÓN
 ========================================================= */
 
-@media (max-width: 800px) {
+body.modo-oscuro .check-entrega-contenedor,
+body.modo-oscuro .check-devolucion-contenedor,
+body.modo-oscuro .entrega-check,
+body.modo-oscuro .devolucion-check {
+    background: #111c2a;
 
-    .entrega-card {
+    border-color: #475569;
+
+    color: #e2e8f0;
+}
+
+
+body.modo-oscuro .check-entrega-contenedor:hover,
+body.modo-oscuro .check-devolucion-contenedor:hover,
+body.modo-oscuro .entrega-check:hover,
+body.modo-oscuro .devolucion-check:hover {
+    background: #172554;
+
+    border-color: #3b82f6;
+}
+
+
+/* =========================================================
+   MODO OSCURO - MATERIAL YA DEVUELTO
+========================================================= */
+
+body.modo-oscuro .material-ya-devuelto {
+    background: #052e24;
+
+    border-color: #166534;
+
+    color: #86efac;
+}
+
+
+/* =========================================================
+   MODO OSCURO - OBSERVACIÓN PREVIA DE ENTREGA
+========================================================= */
+
+body.modo-oscuro .observacion-entrega-previa {
+    background: #451a03;
+
+    border-left-color: #f59e0b;
+
+    color: #fde68a;
+}
+
+
+/* =========================================================
+   MODO OSCURO - DATOS DE RESERVA ENTREGA
+========================================================= */
+
+body.modo-oscuro #datosReservaEntregaFisica,
+body.modo-oscuro #datosReservaEntrega {
+    background: #172554;
+
+    border-color: #1d4ed8;
+
+    color: #dbeafe;
+}
+
+
+/* =========================================================
+   MODO OSCURO - BOTONES SECUNDARIOS
+========================================================= */
+
+body.modo-oscuro .btn-secundario,
+body.modo-oscuro #btnCancelarEntregaFisica,
+body.modo-oscuro #btnCancelarGestionEntrega,
+body.modo-oscuro #btnCancelarEdicion,
+body.modo-oscuro #btnCancelarEdicionDocente {
+    background: #1e293b;
+
+    border-color: #475569;
+
+    color: #ffffff;
+}
+
+
+body.modo-oscuro .btn-secundario:hover,
+body.modo-oscuro #btnCancelarEntregaFisica:hover,
+body.modo-oscuro #btnCancelarGestionEntrega:hover,
+body.modo-oscuro #btnCancelarEdicion:hover,
+body.modo-oscuro #btnCancelarEdicionDocente:hover {
+    background: #334155;
+
+    border-color: #64748b;
+}
+
+
+/* =========================================================
+   MODO OSCURO - CATÁLOGO VACÍO / LISTA VACÍA
+========================================================= */
+
+body.modo-oscuro .catalogo-vacio,
+body.modo-oscuro .lista-vacia {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   MODO OSCURO - SCROLLBAR TABLA
+========================================================= */
+
+@media (min-width: 701px) {
+
+    body.modo-oscuro
+    .tabla-semanal-wrapper::-webkit-scrollbar-track {
+        background: #111827;
+    }
+
+
+    body.modo-oscuro
+    .tabla-semanal-wrapper::-webkit-scrollbar-thumb {
+        background: #475569;
+    }
+
+
+    body.modo-oscuro
+    .tabla-semanal-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+}
+
+
+/* =========================================================
+   MODO OSCURO - SELECCIÓN DE TEXTO
+========================================================= */
+
+body.modo-oscuro ::selection {
+    background: #1d4ed8;
+
+    color: #ffffff;
+}
+/* =========================================================
+   RESPONSIVE GENERAL - PANTALLAS GRANDES / INTERMEDIAS
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .materiales-grid,
+    .catalogo-materiales-docente,
+    #editarCatalogoMateriales,
+    #editarCatalogoMaterialesDocente {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .categorias-checks {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+
+    .detalle-entrega-item {
+        grid-template-columns:
+            minmax(180px, 1fr)
+            minmax(150px, 0.7fr)
+            minmax(190px, 1fr);
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    /* -----------------------------------------------------
+       FORMULARIOS
+    ----------------------------------------------------- */
+
+    .form-grid,
+    .reserva-datos-grid,
+    #panelEditarReserva .reserva-datos-grid,
+    #panelEditarReservaDocente .reserva-datos-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .campo-ancho {
+        grid-column: 1 / -1;
+    }
+
+
+    /* -----------------------------------------------------
+       CATEGORÍAS
+    ----------------------------------------------------- */
+
+    .categorias-checks {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    /* -----------------------------------------------------
+       ENTREGA / DEVOLUCIÓN
+    ----------------------------------------------------- */
+
+    .detalle-entrega-item {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+
+    .detalle-entrega-item > :last-child {
+        grid-column: 1 / -1;
+    }
+
+
+    /* -----------------------------------------------------
+       CARRITO
+    ----------------------------------------------------- */
+
+    .carrito-item {
+        grid-template-columns:
+            65px
+            minmax(130px, 1fr)
+            100px
+            auto;
+    }
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 700px) {
+
+    /* =====================================================
+       FONDO GENERAL
+    ===================================================== */
+
+    .admin-page,
+    .docente-page,
+    .login-page {
+        background-size: 300px;
+
+        background-attachment: scroll;
+    }
+
+
+    body.modo-oscuro.admin-page,
+    body.modo-oscuro.docente-page {
+        background-size:
+            cover,
+            300px;
+
+        background-attachment:
+            scroll,
+            scroll;
+    }
+
+
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    .login-page {
+        padding: 14px;
+    }
+
+
+    .login-card {
+        padding: 28px 20px;
+    }
+
+
+    .login-logo {
+        width: 88px;
+        height: 88px;
+    }
+
+
+    .login-card h1 {
+        font-size: 25px;
+    }
+
+
+    .login-descripcion {
+        font-size: 13px;
+    }
+
+
+    /* =====================================================
+       HEADER ADMIN
+    ===================================================== */
+
+    .admin-header-contenido {
+        padding: 15px;
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+
+    .admin-identidad {
+        align-items: center;
+
+        gap: 12px;
+    }
+
+
+    .admin-identidad img {
+        width: 65px;
+        height: 65px;
+
+        flex: 0 0 65px;
+    }
+
+
+    .admin-identidad h1 {
+        font-size: 20px;
+    }
+
+
+    .admin-identidad > div > p:last-child {
+        font-size: 12px;
+    }
+
+
+    .btn-salir {
+        width: 100%;
+
+        min-height: 42px;
+    }
+
+
+    /* =====================================================
+       HEADER DOCENTE
+    ===================================================== */
+
+    .docente-header-contenido {
+        padding: 15px;
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+
+    .docente-identidad {
+        align-items: center;
+
+        gap: 12px;
+    }
+
+
+    .docente-identidad img {
+        width: 65px;
+        height: 65px;
+
+        flex: 0 0 65px;
+    }
+
+
+    .docente-identidad h1 {
+        font-size: 20px;
+    }
+
+
+    .docente-identidad > div > p:last-child {
+        font-size: 12px;
+    }
+
+
+    .docente-header .btn-salir {
+        width: 100%;
+    }
+
+
+    /* =====================================================
+       TABS ADMIN
+    ===================================================== */
+
+    .admin-tabs {
+        justify-content: flex-start;
+
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding: 9px 10px;
+
+        scrollbar-width: none;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .admin-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .tab-btn {
+        flex: 0 0 auto;
+
+        padding: 9px 13px;
+
+        white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       TABS DOCENTE
+    ===================================================== */
+
+    .docente-tabs {
+        justify-content: flex-start;
+
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding: 9px 10px;
+
+        scrollbar-width: none;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .docente-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .docente-tab {
+        flex: 0 0 auto;
+
+        padding: 9px 13px;
+
+        white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       CONTENIDO PRINCIPAL
+    ===================================================== */
+
+    .admin-main,
+    .docente-main {
+        padding:
+            18px 10px
+            45px;
+    }
+
+
+    /* =====================================================
+       TÍTULOS
+    ===================================================== */
+
+    .seccion-titulo {
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .seccion-titulo > div {
+        align-items: center;
+    }
+
+
+    .seccion-titulo h2 {
+        font-size: 20px;
+
+        line-height: 1.25;
+    }
+
+
+    .numero-seccion {
+        width: 38px;
+        height: 38px;
+
+        flex: 0 0 38px;
+    }
+
+
+    .seccion-titulo > button,
+    .seccion-titulo .btn-principal {
+        width: 100%;
+    }
+
+
+    /* =====================================================
+       CARDS
+    ===================================================== */
+
+    .admin-card,
+    .docente-card {
+        margin-bottom: 18px;
+
+        padding: 16px;
+
+        border-radius: 13px;
+    }
+
+
+    .card-header {
+        margin-bottom: 18px;
+    }
+
+
+    .card-header h3 {
+        font-size: 18px;
+    }
+
+
+    .card-header-listado {
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    /* =====================================================
+       FORMULARIOS
+    ===================================================== */
+
+    .form-grid,
+    .reserva-datos-grid,
+    #panelEditarReserva .reserva-datos-grid,
+    #panelEditarReservaDocente .reserva-datos-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .campo-ancho {
+        grid-column: auto;
+    }
+
+
+    .campo-admin input,
+    .campo-admin textarea,
+    .campo-admin select,
+    .buscador-materiales input {
+        min-height: 44px;
+    }
+
+
+    .campo-admin textarea {
+        min-height: 90px;
+    }
+
+
+    /* =====================================================
+       CATEGORÍAS
+    ===================================================== */
+
+    .categorias-checks {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .categoria-check {
+        min-height: 52px;
+    }
+
+
+    /* =====================================================
+       IMAGEN MATERIAL
+    ===================================================== */
+
+    .imagen-formulario {
         align-items: stretch;
 
         flex-direction: column;
     }
 
 
-    .entrega-card button {
+    .imagen-preview-contenedor {
+        width: 100%;
+        height: 180px;
+
+        flex: none;
+    }
+
+
+    /* =====================================================
+       ACCIONES FORMULARIO
+    ===================================================== */
+
+    .acciones-formulario {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .acciones-formulario button {
+        width: 100%;
+
+        min-height: 44px;
+    }
+
+
+    /* =====================================================
+       BUSCADOR
+    ===================================================== */
+
+    .buscador-materiales {
         width: 100%;
     }
 
 
+    /* =====================================================
+       GRID DE MATERIALES
+    ===================================================== */
+
+    .materiales-grid,
+    .catalogo-materiales-docente,
+    #editarCatalogoMateriales,
+    #editarCatalogoMaterialesDocente {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .material-imagen-wrapper,
+    .docente-material-imagen {
+        height: 220px;
+    }
+
+
+    /* =====================================================
+       TARJETA MATERIAL
+    ===================================================== */
+
+    .material-card-contenido,
+    .docente-material-info {
+        padding: 15px;
+    }
+
+
+    .material-card-cabecera {
+        gap: 10px;
+    }
+
+
+    /* =====================================================
+       FILTROS DOCENTE / EDICIÓN
+    ===================================================== */
+
+    .filtros-material-docente,
+    #panelEditarReserva .filtros-material-docente,
+    #panelEditarReservaDocente .filtros-material-docente {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    /* =====================================================
+       SELECTOR CANTIDAD
+    ===================================================== */
+
+    .selector-cantidad {
+        grid-template-columns:
+            85px
+            minmax(0, 1fr);
+    }
+
+
+    .selector-cantidad input,
+    .selector-cantidad button {
+        min-height: 43px;
+    }
+
+
+    /* =====================================================
+       CARRITO
+    ===================================================== */
+
+    .carrito-item {
+        grid-template-columns:
+            60px
+            minmax(0, 1fr);
+
+        gap: 10px;
+    }
+
+
+    .carrito-item-imagen {
+        width: 60px;
+        height: 55px;
+    }
+
+
+    .carrito-item-cantidad {
+        grid-column: 1 / -1;
+    }
+
+
+    .carrito-item-cantidad input {
+        min-height: 42px;
+    }
+
+
+    .btn-eliminar-carrito {
+        grid-column: 1 / -1;
+
+        width: 100%;
+
+        min-height: 40px;
+    }
+
+
+    .carrito-footer {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .carrito-footer button {
+        width: 100%;
+
+        min-height: 44px;
+    }
+
+
+    /* =====================================================
+       CONTROLES DE SEMANA
+    ===================================================== */
+
+    .semana-controles {
+        padding: 12px;
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .semana-controles > div {
+        order: -1;
+
+        padding-bottom: 3px;
+
+        text-align: center;
+    }
+
+
+    .semana-controles button {
+        width: 100%;
+
+        min-height: 41px;
+    }
+
+
+    /* =====================================================
+       TABLA SEMANAL
+
+       Conservamos desplazamiento horizontal porque intentar
+       meter HORARIO + 5 días dentro de una pantalla pequeña
+       haría las reservas ilegibles.
+    ===================================================== */
+
+    .tabla-semanal-wrapper {
+        border-radius: 10px;
+
+        overflow-x: auto;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .tabla-semanal-material {
+        min-width: 930px;
+    }
+
+
+    .tabla-semanal-material th,
+    .tabla-semanal-material td {
+        padding: 8px;
+    }
+
+
+    .horario-columna {
+        width: 115px;
+    }
+
+
+    /* =====================================================
+       TARJETAS DE RESERVA
+    ===================================================== */
+
+    .reserva-semanal-card {
+        padding: 9px;
+    }
+
+
+    .reserva-docente-nombre {
+        font-size: 12px;
+    }
+
+
+    .reserva-semanal-card p,
+    .reserva-semanal-card ul {
+        font-size: 10px;
+    }
+
+
+    /* =====================================================
+       BOTONES DE RESERVA ADMIN
+    ===================================================== */
+
+    .acciones-reserva-admin {
+        gap: 5px;
+    }
+
+
+    .acciones-reserva-admin button {
+        min-height: 32px;
+
+        font-size: 10px;
+    }
+
+
+    /* =====================================================
+       BOTONES DE RESERVA DOCENTE
+    ===================================================== */
+
+    .acciones-reserva-docente button {
+        min-height: 34px;
+
+        font-size: 10px;
+    }
+
+
+    /* =====================================================
+       LISTA DE ENTREGAS
+    ===================================================== */
+
+    .entrega-card {
+        padding: 14px;
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .entrega-card button {
+        width: 100%;
+
+        min-height: 42px;
+    }
+
+
+    /* =====================================================
+       ENTREGA / DEVOLUCIÓN
+    ===================================================== */
+
     .detalle-entrega-item {
+        padding: 14px;
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .detalle-entrega-item > :last-child {
+        grid-column: auto;
+    }
+
+
+    .check-entrega-contenedor,
+    .check-devolucion-contenedor,
+    .entrega-check,
+    .devolucion-check {
+        min-height: 52px;
+    }
+
+
+    .check-entrega-contenedor input,
+    .check-devolucion-contenedor input,
+    .entrega-check input,
+    .devolucion-check input,
+    .check-entrega-fisica,
+    .check-devuelto {
+        width: 22px;
+        height: 22px;
+
+        flex: 0 0 22px;
+    }
+
+
+    .observacion-entrega-detalle,
+    .observacion-devolucion,
+    #observacionGeneralEntrega {
+        min-height: 90px;
+    }
+
+
+    /* =====================================================
+       DATOS ENTREGA
+    ===================================================== */
+
+    #datosReservaEntregaFisica,
+    #datosReservaEntrega {
+        padding: 12px;
+    }
+
+
+    /* =====================================================
+       PANEL EDITAR ADMIN
+    ===================================================== */
+
+    #panelEditarReserva .admin-card {
+        padding: 16px;
+    }
+
+
+    /* =====================================================
+       PANEL EDITAR DOCENTE
+    ===================================================== */
+
+    #panelEditarReservaDocente .docente-card {
+        padding: 16px;
+    }
+
+
+    #btnGuardarEdicionDocente,
+    #btnCancelarEdicionDocente,
+    #btnGuardarEdicion,
+    #btnCancelarEdicion {
+        width: 100%;
+
+        min-height: 44px;
+    }
+
+
+    /* =====================================================
+       PANEL PRÓXIMAMENTE / VACÍOS
+    ===================================================== */
+
+    .panel-proximamente {
+        padding: 30px 16px;
+    }
+
+
+    .lista-vacia,
+    .catalogo-vacio {
+        padding: 35px 15px;
+    }
+}
+
+
+/* =========================================================
+   CELULARES MEDIANOS
+========================================================= */
+
+@media (max-width: 520px) {
+
+    /* =====================================================
+       IDENTIDAD
+    ===================================================== */
+
+    .admin-identidad,
+    .docente-identidad {
+        align-items: center;
+    }
+
+
+    .admin-identidad img,
+    .docente-identidad img {
+        width: 58px;
+        height: 58px;
+
+        flex-basis: 58px;
+    }
+
+
+    .admin-identidad h1,
+    .docente-identidad h1 {
+        font-size: 18px;
+    }
+
+
+    .admin-etiqueta,
+    .docente-etiqueta {
+        font-size: 9px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    /* =====================================================
+       CONTENIDO
+    ===================================================== */
+
+    .admin-main,
+    .docente-main {
+        padding:
+            15px 8px
+            40px;
+    }
+
+
+    .admin-card,
+    .docente-card {
+        padding: 14px;
+    }
+
+
+    /* =====================================================
+       CATEGORÍAS
+    ===================================================== */
+
+    .categorias-checks {
         grid-template-columns: 1fr;
     }
 
+
+    /* =====================================================
+       TARJETA MATERIAL
+    ===================================================== */
+
+    .material-imagen-wrapper,
+    .docente-material-imagen {
+        height: 200px;
+    }
+
+
+    .material-card-cabecera {
+        flex-direction: column;
+    }
+
+
+    .material-cantidad {
+        width: 100%;
+
+        display: flex;
+
+        align-items: baseline;
+
+        gap: 6px;
+
+        text-align: left;
+    }
+
+
+    .material-cantidad strong {
+        font-size: 22px;
+    }
+
+
+    /* =====================================================
+       ACCIONES MATERIAL
+    ===================================================== */
+
+    .material-acciones {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .material-acciones button {
+        width: 100%;
+
+        min-height: 38px;
+    }
+
+
+    /* =====================================================
+       SELECTOR CANTIDAD
+    ===================================================== */
+
+    .selector-cantidad {
+        grid-template-columns:
+            75px
+            minmax(0, 1fr);
+    }
+
+
+    /* =====================================================
+       CARRITO
+    ===================================================== */
+
+    .carrito-item {
+        padding: 10px;
+    }
+
+
+    .carrito-vacio {
+        padding: 28px 15px;
+    }
+
+
+    /* =====================================================
+       TABLA
+    ===================================================== */
+
+    .tabla-semanal-material {
+        min-width: 860px;
+    }
+
+
+    .horario-columna {
+        width: 105px;
+    }
 }
+
+
+/* =========================================================
+   TELÉFONOS PEQUEÑOS
+========================================================= */
+
+@media (max-width: 430px) {
+
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    .login-page {
+        padding: 10px;
+    }
+
+
+    .login-card {
+        padding:
+            25px
+            16px;
+    }
+
+
+    .login-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+
+    .login-card h1 {
+        font-size: 22px;
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .admin-header-contenido,
+    .docente-header-contenido {
+        padding: 12px;
+    }
+
+
+    .admin-identidad,
+    .docente-identidad {
+        gap: 10px;
+    }
+
+
+    .admin-identidad img,
+    .docente-identidad img {
+        width: 54px;
+        height: 54px;
+
+        flex-basis: 54px;
+
+        padding: 6px;
+    }
+
+
+    .admin-identidad h1,
+    .docente-identidad h1 {
+        font-size: 17px;
+    }
+
+
+    /* =====================================================
+       TABS
+    ===================================================== */
+
+    .tab-btn,
+    .docente-tab {
+        padding:
+            8px
+            11px;
+
+        font-size: 12px;
+    }
+
+
+    /* =====================================================
+       TÍTULOS
+    ===================================================== */
+
+    .seccion-titulo h2 {
+        font-size: 18px;
+    }
+
+
+    .numero-seccion {
+        width: 35px;
+        height: 35px;
+
+        flex-basis: 35px;
+
+        font-size: 10px;
+    }
+
+
+    /* =====================================================
+       CARDS
+    ===================================================== */
+
+    .admin-card,
+    .docente-card {
+        padding: 12px;
+
+        border-radius: 11px;
+    }
+
+
+    /* =====================================================
+       MATERIAL
+    ===================================================== */
+
+    .material-imagen-wrapper,
+    .docente-material-imagen {
+        height: 185px;
+    }
+
+
+    .material-card-contenido,
+    .docente-material-info {
+        padding: 13px;
+    }
+
+
+    .material-card h3,
+    .docente-material-info h3 {
+        font-size: 16px;
+    }
+
+
+    /* =====================================================
+       ACCIONES MATERIAL
+    ===================================================== */
+
+    .material-acciones {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* =====================================================
+       DISPONIBILIDAD
+    ===================================================== */
+
+    .disponibilidad-box {
+        padding: 10px;
+    }
+
+
+    .disponibilidad-box strong {
+        font-size: 22px;
+    }
+
+
+    /* =====================================================
+       SELECTOR DE CANTIDAD
+    ===================================================== */
+
+    .selector-cantidad {
+        grid-template-columns:
+            70px
+            minmax(0, 1fr);
+    }
+
+
+    /* =====================================================
+       ENTREGA
+    ===================================================== */
+
+    .entrega-card {
+        padding: 12px;
+    }
+
+
+    .entrega-card h3 {
+        font-size: 15px;
+    }
+
+
+    .detalle-entrega-item {
+        padding: 12px;
+    }
+
+
+    /* =====================================================
+       OBSERVACIONES
+    ===================================================== */
+
+    .observacion-entrega-inline,
+    .observacion-devolucion-inline,
+    .obs-entrega,
+    .obs-devolucion,
+    .docente-observacion-entrega,
+    .docente-observacion-devolucion {
+        font-size: 9px;
+    }
+
+
+    /* =====================================================
+       FONDO / MARCA DE AGUA
+    ===================================================== */
+
+    .admin-page,
+    .docente-page {
+        background-size: 250px;
+    }
+
+
+    body.modo-oscuro.admin-page,
+    body.modo-oscuro.docente-page {
+        background-size:
+            cover,
+            250px;
+    }
+}
+
+
+/* =========================================================
+   PANTALLAS MUY PEQUEÑAS
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .admin-identidad img,
+    .docente-identidad img {
+        width: 48px;
+        height: 48px;
+
+        flex-basis: 48px;
+    }
+
+
+    .admin-identidad h1,
+    .docente-identidad h1 {
+        font-size: 15px;
+    }
+
+
+    .admin-identidad > div > p:last-child,
+    .docente-identidad > div > p:last-child {
+        font-size: 11px;
+    }
+
+
+    .admin-main,
+    .docente-main {
+        padding:
+            12px 6px
+            35px;
+    }
+
+
+    .admin-card,
+    .docente-card {
+        padding: 10px;
+    }
+
+
+    .selector-cantidad {
+        grid-template-columns: 65px 1fr;
+    }
+
+
+    .material-imagen-wrapper,
+    .docente-material-imagen {
+        height: 170px;
+    }
+}
+
+
+/* =========================================================
+   IMPRESIÓN
+
+   No modifica el PDF generado por JavaScript.
+   Solo evita elementos innecesarios si alguien imprime
+   directamente la página desde el navegador.
+========================================================= */
+
+@media print {
+
+    .admin-header,
+    .docente-header,
+    .admin-tabs,
+    .docente-tabs,
+    .acciones-reserva-admin,
+    .acciones-reserva-docente,
+    .btn-salir,
+    .btn-semana,
+    button {
+        display: none !important;
+    }
+
+
+    body,
+    body.modo-oscuro,
+    .admin-page,
+    .docente-page {
+        background: #ffffff !important;
+
+        color: #000000 !important;
+    }
+
+
+    .admin-main,
+    .docente-main {
+        max-width: none;
+
+        padding: 0;
+    }
+
+
+    .admin-card,
+    .docente-card,
+    .tabla-semanal-wrapper {
+        background: #ffffff !important;
+
+        border-color: #cccccc !important;
+
+        box-shadow: none !important;
+    }
+}
+
+
+/* =========================================================
+   FIN - CETA MATERIAL DE GABINETE
+========================================================= */

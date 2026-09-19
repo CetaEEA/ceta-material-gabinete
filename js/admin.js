@@ -1,4 +1,4 @@
-// =========================================================
+ // =========================================================
 // CETA
 // MATERIAL DE GABINETE
 // PANEL ADMINISTRATIVO
@@ -4418,14 +4418,15 @@ function renderizarEntregasPendientes() {
 // ABRIR GESTIÓN DE DEVOLUCIÓN
 // =========================================================
 
+// =========================================================
+// ABRIR GESTIÓN DE DEVOLUCIÓN
+// =========================================================
+
 window.abrirEntrega =
-    function (
-        reservaId
-    ) {
+    function (reservaId) {
 
         const reserva =
             reservasAdmin.find(
-
                 item =>
                     Number(item.id) ===
                     Number(reservaId)
@@ -4459,11 +4460,10 @@ window.abrirEntrega =
             obtenerDetallesReservaAdmin(
                 reserva.id
             )
-
-                .filter(
-                    detalle =>
-                        detalle.entregado === true
-                );
+            .filter(
+                detalle =>
+                    detalle.entregado === true
+            );
 
 
         if (!detalles.length) {
@@ -4483,18 +4483,14 @@ window.abrirEntrega =
         if (tituloGestionEntrega) {
 
             tituloGestionEntrega.textContent =
-                "Registrar devolución de materiales";
+                `Devolución - Reserva #${reserva.id}`;
         }
 
 
         if (datosGestionEntrega) {
 
-            datosGestionEntrega.innerHTML =
-                `
-                <strong>
-                    Docente:
-                </strong>
-
+            datosGestionEntrega.innerHTML = `
+                <strong>Docente:</strong>
                 ${escaparHTML(
                     nombreDocenteAdmin(
                         reserva.usuario_id
@@ -4503,55 +4499,32 @@ window.abrirEntrega =
 
                 <br>
 
-                <strong>
-                    Fecha:
-                </strong>
-
-                ${escaparHTML(
-                    reserva.fecha
-                )}
+                <strong>Fecha:</strong>
+                ${escaparHTML(reserva.fecha)}
 
                 ·
 
-                <strong>
-                    Horario:
-                </strong>
-
-                ${escaparHTML(
-                    reserva.horario
-                )}
+                <strong>Horario:</strong>
+                ${escaparHTML(reserva.horario)}
 
                 <br>
 
-                <strong>
-                    Grupo:
-                </strong>
-
-                ${escaparHTML(
-                    reserva.grupo
-                )}
+                <strong>Grupo:</strong>
+                ${escaparHTML(reserva.grupo)}
 
                 <br>
 
-                <strong>
-                    Tema:
-                </strong>
-
-                ${escaparHTML(
-                    reserva.tema
-                )}
-                `;
+                <strong>Tema:</strong>
+                ${escaparHTML(reserva.tema)}
+            `;
         }
 
 
         if (detalleGestionEntrega) {
 
             detalleGestionEntrega.innerHTML =
-
                 detalles
-
                     .map(
-
                         detalle => {
 
                             const cantidad =
@@ -4560,113 +4533,126 @@ window.abrirEntrega =
                                 );
 
 
-                            const devuelta =
+                            const yaDevuelto =
                                 Number(
-                                    detalle.cantidad_devuelta ||
-                                    0
-                                );
+                                    detalle.cantidad_devuelta || 0
+                                ) >= cantidad;
 
 
-                            const pendiente =
-                                Math.max(
-                                    0,
-                                    cantidad -
-                                    devuelta
-                                );
-
-
-                            const observacionSalida =
+                            const observacionEntrega =
                                 detalle.observacion_entrega
+                                    ?.trim();
 
-                                    ? `
-                                        <div class="mensaje-admin mensaje-info">
 
-                                            <strong>
-                                                Observación de entrega:
-                                            </strong>
-
-                                            ${escaparHTML(
-                                                detalle.observacion_entrega
-                                            )}
-
-                                        </div>
-                                    `
-
-                                    : "";
+                            const observacionDevolucion =
+                                detalle.observacion
+                                    ?.trim();
 
 
                             return `
                                 <div
-                                    class="entrega-detalle-item"
+                                    class="detalle-entrega-item"
                                     data-detalle-id="${detalle.id}"
                                 >
 
-                                    <div>
+                                    <div class="detalle-entrega-info">
 
-                                        <strong>
-
-                                            ${cantidad} ×
-
+                                        <h4>
                                             ${escaparHTML(
                                                 nombreMaterialAdmin(
                                                     detalle.material_id
                                                 )
                                             )}
-
-                                        </strong>
-
+                                        </h4>
 
                                         <p>
-
-                                            Devuelto anteriormente:
-
+                                            Cantidad entregada:
                                             <strong>
-                                                ${devuelta}
+                                                ${cantidad}
                                             </strong>
-
-                                        </p>
-
-
-                                        <p>
-
-                                            Pendiente:
-
-                                            <strong>
-                                                ${pendiente}
-                                            </strong>
-
                                         </p>
 
                                     </div>
-
-
-                                    ${observacionSalida}
 
 
                                     <div class="campo-admin">
 
                                         <label
-                                            for="cantidadDevuelta${detalle.id}"
+                                            style="
+                                                display:flex;
+                                                align-items:center;
+                                                gap:10px;
+                                                cursor:pointer;
+                                            "
                                         >
-                                            Cantidad total devuelta
+
+                                            <input
+                                                type="checkbox"
+                                                class="check-devuelto"
+                                                data-detalle-id="${detalle.id}"
+                                                ${yaDevuelto
+                                                    ? "checked disabled"
+                                                    : ""}
+                                                style="
+                                                    width:20px;
+                                                    height:20px;
+                                                "
+                                            >
+
+                                            <strong>
+                                                ${
+                                                    yaDevuelto
+                                                        ? "Material devuelto"
+                                                        : "Marcar como devuelto"
+                                                }
+                                            </strong>
+
                                         </label>
-
-
-                                        <input
-                                            type="number"
-                                            id="cantidadDevuelta${detalle.id}"
-                                            class="cantidad-devuelta"
-                                            data-detalle-id="${detalle.id}"
-                                            min="${devuelta}"
-                                            max="${cantidad}"
-                                            step="1"
-                                            value="${devuelta}"
-                                        >
 
                                     </div>
 
 
-                                    <div class="campo-admin">
+                                    ${
+                                        observacionEntrega
+                                            ? `
+                                                <div
+                                                    class="mensaje-admin mensaje-info"
+                                                    style="margin-top:10px;"
+                                                >
+
+                                                    <strong>
+                                                        Observación de entrega:
+                                                    </strong>
+
+                                                    <br>
+
+                                                    ${escaparHTML(
+                                                        observacionEntrega
+                                                    )}
+
+                                                </div>
+                                            `
+                                            : `
+                                                <div
+                                                    class="mensaje-admin"
+                                                    style="margin-top:10px;"
+                                                >
+
+                                                    <strong>
+                                                        Observación de entrega:
+                                                    </strong>
+
+                                                    Sin observaciones.
+
+                                                </div>
+                                            `
+                                    }
+
+
+                                    <div
+                                        class="campo-admin"
+                                        style="margin-top:10px;"
+                                    >
 
                                         <label
                                             for="observacionDevolucion${detalle.id}"
@@ -4675,17 +4661,15 @@ window.abrirEntrega =
                                         </label>
 
 
-                                        <input
-                                            type="text"
+                                        <textarea
                                             id="observacionDevolucion${detalle.id}"
                                             class="observacion-devolucion"
                                             data-detalle-id="${detalle.id}"
-                                            value="${escaparHTML(
-                                                detalle.observacion ||
-                                                ""
-                                            )}"
-                                            placeholder="Opcional. Ej.: revisar cable, borne flojo..."
-                                        >
+                                            rows="3"
+                                            placeholder="Ej.: equipo completo, falta cable, revisar conector..."
+                                        >${escaparHTML(
+                                            observacionDevolucion || ""
+                                        )}</textarea>
 
                                     </div>
 
@@ -4693,7 +4677,6 @@ window.abrirEntrega =
                             `;
                         }
                     )
-
                     .join("");
         }
 
@@ -4726,20 +4709,14 @@ window.abrirEntrega =
 
                 panelGestionEntrega
                     ?.scrollIntoView({
-
-                        behavior:
-                            "smooth",
-
-                        block:
-                            "start"
+                        behavior: "smooth",
+                        block: "start"
                     });
 
             },
             150
         );
     };
-
-
 // =========================================================
 // CERRAR GESTIÓN DE DEVOLUCIÓN
 // =========================================================
@@ -4785,6 +4762,9 @@ btnCerrarGestionEntrega
 // =========================================================
 // GUARDAR DEVOLUCIÓN
 // =========================================================
+// =========================================================
+// GUARDAR DEVOLUCIÓN
+// =========================================================
 
 btnGuardarDevolucion
     ?.addEventListener(
@@ -4803,11 +4783,10 @@ btnGuardarDevolucion
                 obtenerDetallesReservaAdmin(
                     reservaEntregaActual.id
                 )
-
-                    .filter(
-                        detalle =>
-                            detalle.entregado === true
-                    );
+                .filter(
+                    detalle =>
+                        detalle.entregado === true
+                );
 
 
             if (!detalles.length) {
@@ -4816,125 +4795,133 @@ btnGuardarDevolucion
             }
 
 
-            const payload = [];
+            const payload =
+                detalles.map(
+                    detalle => {
+
+                        const check =
+                            document.querySelector(
+                                `.check-devuelto[data-detalle-id="${detalle.id}"]`
+                            );
 
 
-            for (
-                const detalle
-                of detalles
+                        const inputObservacion =
+                            document.querySelector(
+                                `.observacion-devolucion[data-detalle-id="${detalle.id}"]`
+                            );
+
+
+                        const yaDevuelto =
+                            Number(
+                                detalle.cantidad_devuelta || 0
+                            ) >=
+                            Number(
+                                detalle.cantidad
+                            );
+
+
+                        return {
+
+                            detalle_id:
+                                Number(
+                                    detalle.id
+                                ),
+
+                            /*
+                             * Si ya estaba devuelto,
+                             * permanece devuelto.
+                             *
+                             * Si todavía estaba pendiente,
+                             * tomamos el valor del checkbox.
+                             */
+
+                            devuelto:
+                                yaDevuelto ||
+                                Boolean(
+                                    check?.checked
+                                ),
+
+                            observacion:
+                                inputObservacion
+                                    ?.value
+                                    ?.trim() ||
+                                null
+                        };
+                    }
+                );
+
+
+            const nuevosDevueltos =
+                detalles.filter(
+                    detalle => {
+
+                        const yaDevuelto =
+                            Number(
+                                detalle.cantidad_devuelta || 0
+                            ) >=
+                            Number(
+                                detalle.cantidad
+                            );
+
+
+                        if (yaDevuelto) {
+
+                            return false;
+                        }
+
+
+                        const check =
+                            document.querySelector(
+                                `.check-devuelto[data-detalle-id="${detalle.id}"]`
+                            );
+
+
+                        return Boolean(
+                            check?.checked
+                        );
+                    }
+                );
+
+
+            const hayObservaciones =
+                payload.some(
+                    item =>
+                        Boolean(
+                            item.observacion
+                        )
+                );
+
+
+            /*
+             * Permitimos guardar aunque no haya un nuevo
+             * material devuelto si el administrador escribió
+             * una observación.
+             */
+
+            if (
+                nuevosDevueltos.length === 0 &&
+                !hayObservaciones
             ) {
 
-                const inputCantidad =
-                    document.querySelector(
-                        `.cantidad-devuelta[data-detalle-id="${detalle.id}"]`
-                    );
+                mensajeEntrega.className =
+                    "mensaje-admin mensaje-error";
 
 
-                const inputObservacion =
-                    document.querySelector(
-                        `.observacion-devolucion[data-detalle-id="${detalle.id}"]`
-                    );
+                mensajeEntrega.textContent =
+                    "Marca al menos un material como devuelto o registra una observación.";
 
 
-                const cantidad =
-                    Number(
-                        inputCantidad?.value
-                    );
-
-
-                const cantidadReservada =
-                    Number(
-                        detalle.cantidad
-                    );
-
-
-                const cantidadAnterior =
-                    Number(
-                        detalle.cantidad_devuelta ||
-                        0
-                    );
-
-
-                if (
-                    !Number.isInteger(
-                        cantidad
-                    )
-                ) {
-
-                    mensajeEntrega.className =
-                        "mensaje-admin mensaje-error";
-
-
-                    mensajeEntrega.textContent =
-                        `Ingrese una cantidad válida para ${nombreMaterialAdmin(
-                            detalle.material_id
-                        )}.`;
-
-
-                    return;
-                }
-
-
-                if (
-                    cantidad <
-                    cantidadAnterior
-                ) {
-
-                    mensajeEntrega.className =
-                        "mensaje-admin mensaje-error";
-
-
-                    mensajeEntrega.textContent =
-                        `La cantidad devuelta de ${nombreMaterialAdmin(
-                            detalle.material_id
-                        )} no puede disminuir.`;
-
-
-                    return;
-                }
-
-
-                if (
-                    cantidad >
-                    cantidadReservada
-                ) {
-
-                    mensajeEntrega.className =
-                        "mensaje-admin mensaje-error";
-
-
-                    mensajeEntrega.textContent =
-                        `La cantidad devuelta de ${nombreMaterialAdmin(
-                            detalle.material_id
-                        )} no puede superar ${cantidadReservada}.`;
-
-
-                    return;
-                }
-
-
-                payload.push({
-
-                    detalle_id:
-                        Number(
-                            detalle.id
-                        ),
-
-                    cantidad_devuelta:
-                        cantidad,
-
-                    observacion:
-                        inputObservacion
-                            ?.value
-                            ?.trim() ||
-                        null
-                });
+                return;
             }
 
 
             if (
                 !confirm(
-                    "¿Guardar el registro de devolución?"
+                    nuevosDevueltos.length > 0
+
+                        ? "¿Registrar los materiales marcados como devueltos?"
+
+                        : "¿Guardar las observaciones de devolución?"
                 )
             ) {
 
@@ -4972,6 +4959,7 @@ btnGuardarDevolucion
 
 
                 if (error) {
+
                     throw error;
                 }
 
@@ -4984,25 +4972,33 @@ btnGuardarDevolucion
                     null;
 
 
-                panelGestionEntrega
-                    ?.classList.add(
+                if (panelGestionEntrega) {
+
+                    panelGestionEntrega.classList.add(
                         "oculto"
                     );
+                }
 
 
-                detalleGestionEntrega.innerHTML =
-                    "";
+                if (detalleGestionEntrega) {
 
-
-                mensajeEntrega.className =
-                    "mensaje-admin mensaje-ok";
-
-
-                mensajeEntrega.textContent =
-                    `Devolución de la reserva #${idProcesado} registrada correctamente.`;
+                    detalleGestionEntrega.innerHTML =
+                        "";
+                }
 
 
                 await cargarReservasAdmin();
+
+
+                if (mensajeEntrega) {
+
+                    mensajeEntrega.className =
+                        "mensaje-admin mensaje-ok";
+
+
+                    mensajeEntrega.textContent =
+                        `Devolución de la reserva #${idProcesado} actualizada correctamente.`;
+                }
 
 
             } catch (error) {
@@ -5031,7 +5027,6 @@ btnGuardarDevolucion
                 "Guardar devolución";
         }
     );
-
 
 // =========================================================
 // ABRIR EDICIÓN DE RESERVA
